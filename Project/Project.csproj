@@ -233,9 +233,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\HomepageController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -266,6 +265,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\StudentTB.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\subject.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -290,6 +292,7 @@
     <Compile Include="Models\teacher_subject.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UploadFile.cs" />
     <Compile Include="Models\upload_file.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -304,6 +307,11 @@
       <DependentUpon>SipminiDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="StudentDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StudentDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SubjectTBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -381,6 +389,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\ClassroomManagement-750x300.jpg" />
+    <Content Include="Image\images.jpg" />
+    <Content Include="Image\rp.jpg" />
+    <Content Include="Image\synopsys-education-center.jpg" />
     <Content Include="Localization\ar.xml" />
     <Content Include="Localization\be.xml" />
     <Content Include="Localization\bg.xml" />
@@ -583,6 +595,17 @@
     <Content Include="SubjectTBDataSet.xsc">
       <DependentUpon>SubjectTBDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="StudentDataSet1.xsc">
+      <DependentUpon>StudentDataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="StudentDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StudentDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="StudentDataSet1.xss">
+      <DependentUpon>StudentDataSet1.xsd</DependentUpon>
+    </Content>
     <None Include="SubjectTBDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SubjectTBDataSet.Designer.cs</LastGenOutput>
@@ -591,6 +614,14 @@
     <Content Include="SubjectTBDataSet.xss">
       <DependentUpon>SubjectTBDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
+    <Content Include="Views\Student\Loginpage.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Homepage.cshtml" />
+    <Content Include="Views\Homepage\Index.cshtml" />
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -600,27 +631,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\UploadFile\index.cshtml" />
     <Content Include="Views\Shared\DisplaySubjects.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -655,6 +665,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\StudentReport.rdlc" />
     <EmbeddedResource Include="Reports\SubjectReport.rdlc" />
     <EmbeddedResource Include="Reports\uploadFileReport.rdlc" />
   </ItemGroup>

@@ -19,6 +19,7 @@
         <AssociationConnector Association="SipminiModel.FK_SubjectTB_GradeList" />
         <AssociationConnector Association="SipminiModel.FK_SubjectDetails_SubjectTB" />
         <AssociationConnector Association="SipminiModel.FK_SubjectTB_TeacherList" />
+        <EntityTypeShape EntityType="SipminiModel.StudentTB" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

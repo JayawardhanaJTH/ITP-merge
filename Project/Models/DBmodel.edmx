@@ -18,6 +18,25 @@
           </Key>
           <Property Name="Grade" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="StudentTB">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="50" />
+          <Property Name="school" Type="varchar" MaxLength="50" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="grade" Type="varchar" MaxLength="50" />
+          <Property Name="gender" Type="varchar" MaxLength="50" />
+          <Property Name="subject" Type="varchar" MaxLength="50" />
+          <Property Name="tpnum" Type="varchar" MaxLength="50" />
+          <Property Name="parentname" Type="varchar" MaxLength="50" />
+          <Property Name="parenttpnum" Type="varchar" MaxLength="50" />
+          <Property Name="imagepath" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="subject">
           <Key>
             <PropertyRef Name="subject_id" />
@@ -132,6 +151,7 @@
         <EntityContainer Name="SipminiModelStoreContainer">
           <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GradeList" EntityType="Self.GradeList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentTB" EntityType="Self.StudentTB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectDetails" EntityType="Self.SubjectDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTB" EntityType="Self.SubjectTB" Schema="dbo" store:Type="Tables" />
@@ -238,6 +258,7 @@
             <End Role="TeacherList" EntitySet="TeacherLists" />
             <End Role="SubjectTB" EntitySet="SubjectTBs" />
           </AssociationSet>
+          <EntitySet Name="StudentTBs" EntityType="SipminiModel.StudentTB" />
         </EntityContainer>
         <EntityType Name="GradeList">
           <Key>
@@ -313,6 +334,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StudentTB">
+          <Key>
+            <PropertyRef Name="sid" />
+          </Key>
+          <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="school" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="grade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tpnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="parentname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="parenttpnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="imagepath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -413,6 +453,26 @@
               <MappingFragment StoreEntitySet="TeacherList">
                 <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTBs">
+            <EntityTypeMapping TypeName="SipminiModel.StudentTB">
+              <MappingFragment StoreEntitySet="StudentTB">
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
+                <ScalarProperty Name="parenttpnum" ColumnName="parenttpnum" />
+                <ScalarProperty Name="parentname" ColumnName="parentname" />
+                <ScalarProperty Name="tpnum" ColumnName="tpnum" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="school" ColumnName="school" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

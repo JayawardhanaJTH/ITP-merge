@@ -36,5 +36,6 @@ namespace Project.Models
         public virtual DbSet<SubjectDetail> SubjectDetails { get; set; }
         public virtual DbSet<SubjectTB> SubjectTBs { get; set; }
         public virtual DbSet<TeacherList> TeacherLists { get; set; }
+        public virtual DbSet<StudentTB> StudentTBs { get; set; }
     }
 }

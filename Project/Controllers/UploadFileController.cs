@@ -207,12 +207,21 @@ namespace Project.Controllers
                 }
                 DBmodel db = new DBmodel();
                 upload_file file = db.upload_file.Find(id);
+                UploadFile model = new UploadFile();
 
                 if (file == null)
                 {
                     return HttpNotFound();
                 }
-                return View(file);
+                else
+                {
+                    model.file_id = file.file_id;
+                    model.file_name = file.file_name;
+                    model.file_path = file.file_path;
+                    model.grade = file.grade;
+                    model.subject = file.subject;
+                }
+                return View(model);
             }
             catch(Exception ex)
             {
@@ -263,10 +272,25 @@ namespace Project.Controllers
             {
                 DBmodel db = new DBmodel();
                 upload_file file = db.upload_file.Find(id);
+                UploadFile model = new UploadFile();
 
-                ViewBag.teachersList = new SelectList(GetteachersList(), "teacher_id", "teacher_name");
+                if(file == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    ViewBag.teachersList = new SelectList(GetteachersList(), "teacher_id", "teacher_name");
 
-                return View(file);
+                    model.file_id = file.file_id;
+                    model.file_name = file.file_name;
+                    model.file_path = file.file_path;
+                    model.grade = file.grade;
+                    model.subject = file.subject;
+                }
+                
+
+                return View(model);
             }
             catch(Exception ex)
             {
@@ -277,7 +301,7 @@ namespace Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Edit")]
-        public ActionResult EditSucces(int id,upload_file model)
+        public ActionResult EditSucces(int id,UploadFile model)
         {
             try {
                 if (ModelState.IsValid)
