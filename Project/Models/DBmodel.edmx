@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SipminiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+          </Key>
+          <Property Name="grade_id" Type="int" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GradeList">
+          <Key>
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Grade" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="subject" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubjectDetails">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="Hall" Type="varchar" MaxLength="20" />
+          <Property Name="Day" Type="char" MaxLength="3" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="SubjectTB">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="20" />
+          <Property Name="Grade" Type="varchar" MaxLength="20" />
+          <Property Name="Teacher" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+          <Property Name="teacher_name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher_grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="grade_id" Type="int" Nullable="false" />
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher_subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="subject_id" Type="int" Nullable="false" />
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherList">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TeacherName" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="upload_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="file_name" Type="nchar" MaxLength="200" Nullable="false" />
+          <Property Name="upload_date" Type="datetime" Nullable="false" />
+          <Property Name="file_path" Type="varchar(max)" Nullable="false" />
+          <Property Name="subject" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="grade" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="upload_file_teacher">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SubjectDetails_SubjectTB">
+          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="1" />
+          <End Role="SubjectDetails" Type="Self.SubjectDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="SubjectDetails">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTB_GradeList">
+          <End Role="GradeList" Type="Self.GradeList" Multiplicity="0..1" />
+          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradeList">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTB_TeacherList">
+          <End Role="TeacherList" Type="Self.TeacherList" Multiplicity="0..1" />
+          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherList">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SipminiModelStoreContainer">
+          <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GradeList" EntityType="Self.GradeList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectDetails" EntityType="Self.SubjectDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectTB" EntityType="Self.SubjectTB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher_grade" EntityType="Self.teacher_grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherList" EntityType="Self.TeacherList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="upload_file" EntityType="Self.upload_file" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SubjectDetails_SubjectTB" Association="Self.FK_SubjectDetails_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTB" />
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectTB_GradeList" Association="Self.FK_SubjectTB_GradeList">
+            <End Role="GradeList" EntitySet="GradeList" />
+            <End Role="SubjectTB" EntitySet="SubjectTB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectTB_TeacherList" Association="Self.FK_SubjectTB_TeacherList">
+            <End Role="TeacherList" EntitySet="TeacherList" />
+            <End Role="SubjectTB" EntitySet="SubjectTB" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SipminiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+          </Key>
+          <Property Name="grade_id" Type="Int32" Nullable="false" />
+          <Property Name="grade1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="subject1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher_grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="grade_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="teacher_subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="upload_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_name" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="upload_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="file_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="subject" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="grade" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="upload_file_teacher">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBmodel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="grades" EntityType="Self.grade" />
+          <EntitySet Name="subjects" EntityType="Self.subject" />
+          <EntitySet Name="teachers" EntityType="Self.teacher" />
+          <EntitySet Name="teacher_grade" EntityType="Self.teacher_grade" />
+          <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" />
+          <EntitySet Name="upload_file" EntityType="Self.upload_file" />
+          <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" />
+          <EntitySet Name="GradeLists" EntityType="SipminiModel.GradeList" />
+          <EntitySet Name="SubjectDetails" EntityType="SipminiModel.SubjectDetail" />
+          <EntitySet Name="SubjectTBs" EntityType="SipminiModel.SubjectTB" />
+          <EntitySet Name="TeacherLists" EntityType="SipminiModel.TeacherList" />
+          <AssociationSet Name="FK_SubjectTB_GradeList" Association="SipminiModel.FK_SubjectTB_GradeList">
+            <End Role="GradeList" EntitySet="GradeLists" />
+            <End Role="SubjectTB" EntitySet="SubjectTBs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectDetails_SubjectTB" Association="SipminiModel.FK_SubjectDetails_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTBs" />
+            <End Role="SubjectDetail" EntitySet="SubjectDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectTB_TeacherList" Association="SipminiModel.FK_SubjectTB_TeacherList">
+            <End Role="TeacherList" EntitySet="TeacherLists" />
+            <End Role="SubjectTB" EntitySet="SubjectTBs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="GradeList">
+          <Key>
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubjectTBs" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="GradeList" ToRole="SubjectTB" />
+        </EntityType>
+        <EntityType Name="SubjectDetail">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="Hall" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Day" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <NavigationProperty Name="SubjectTB" Relationship="SipminiModel.FK_SubjectDetails_SubjectTB" FromRole="SubjectDetail" ToRole="SubjectTB" />
+        </EntityType>
+        <EntityType Name="SubjectTB">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GradeList" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="SubjectTB" ToRole="GradeList" />
+          <NavigationProperty Name="SubjectDetail" Relationship="SipminiModel.FK_SubjectDetails_SubjectTB" FromRole="SubjectTB" ToRole="SubjectDetail" />
+          <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="SubjectTB" ToRole="TeacherList" />
+        </EntityType>
+        <EntityType Name="TeacherList">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TeacherName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubjectTBs" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="TeacherList" ToRole="SubjectTB" />
+        </EntityType>
+        <Association Name="FK_SubjectTB_GradeList">
+          <End Type="SipminiModel.GradeList" Role="GradeList" Multiplicity="0..1" />
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradeList">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectDetails_SubjectTB">
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="1" />
+          <End Type="SipminiModel.SubjectDetail" Role="SubjectDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="SubjectDetail">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTB_TeacherList">
+          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="0..1" />
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherList">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SipminiModelStoreContainer" CdmEntityContainer="DBmodel">
+          <EntitySetMapping Name="grades">
+            <EntityTypeMapping TypeName="SipminiModel.grade">
+              <MappingFragment StoreEntitySet="grade">
+                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+                <ScalarProperty Name="grade1" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="SipminiModel.subject">
+              <MappingFragment StoreEntitySet="subject">
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="subject1" ColumnName="subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachers">
+            <EntityTypeMapping TypeName="SipminiModel.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher_grade">
+            <EntityTypeMapping TypeName="SipminiModel.teacher_grade">
+              <MappingFragment StoreEntitySet="teacher_grade">
+                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher_subject">
+            <EntityTypeMapping TypeName="SipminiModel.teacher_subject">
+              <MappingFragment StoreEntitySet="teacher_subject">
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="upload_file">
+            <EntityTypeMapping TypeName="SipminiModel.upload_file">
+              <MappingFragment StoreEntitySet="upload_file">
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="upload_date" ColumnName="upload_date" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="upload_file_teacher">
+            <EntityTypeMapping TypeName="SipminiModel.upload_file_teacher">
+              <MappingFragment StoreEntitySet="upload_file_teacher">
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradeLists">
+            <EntityTypeMapping TypeName="SipminiModel.GradeList">
+              <MappingFragment StoreEntitySet="GradeList">
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectDetails">
+            <EntityTypeMapping TypeName="SipminiModel.SubjectDetail">
+              <MappingFragment StoreEntitySet="SubjectDetails">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Hall" ColumnName="Hall" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectTBs">
+            <EntityTypeMapping TypeName="SipminiModel.SubjectTB">
+              <MappingFragment StoreEntitySet="SubjectTB">
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherLists">
+            <EntityTypeMapping TypeName="SipminiModel.TeacherList">
+              <MappingFragment StoreEntitySet="TeacherList">
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

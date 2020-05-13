@@ -1,0 +1,59 @@
+﻿@model Project.Models.SubjectDetailsViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+<h1 style="text-align:center">Edit Subject Details</h1>
+<hr style="margin-top:3%" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal" style="margin-left:35%">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-auto">Subject Code</label>
+            <div class="col-sm-5">
+                <div class="form-control" id="form_disabl">
+                    @Html.ValueFor(model => model.Subject.SubjectCode)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-auto">Subject Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject.SubjectName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject.SubjectName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-auto">Teacher</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Subject.Teacher, new SelectList(Model.Teachers, "Username", "TeacherName"), new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-auto">Grade</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Subject.Grade, new SelectList(Model.Grades, "Grade", "Grade"), new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <label class="dpMsg">@ViewBag.DuplicateMessage</label>
+            </div>
+        </div>
+        <div class="form-group" style="margin-top:3%">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-success" name="Save" />
+                <button type="reset" value="Cancel" class="btn btn-danger">Reset</button>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "SubjectList")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

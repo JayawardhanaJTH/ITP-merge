@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Project.Models.SubjectTB>
+@{
+    ViewBag.Title = "SubjectList";
+}
+<h1 style="text-align:center">List Of Subjects</h1>
+<a class="btn btn-success" href="~/" style="margin-bottom:10px" title="Back to Home"><i class="fas fa-home"></i></a>
+
+@Html.ActionLink("Export ", "Reports", new { ReportType = "Excel" }) <i class="fas fa-file-excel" style="color:cornflowerblue" title="Export to Excel"></i> |
+@Html.ActionLink("Export ", "Reports", new { ReportType = "PDF" }) <i class="fas fa-file-pdf" style="color:cornflowerblue" title="Export to PDF"></i> |
+@Html.ActionLink("Export ", "Reports", new { ReportType = "Word" }) <i class="fas fa-file-word" style="color:cornflowerblue" title="Export to Word"></i> |
+@Html.ActionLink("Export ", "Reports", new { ReportType = "Image" }) <i class="fas fa-file-image" style="color:cornflowerblue" title="Export to Image"></i> |
+
+
+<table id="SubjectTB" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Grade</th>
+            <th>Teacher</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+</table>
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" />
+@section scripts
+{
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#SubjectTB").DataTable({
+                "ajax": {
+                    "url": "/Subject/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+
+                    { "data": "SubjectCode" },
+                    { "data": "SubjectName" },
+                    { "data": "Grade" },
+                    { "data": "Teacher" },
+                    {
+                        "data": "SubjectCode", "render": function (data) {
+
+                            return "<a class='btn btn-secondary btn-sm' id='listbtn' title='Edit' href='Edit/" + data + "'><i class='far fa-edit'></i></a><a class='btn btn-info btn-sm'id='listbtn' style='margin-left:5px'title='Details' href='Details/" + data + "'><i class='far fa-file-alt'></i></a><a class='btn btn-danger btn-sm' id='listbtn' style='margin-left:5px'title='Delete' href='Delete/" + data + "'><i class='fas fa-trash-alt'></i></a>"
+                        },
+                        "orderable": false,
+                        "width": "150px"
+                    }
+
+                ],
+                "dom": "Bfrtip",
+                "language": {
+
+                    "emptyTable": "No data found, Please <b> Add Subject</b> Details"
+                }
+
+            });
+        });
+
+
+    </script>
+}

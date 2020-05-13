@@ -1,0 +1,56 @@
+﻿@model Project.Models.SubjectDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+<h1 style="text-align:center">Subject Details</h1>
+<hr style="margin-top:3%" />
+<div class="detailFullContent">
+    <img class="detailBG" src="~/Content/images/bg2.jpg" width="35%" height="80%" />
+    <div class="ditailsDIV">
+        <dl class="dl-horizontal" style="text-align:center">
+            <dt>
+                Subject Name
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.SubjectName)
+            </dd>
+            <dt>
+                Teacher Name
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.Teacher)
+            </dd>
+            <dt>
+                Grade
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.Grade)
+            </dd>
+            <dt>
+                Hall
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.Hall)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal" style="text-align:center; margin-left:15%">
+            <dt>
+                Day & Time
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.Day)
+            </dd>
+            <dt />
+            <dd>
+                @Html.DisplayFor(model => model.Subject.StartTime)
+            </dd>
+            <dt>To</dt>
+            <dd>
+                @Html.DisplayFor(model => model.Subject.EndTime)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "SubjectList")
+</div>
