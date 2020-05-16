@@ -88,7 +88,7 @@ namespace Project.Controllers
                         Grade = s.GradeList.Grade,
                         SubjectCode = s.SubjectCode,
                         SubjectName = s.SubjectName,
-                        Teacher = s.TeacherList.TeacherName
+                        TeacherName = s.TeacherList.teacher_name
                     }
                 ).ToList<SubjectViewModel>();
                 return Json(new { data = subjectTB }, JsonRequestBehavior.AllowGet);
@@ -106,7 +106,7 @@ namespace Project.Controllers
                     Grade = s.Grade,
                     SubjectCode = s.SubjectCode,
                     SubjectName = s.SubjectName,
-                    Teacher = s.TeacherList.TeacherName
+                    TeacherName = s.TeacherList.teacher_name
                 }).FirstOrDefault();
                 model.Teachers = DBmodel.TeacherLists.ToList<TeacherList>();
                 model.Grades = DBmodel.GradeLists.ToList<GradeList>();
@@ -179,7 +179,7 @@ namespace Project.Controllers
                     model.Subject = new SubjectViewModel
                     {
                         Grade = subject.GradeList.Grade,
-                        Teacher = subject.TeacherList.TeacherName,
+                        TeacherName = subject.TeacherList.teacher_name,
                         SubjectCode = subject.SubjectCode,
                         SubjectName = subject.SubjectName
                     };
@@ -211,7 +211,7 @@ namespace Project.Controllers
                     Grade = s.Grade,
                     SubjectCode = s.SubjectCode,
                     SubjectName = s.SubjectName,
-                    Teacher = s.TeacherList.TeacherName
+                    TeacherName = s.TeacherList.teacher_name
                 }).FirstOrDefault();
 
                 model.Teachers = DBmodel.TeacherLists.ToList<TeacherList>();

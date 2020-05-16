@@ -5,18 +5,84 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SipminiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Biil">
+          <Key>
+            <PropertyRef Name="BillId" />
+          </Key>
+          <Property Name="BillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Payment_Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Date" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cleaner">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Contact_Number" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CleanerSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CleanerID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="grade">
           <Key>
             <PropertyRef Name="grade_id" />
           </Key>
-          <Property Name="grade_id" Type="int" Nullable="false" />
-          <Property Name="grade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="GradeList">
           <Key>
             <PropertyRef Name="Grade" />
           </Key>
-          <Property Name="Grade" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Contact_Number" Type="int" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OfficeSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentFee">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="StudentTB">
           <Key>
@@ -58,41 +124,54 @@
           <Key>
             <PropertyRef Name="SubjectCode" />
           </Key>
-          <Property Name="SubjectCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SubjectName" Type="varchar" MaxLength="20" />
-          <Property Name="Grade" Type="varchar" MaxLength="20" />
-          <Property Name="Teacher" Type="varchar" MaxLength="20" />
+          <Property Name="SubjectCode" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="50" />
+          <Property Name="Grade" Type="varchar" MaxLength="50" />
+          <Property Name="Teacher" Type="int" />
         </EntityType>
-        <EntityType Name="teacher">
+        <EntityType Name="Teacher">
           <Key>
-            <PropertyRef Name="teacher_id" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="teacher_id" Type="int" Nullable="false" />
-          <Property Name="teacher_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Shool" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="teacher_grade">
           <Key>
             <PropertyRef Name="grade_id" />
-            <PropertyRef Name="teacher_id" />
           </Key>
-          <Property Name="grade_id" Type="int" Nullable="false" />
+          <Property Name="grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="teacher_id" Type="int" Nullable="false" />
-          <Property Name="grade" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="grade" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="teacher_subject">
           <Key>
             <PropertyRef Name="subject_id" />
-            <PropertyRef Name="teacher_id" />
           </Key>
           <Property Name="subject_id" Type="int" Nullable="false" />
           <Property Name="teacher_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TeacherList">
           <Key>
-            <PropertyRef Name="Username" />
+            <PropertyRef Name="teacher_id" />
           </Key>
-          <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="TeacherName" Type="varchar" MaxLength="20" />
+          <Property Name="teacher_id" Type="int" Nullable="false" />
+          <Property Name="teacher_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="upload_file">
           <Key>
@@ -112,15 +191,39 @@
           <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="teacher_id" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_SubjectDetails_SubjectTB">
-          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="1" />
-          <End Role="SubjectDetails" Type="Self.SubjectDetails" Multiplicity="0..1" />
+        <Association Name="FK_CleanerSalary_Cleaner">
+          <End Role="Cleaner" Type="Self.Cleaner" Multiplicity="1" />
+          <End Role="CleanerSalary" Type="Self.CleanerSalary" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SubjectTB">
-              <PropertyRef Name="SubjectCode" />
+            <Principal Role="Cleaner">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="SubjectDetails">
-              <PropertyRef Name="SubjectID" />
+            <Dependent Role="CleanerSalary">
+              <PropertyRef Name="CleanerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeSalary_Office">
+          <End Role="Office" Type="Self.Office" Multiplicity="1" />
+          <End Role="OfficeSalary" Type="Self.OfficeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OfficeSalary">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTB">
+          <End Role="StudentTB" Type="Self.StudentTB" Multiplicity="1" />
+          <End Role="StudentFee" Type="Self.StudentFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTB">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="StudentFee">
+              <PropertyRef Name="StudentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -141,29 +244,80 @@
           <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TeacherList">
-              <PropertyRef Name="Username" />
+              <PropertyRef Name="teacher_id" />
             </Principal>
             <Dependent Role="SubjectTB">
               <PropertyRef Name="Teacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_teacher_subject_SubjectTB">
+          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="1" />
+          <End Role="teacher_subject" Type="Self.teacher_subject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherList_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="TeacherList" Type="Self.TeacherList" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeacherList">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherSalary_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="TeacherSalary" Type="Self.TeacherSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeacherSalary">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SipminiModelStoreContainer">
+          <EntitySet Name="Biil" EntityType="Self.Biil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cleaner" EntityType="Self.Cleaner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CleanerSalary" EntityType="Self.CleanerSalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GradeList" EntityType="Self.GradeList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OfficeSalary" EntityType="Self.OfficeSalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentFee" EntityType="Self.StudentFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentTB" EntityType="Self.StudentTB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectDetails" EntityType="Self.SubjectDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubjectTB" EntityType="Self.SubjectTB" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher_grade" EntityType="Self.teacher_grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherList" EntityType="Self.TeacherList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherSalary" EntityType="Self.TeacherSalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file" EntityType="Self.upload_file" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_SubjectDetails_SubjectTB" Association="Self.FK_SubjectDetails_SubjectTB">
-            <End Role="SubjectTB" EntitySet="SubjectTB" />
-            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+          <AssociationSet Name="FK_CleanerSalary_Cleaner" Association="Self.FK_CleanerSalary_Cleaner">
+            <End Role="Cleaner" EntitySet="Cleaner" />
+            <End Role="CleanerSalary" EntitySet="CleanerSalary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OfficeSalary_Office" Association="Self.FK_OfficeSalary_Office">
+            <End Role="Office" EntitySet="Office" />
+            <End Role="OfficeSalary" EntitySet="OfficeSalary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTB" Association="Self.FK_StudentTB">
+            <End Role="StudentTB" EntitySet="StudentTB" />
+            <End Role="StudentFee" EntitySet="StudentFee" />
           </AssociationSet>
           <AssociationSet Name="FK_SubjectTB_GradeList" Association="Self.FK_SubjectTB_GradeList">
             <End Role="GradeList" EntitySet="GradeList" />
@@ -173,167 +327,161 @@
             <End Role="TeacherList" EntitySet="TeacherList" />
             <End Role="SubjectTB" EntitySet="SubjectTB" />
           </AssociationSet>
+          <AssociationSet Name="FK_teacher_subject_SubjectTB" Association="Self.FK_teacher_subject_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTB" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherList_Teacher" Association="Self.FK_TeacherList_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="TeacherList" EntitySet="TeacherList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherSalary_Teacher" Association="Self.FK_TeacherSalary_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="TeacherSalary" EntitySet="TeacherSalary" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SipminiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="grade">
-          <Key>
-            <PropertyRef Name="grade_id" />
-          </Key>
-          <Property Name="grade_id" Type="Int32" Nullable="false" />
-          <Property Name="grade1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="subject">
-          <Key>
-            <PropertyRef Name="subject_id" />
-          </Key>
-          <Property Name="subject_id" Type="Int32" Nullable="false" />
-          <Property Name="subject1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="teacher">
-          <Key>
-            <PropertyRef Name="teacher_id" />
-          </Key>
-          <Property Name="teacher_id" Type="Int32" Nullable="false" />
-          <Property Name="teacher_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="teacher_grade">
-          <Key>
-            <PropertyRef Name="grade_id" />
-            <PropertyRef Name="teacher_id" />
-          </Key>
-          <Property Name="grade_id" Type="Int32" Nullable="false" />
-          <Property Name="teacher_id" Type="Int32" Nullable="false" />
-          <Property Name="grade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="teacher_subject">
-          <Key>
-            <PropertyRef Name="subject_id" />
-            <PropertyRef Name="teacher_id" />
-          </Key>
-          <Property Name="subject_id" Type="Int32" Nullable="false" />
-          <Property Name="teacher_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="upload_file">
-          <Key>
-            <PropertyRef Name="file_id" />
-          </Key>
-          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="file_name" Type="String" MaxLength="200" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="upload_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="file_path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="subject" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="grade" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-        </EntityType>
-        <EntityType Name="upload_file_teacher">
-          <Key>
-            <PropertyRef Name="file_id" />
-          </Key>
-          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="teacher_id" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="DBmodel" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="grades" EntityType="Self.grade" />
-          <EntitySet Name="subjects" EntityType="Self.subject" />
-          <EntitySet Name="teachers" EntityType="Self.teacher" />
-          <EntitySet Name="teacher_grade" EntityType="Self.teacher_grade" />
-          <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" />
-          <EntitySet Name="upload_file" EntityType="Self.upload_file" />
-          <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" />
+          <EntitySet Name="Biils" EntityType="SipminiModel.Biil" />
+          <EntitySet Name="Cleaners" EntityType="SipminiModel.Cleaner" />
+          <EntitySet Name="CleanerSalaries" EntityType="SipminiModel.CleanerSalary" />
+          <EntitySet Name="grades" EntityType="SipminiModel.grade" />
           <EntitySet Name="GradeLists" EntityType="SipminiModel.GradeList" />
+          <EntitySet Name="Offices" EntityType="SipminiModel.Office" />
+          <EntitySet Name="OfficeSalaries" EntityType="SipminiModel.OfficeSalary" />
+          <EntitySet Name="StudentFees" EntityType="SipminiModel.StudentFee" />
+          <EntitySet Name="StudentTBs" EntityType="SipminiModel.StudentTB" />
+          <EntitySet Name="subjects" EntityType="SipminiModel.subject" />
           <EntitySet Name="SubjectDetails" EntityType="SipminiModel.SubjectDetail" />
           <EntitySet Name="SubjectTBs" EntityType="SipminiModel.SubjectTB" />
+          <EntitySet Name="Teachers" EntityType="SipminiModel.Teacher" />
+          <EntitySet Name="teacher_grade" EntityType="SipminiModel.teacher_grade" />
+          <EntitySet Name="teacher_subject" EntityType="SipminiModel.teacher_subject" />
           <EntitySet Name="TeacherLists" EntityType="SipminiModel.TeacherList" />
+          <EntitySet Name="TeacherSalaries" EntityType="SipminiModel.TeacherSalary" />
+          <EntitySet Name="upload_file" EntityType="SipminiModel.upload_file" />
+          <EntitySet Name="upload_file_teacher" EntityType="SipminiModel.upload_file_teacher" />
+          <AssociationSet Name="FK_CleanerSalary_Cleaner" Association="SipminiModel.FK_CleanerSalary_Cleaner">
+            <End Role="Cleaner" EntitySet="Cleaners" />
+            <End Role="CleanerSalary" EntitySet="CleanerSalaries" />
+          </AssociationSet>
           <AssociationSet Name="FK_SubjectTB_GradeList" Association="SipminiModel.FK_SubjectTB_GradeList">
             <End Role="GradeList" EntitySet="GradeLists" />
             <End Role="SubjectTB" EntitySet="SubjectTBs" />
           </AssociationSet>
-          <AssociationSet Name="FK_SubjectDetails_SubjectTB" Association="SipminiModel.FK_SubjectDetails_SubjectTB">
-            <End Role="SubjectTB" EntitySet="SubjectTBs" />
-            <End Role="SubjectDetail" EntitySet="SubjectDetails" />
+          <AssociationSet Name="FK_OfficeSalary_Office" Association="SipminiModel.FK_OfficeSalary_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="OfficeSalary" EntitySet="OfficeSalaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentTB" Association="SipminiModel.FK_StudentTB">
+            <End Role="StudentTB" EntitySet="StudentTBs" />
+            <End Role="StudentFee" EntitySet="StudentFees" />
           </AssociationSet>
           <AssociationSet Name="FK_SubjectTB_TeacherList" Association="SipminiModel.FK_SubjectTB_TeacherList">
             <End Role="TeacherList" EntitySet="TeacherLists" />
             <End Role="SubjectTB" EntitySet="SubjectTBs" />
           </AssociationSet>
-          <EntitySet Name="StudentTBs" EntityType="SipminiModel.StudentTB" />
+          <AssociationSet Name="FK_teacher_subject_SubjectTB" Association="SipminiModel.FK_teacher_subject_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTBs" />
+            <End Role="teacher_subject" EntitySet="teacher_subject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherList_Teacher" Association="SipminiModel.FK_TeacherList_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="TeacherList" EntitySet="TeacherLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeacherSalary_Teacher" Association="SipminiModel.FK_TeacherSalary_Teacher">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="TeacherSalary" EntitySet="TeacherSalaries" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Biil">
+          <Key>
+            <PropertyRef Name="BillId" />
+          </Key>
+          <Property Name="BillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Payment_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Cleaner">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Number" Type="Int32" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CleanerSalaries" Relationship="SipminiModel.FK_CleanerSalary_Cleaner" FromRole="Cleaner" ToRole="CleanerSalary" />
+        </EntityType>
+        <EntityType Name="CleanerSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CleanerID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cleaner" Relationship="SipminiModel.FK_CleanerSalary_Cleaner" FromRole="CleanerSalary" ToRole="Cleaner" />
+        </EntityType>
+        <EntityType Name="grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+          </Key>
+          <Property Name="grade_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="grade1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="GradeList">
           <Key>
             <PropertyRef Name="Grade" />
           </Key>
-          <Property Name="Grade" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SubjectTBs" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="GradeList" ToRole="SubjectTB" />
         </EntityType>
-        <EntityType Name="SubjectDetail">
+        <EntityType Name="Office">
           <Key>
-            <PropertyRef Name="SubjectID" />
+            <PropertyRef Name="UserID" />
           </Key>
-          <Property Name="SubjectID" Type="Int32" Nullable="false" />
-          <Property Name="Hall" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Day" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
-          <Property Name="StartTime" Type="Time" Precision="7" />
-          <Property Name="EndTime" Type="Time" Precision="7" />
-          <NavigationProperty Name="SubjectTB" Relationship="SipminiModel.FK_SubjectDetails_SubjectTB" FromRole="SubjectDetail" ToRole="SubjectTB" />
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contact_Number" Type="Int32" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OfficeSalaries" Relationship="SipminiModel.FK_OfficeSalary_Office" FromRole="Office" ToRole="OfficeSalary" />
         </EntityType>
-        <EntityType Name="SubjectTB">
+        <EntityType Name="OfficeSalary">
           <Key>
-            <PropertyRef Name="SubjectCode" />
+            <PropertyRef Name="SalaryId" />
           </Key>
-          <Property Name="SubjectCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SubjectName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Grade" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Teacher" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GradeList" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="SubjectTB" ToRole="GradeList" />
-          <NavigationProperty Name="SubjectDetail" Relationship="SipminiModel.FK_SubjectDetails_SubjectTB" FromRole="SubjectTB" ToRole="SubjectDetail" />
-          <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="SubjectTB" ToRole="TeacherList" />
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Office" Relationship="SipminiModel.FK_OfficeSalary_Office" FromRole="OfficeSalary" ToRole="Office" />
         </EntityType>
-        <EntityType Name="TeacherList">
+        <EntityType Name="StudentFee">
           <Key>
-            <PropertyRef Name="Username" />
+            <PropertyRef Name="SalaryId" />
           </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="TeacherName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SubjectTBs" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="TeacherList" ToRole="SubjectTB" />
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentTB" Relationship="SipminiModel.FK_StudentTB" FromRole="StudentFee" ToRole="StudentTB" />
         </EntityType>
-        <Association Name="FK_SubjectTB_GradeList">
-          <End Type="SipminiModel.GradeList" Role="GradeList" Multiplicity="0..1" />
-          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GradeList">
-              <PropertyRef Name="Grade" />
-            </Principal>
-            <Dependent Role="SubjectTB">
-              <PropertyRef Name="Grade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubjectDetails_SubjectTB">
-          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="1" />
-          <End Type="SipminiModel.SubjectDetail" Role="SubjectDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="SubjectTB">
-              <PropertyRef Name="SubjectCode" />
-            </Principal>
-            <Dependent Role="SubjectDetail">
-              <PropertyRef Name="SubjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SubjectTB_TeacherList">
-          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="0..1" />
-          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TeacherList">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="SubjectTB">
-              <PropertyRef Name="Teacher" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="StudentTB">
           <Key>
             <PropertyRef Name="sid" />
@@ -352,78 +500,319 @@
           <Property Name="parentname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="parenttpnum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="imagepath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentFees" Relationship="SipminiModel.FK_StudentTB" FromRole="StudentTB" ToRole="StudentFee" />
         </EntityType>
-      </Schema>
+        <EntityType Name="subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="subject1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SubjectDetail">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="Hall" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Day" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="SubjectTB">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="Int32" />
+          <NavigationProperty Name="GradeList" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="SubjectTB" ToRole="GradeList" />
+          <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="SubjectTB" ToRole="TeacherList" />
+          <NavigationProperty Name="teacher_subject" Relationship="SipminiModel.FK_teacher_subject_SubjectTB" FromRole="SubjectTB" ToRole="teacher_subject" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Shool" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_TeacherList_Teacher" FromRole="Teacher" ToRole="TeacherList" />
+          <NavigationProperty Name="TeacherSalaries" Relationship="SipminiModel.FK_TeacherSalary_Teacher" FromRole="Teacher" ToRole="TeacherSalary" />
+        </EntityType>
+        <EntityType Name="teacher_grade">
+          <Key>
+            <PropertyRef Name="grade_id" />
+          </Key>
+          <Property Name="grade_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="teacher_subject">
+          <Key>
+            <PropertyRef Name="subject_id" />
+          </Key>
+          <Property Name="subject_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SubjectTB" Relationship="SipminiModel.FK_teacher_subject_SubjectTB" FromRole="teacher_subject" ToRole="SubjectTB" />
+        </EntityType>
+        <EntityType Name="TeacherList">
+          <Key>
+            <PropertyRef Name="teacher_id" />
+          </Key>
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="teacher_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubjectTBs" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="TeacherList" ToRole="SubjectTB" />
+          <NavigationProperty Name="Teacher" Relationship="SipminiModel.FK_TeacherList_Teacher" FromRole="TeacherList" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="TeacherSalary">
+          <Key>
+            <PropertyRef Name="SalaryId" />
+          </Key>
+          <Property Name="SalaryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Teacher" Relationship="SipminiModel.FK_TeacherSalary_Teacher" FromRole="TeacherSalary" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="upload_file">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="file_name" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="upload_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="file_path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="upload_file_teacher">
+          <Key>
+            <PropertyRef Name="file_id" />
+          </Key>
+          <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CleanerSalary_Cleaner">
+          <End Type="SipminiModel.Cleaner" Role="Cleaner" Multiplicity="1" />
+          <End Type="SipminiModel.CleanerSalary" Role="CleanerSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cleaner">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CleanerSalary">
+              <PropertyRef Name="CleanerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTB_GradeList">
+          <End Type="SipminiModel.GradeList" Role="GradeList" Multiplicity="0..1" />
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GradeList">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OfficeSalary_Office">
+          <End Type="SipminiModel.Office" Role="Office" Multiplicity="1" />
+          <End Type="SipminiModel.OfficeSalary" Role="OfficeSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OfficeSalary">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentTB">
+          <End Type="SipminiModel.StudentTB" Role="StudentTB" Multiplicity="1" />
+          <End Type="SipminiModel.StudentFee" Role="StudentFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentTB">
+              <PropertyRef Name="sid" />
+            </Principal>
+            <Dependent Role="StudentFee">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectTB_TeacherList">
+          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="0..1" />
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeacherList">
+              <PropertyRef Name="teacher_id" />
+            </Principal>
+            <Dependent Role="SubjectTB">
+              <PropertyRef Name="Teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_teacher_subject_SubjectTB">
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="1" />
+          <End Type="SipminiModel.teacher_subject" Role="teacher_subject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="teacher_subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherList_Teacher">
+          <End Type="SipminiModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeacherList">
+              <PropertyRef Name="teacher_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeacherSalary_Teacher">
+          <End Type="SipminiModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="SipminiModel.TeacherSalary" Role="TeacherSalary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TeacherSalary">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SipminiModelStoreContainer" CdmEntityContainer="DBmodel">
+          <EntitySetMapping Name="Biils">
+            <EntityTypeMapping TypeName="SipminiModel.Biil">
+              <MappingFragment StoreEntitySet="Biil">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Payment_Name" ColumnName="Payment_Name" />
+                <ScalarProperty Name="BillId" ColumnName="BillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cleaners">
+            <EntityTypeMapping TypeName="SipminiModel.Cleaner">
+              <MappingFragment StoreEntitySet="Cleaner">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CleanerSalaries">
+            <EntityTypeMapping TypeName="SipminiModel.CleanerSalary">
+              <MappingFragment StoreEntitySet="CleanerSalary">
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CleanerID" ColumnName="CleanerID" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="grades">
             <EntityTypeMapping TypeName="SipminiModel.grade">
               <MappingFragment StoreEntitySet="grade">
-                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
                 <ScalarProperty Name="grade1" ColumnName="grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="subjects">
-            <EntityTypeMapping TypeName="SipminiModel.subject">
-              <MappingFragment StoreEntitySet="subject">
-                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="subject1" ColumnName="subject" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teachers">
-            <EntityTypeMapping TypeName="SipminiModel.teacher">
-              <MappingFragment StoreEntitySet="teacher">
-                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
-                <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teacher_grade">
-            <EntityTypeMapping TypeName="SipminiModel.teacher_grade">
-              <MappingFragment StoreEntitySet="teacher_grade">
                 <ScalarProperty Name="grade_id" ColumnName="grade_id" />
-                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
-                <ScalarProperty Name="grade" ColumnName="grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teacher_subject">
-            <EntityTypeMapping TypeName="SipminiModel.teacher_subject">
-              <MappingFragment StoreEntitySet="teacher_subject">
-                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="upload_file">
-            <EntityTypeMapping TypeName="SipminiModel.upload_file">
-              <MappingFragment StoreEntitySet="upload_file">
-                <ScalarProperty Name="file_id" ColumnName="file_id" />
-                <ScalarProperty Name="file_name" ColumnName="file_name" />
-                <ScalarProperty Name="upload_date" ColumnName="upload_date" />
-                <ScalarProperty Name="file_path" ColumnName="file_path" />
-                <ScalarProperty Name="subject" ColumnName="subject" />
-                <ScalarProperty Name="grade" ColumnName="grade" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="upload_file_teacher">
-            <EntityTypeMapping TypeName="SipminiModel.upload_file_teacher">
-              <MappingFragment StoreEntitySet="upload_file_teacher">
-                <ScalarProperty Name="file_id" ColumnName="file_id" />
-                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="GradeLists">
             <EntityTypeMapping TypeName="SipminiModel.GradeList">
               <MappingFragment StoreEntitySet="GradeList">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="SipminiModel.Office">
+              <MappingFragment StoreEntitySet="Office">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeSalaries">
+            <EntityTypeMapping TypeName="SipminiModel.OfficeSalary">
+              <MappingFragment StoreEntitySet="OfficeSalary">
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentFees">
+            <EntityTypeMapping TypeName="SipminiModel.StudentFee">
+              <MappingFragment StoreEntitySet="StudentFee">
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentTBs">
+            <EntityTypeMapping TypeName="SipminiModel.StudentTB">
+              <MappingFragment StoreEntitySet="StudentTB">
+                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
+                <ScalarProperty Name="parenttpnum" ColumnName="parenttpnum" />
+                <ScalarProperty Name="parentname" ColumnName="parentname" />
+                <ScalarProperty Name="tpnum" ColumnName="tpnum" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="school" ColumnName="school" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="sid" ColumnName="sid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subjects">
+            <EntityTypeMapping TypeName="SipminiModel.subject">
+              <MappingFragment StoreEntitySet="subject">
+                <ScalarProperty Name="subject1" ColumnName="subject" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -448,31 +837,72 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TeacherLists">
-            <EntityTypeMapping TypeName="SipminiModel.TeacherList">
-              <MappingFragment StoreEntitySet="TeacherList">
-                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="SipminiModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Shool" ColumnName="Shool" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StudentTBs">
-            <EntityTypeMapping TypeName="SipminiModel.StudentTB">
-              <MappingFragment StoreEntitySet="StudentTB">
-                <ScalarProperty Name="imagepath" ColumnName="imagepath" />
-                <ScalarProperty Name="parenttpnum" ColumnName="parenttpnum" />
-                <ScalarProperty Name="parentname" ColumnName="parentname" />
-                <ScalarProperty Name="tpnum" ColumnName="tpnum" />
-                <ScalarProperty Name="subject" ColumnName="subject" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
+          <EntitySetMapping Name="teacher_grade">
+            <EntityTypeMapping TypeName="SipminiModel.teacher_grade">
+              <MappingFragment StoreEntitySet="teacher_grade">
                 <ScalarProperty Name="grade" ColumnName="grade" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="school" ColumnName="school" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="sid" ColumnName="sid" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher_subject">
+            <EntityTypeMapping TypeName="SipminiModel.teacher_subject">
+              <MappingFragment StoreEntitySet="teacher_subject">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="subject_id" ColumnName="subject_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherLists">
+            <EntityTypeMapping TypeName="SipminiModel.TeacherList">
+              <MappingFragment StoreEntitySet="TeacherList">
+                <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeacherSalaries">
+            <EntityTypeMapping TypeName="SipminiModel.TeacherSalary">
+              <MappingFragment StoreEntitySet="TeacherSalary">
+                <ScalarProperty Name="Date_Time" ColumnName="Date_Time" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="upload_file">
+            <EntityTypeMapping TypeName="SipminiModel.upload_file">
+              <MappingFragment StoreEntitySet="upload_file">
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="upload_date" ColumnName="upload_date" />
+                <ScalarProperty Name="file_name" ColumnName="file_name" />
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="upload_file_teacher">
+            <EntityTypeMapping TypeName="SipminiModel.upload_file_teacher">
+              <MappingFragment StoreEntitySet="upload_file_teacher">
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="file_id" ColumnName="file_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

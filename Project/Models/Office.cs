@@ -12,19 +12,22 @@ namespace Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TeacherList
+    public partial class Office
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TeacherList()
+        public Office()
         {
-            this.SubjectTBs = new HashSet<SubjectTB>();
+            this.OfficeSalaries = new HashSet<OfficeSalary>();
         }
     
-        public int teacher_id { get; set; }
-        public string teacher_name { get; set; }
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> Contact_Number { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubjectTB> SubjectTBs { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public virtual ICollection<OfficeSalary> OfficeSalaries { get; set; }
     }
 }

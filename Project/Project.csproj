@@ -236,11 +236,21 @@
     <Compile Include="Controllers\HomepageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Biil.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cleaner.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CleanerSalary.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBmodel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -265,6 +275,15 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Office.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OfficeSalary.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentFee.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentTB.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -279,13 +298,16 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectViewModel.cs" />
-    <Compile Include="Models\teacher.cs">
+    <Compile Include="Models\Teacher.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TeacherList.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TeacherRel.cs" />
+    <Compile Include="Models\TeacherSalary.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\teacher_grade.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -656,6 +678,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
+    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

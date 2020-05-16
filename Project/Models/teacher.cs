@@ -12,9 +12,23 @@ namespace Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class teacher
+    public partial class Teacher
     {
-        public int teacher_id { get; set; }
-        public string teacher_name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Teacher()
+        {
+            this.TeacherSalaries = new HashSet<TeacherSalary>();
+        }
+    
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Shool { get; set; }
+        public string Password { get; set; }
+    
+        public virtual TeacherList TeacherList { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TeacherSalary> TeacherSalaries { get; set; }
     }
 }

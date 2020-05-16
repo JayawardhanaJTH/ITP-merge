@@ -12,7 +12,8 @@ namespace Project.Models
         [Required(ErrorMessage = "This Field is Required.*")]
         public string SubjectName { get; set; }
         public string Grade { get; set; }
-        public string Teacher { get; set; }
+        public int Teacher { get; set; }
+        public string TeacherName { get; set; }
         public string Hall { get; set; }
         public string Day { get; set; }
         public TimeSpan? StartTime { get; set; }

@@ -32,12 +32,12 @@ namespace Project.Controllers
         }
 
         [HandleError]
-        public List<teacher> GetteachersList()
+        public List<TeacherList> GetteachersList()
         {
-            List<teacher> teachers = null;
+            List<TeacherList> teachers = null;
            
             DBmodel db = new DBmodel();
-            teachers = db.teachers.ToList();
+            teachers = db.TeacherLists.ToList();
 
             return teachers;
         }
@@ -114,10 +114,10 @@ namespace Project.Controllers
                                     int subjectid = model.subject_id;
 
 
-                                    var grades = db.grades.Where(u => u.grade_id == gradeid)
+                                    var grades = db.GradeLists.Where(u => u.ID == gradeid)
                                                                      .Select(u => new
                                                                      {
-                                                                         grade = u.grade1
+                                                                         grade = u.Grade
                                                                      }).Single();
 
                                     var subjects = db.subjects.Where(u => u.subject_id == subjectid)
@@ -431,10 +431,10 @@ namespace Project.Controllers
             try {
                 DBmodel db = new DBmodel();
 
-                var grades = db.grades.Where(u => u.grade_id == model.grade_id)
+                var grades = db.GradeLists.Where(u => u.ID == model.grade_id)
                                                                 .Select(u => new
                                                                 {
-                                                                    grade = u.grade1
+                                                                    grade = u.Grade
                                                                 }).Single();
 
                 var subjects = db.subjects.Where(u => u.subject_id == model.subject_id)

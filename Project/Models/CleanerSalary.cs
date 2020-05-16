@@ -12,12 +12,15 @@ namespace Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SubjectDetail
+    public partial class CleanerSalary
     {
-        public int SubjectID { get; set; }
-        public string Hall { get; set; }
-        public string Day { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
+        public int SalaryId { get; set; }
+        public int CleanerID { get; set; }
+        public string Name { get; set; }
+        public int Amount { get; set; }
+        public string Month { get; set; }
+        public string Date_Time { get; set; }
+    
+        public virtual Cleaner Cleaner { get; set; }
     }
 }

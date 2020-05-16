@@ -12,12 +12,11 @@ namespace Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SubjectDetail
+    public partial class Biil
     {
-        public int SubjectID { get; set; }
-        public string Hall { get; set; }
-        public string Day { get; set; }
-        public Nullable<System.TimeSpan> StartTime { get; set; }
-        public Nullable<System.TimeSpan> EndTime { get; set; }
+        public int BillId { get; set; }
+        public string Payment_Name { get; set; }
+        public int Amount { get; set; }
+        public string Date { get; set; }
     }
 }

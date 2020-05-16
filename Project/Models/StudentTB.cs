@@ -11,9 +11,15 @@ namespace Project.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class StudentTB
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StudentTB()
+        {
+            this.StudentFees = new HashSet<StudentFee>();
+        }
+    
         public int sid { get; set; }
         public string fullname { get; set; }
         public string school { get; set; }
@@ -28,7 +34,8 @@ namespace Project.Models
         public string parentname { get; set; }
         public string parenttpnum { get; set; }
         public string imagepath { get; set; }
-
-        public string LoginErrorMessage{get;set;}
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StudentFee> StudentFees { get; set; }
     }
 }
