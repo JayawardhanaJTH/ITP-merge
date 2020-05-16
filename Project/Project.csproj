@@ -358,6 +358,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TeachersDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="UploadFiles.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadFiles.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -717,6 +722,17 @@
     </None>
     <Content Include="TeachersDataSet.xss">
       <DependentUpon>TeachersDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="UploadFiles.xsc">
+      <DependentUpon>UploadFiles.xsd</DependentUpon>
+    </Content>
+    <None Include="UploadFiles.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UploadFiles.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="UploadFiles.xss">
+      <DependentUpon>UploadFiles.xsd</DependentUpon>
     </Content>
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />

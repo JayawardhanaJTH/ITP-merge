@@ -444,6 +444,7 @@ namespace Project.Controllers
                                                 }).Single();
 
                 List<upload_file> files = db.upload_file.Where(x => x.grade == grades.grade && x.subject == subjects.subject).ToList();
+                //List<upload_file> files = db.upload_file.ToList();
                 return View(files);
             }
             catch (Exception ex)

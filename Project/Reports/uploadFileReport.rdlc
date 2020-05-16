@@ -411,8 +411,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox15</rd:DefaultName>
-        <Top>0.02778in</Top>
-        <Left>0.50917in</Left>
+        <Top>0.01389in</Top>
+        <Left>0.50916in</Left>
         <Height>0.40972in</Height>
         <Width>5.36667in</Width>
         <ZIndex>1</ZIndex>
@@ -479,25 +479,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="SipminiDataSet">
+    <DataSource Name="UploadFiles">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>0b970f95-43b3-44a5-91c7-7ddd64ca792a</rd:DataSourceID>
-    </DataSource>
-    <DataSource Name="Teacher">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>1d6b3117-1e77-42c0-a892-911aa4d3769f</rd:DataSourceID>
+      <rd:DataSourceID>86e93c81-6b57-47ba-a27e-af879461def1</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="UploadFiles">
       <Query>
-        <DataSourceName>SipminiDataSet</DataSourceName>
+        <DataSourceName>UploadFiles</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -527,8 +520,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>SipminiDataSet</rd:DataSetName>
-        <rd:SchemaPath>E:\Y2S1\ITP Backup\Project\Project\SipminiDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>UploadFiles</rd:DataSetName>
+        <rd:SchemaPath>E:\Merge Project\Project\Project\UploadFiles.xsd</rd:SchemaPath>
         <rd:TableName>upload_file</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
