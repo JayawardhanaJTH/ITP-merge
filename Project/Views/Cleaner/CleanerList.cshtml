@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Project.Models.Cleaner>
+
+@{
+    ViewBag.Title = "CleanerList";
+}
+
+<h2>Cleaning Staff Information</h2>
+
+
+@Html.ActionLink("Export To Excel", "Reports", new { ReportType = "Excel" }) |
+@Html.ActionLink("Export To PDF", "Reports", new { ReportType = "PDF" }) |
+@Html.ActionLink("Export To Word", "Reports", new { ReportType = "Word" }) |
+@Html.ActionLink("Export To Image", "Reports", new { ReportType = "Image" }) |
+
+<br /> <br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contact_Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact_Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        
+    </tr>
+}
+
+</table>

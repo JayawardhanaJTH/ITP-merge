@@ -233,7 +233,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CleanerController.cs" />
     <Compile Include="Controllers\HomepageController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -321,6 +324,7 @@
     <Compile Include="Models\upload_file_teacher.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewFileList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SipminiDataSet.Designer.cs">
@@ -463,6 +467,8 @@
       <DependentUpon>DBmodel.edmx</DependentUpon>
       <LastGenOutput>DBmodel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\images\1.jpg" />
+    <Content Include="Models\images\prof.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -644,6 +650,26 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Homepage.cshtml" />
     <Content Include="Views\Homepage\Index.cshtml" />
+    <Content Include="Views\Cleaner\Index.cshtml" />
+    <Content Include="Views\Cleaner\Details.cshtml" />
+    <Content Include="Views\Cleaner\Delete.cshtml" />
+    <Content Include="Views\Cleaner\CleanerList.cshtml" />
+    <Content Include="Views\Cleaner\Create.cshtml" />
+    <Content Include="Views\Cleaner\Edit.cshtml" />
+    <Content Include="Views\Office\Index.cshtml" />
+    <Content Include="Views\Office\Create.cshtml" />
+    <Content Include="Views\Office\Delete.cshtml" />
+    <Content Include="Views\Office\Details.cshtml" />
+    <Content Include="Views\Office\Edit.cshtml" />
+    <Content Include="Views\Office\OfficesList.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\Create.cshtml" />
+    <Content Include="Views\Teacher\Delete.cshtml" />
+    <Content Include="Views\Teacher\Details.cshtml" />
+    <Content Include="Views\Teacher\Edit.cshtml" />
+    <Content Include="Views\Teacher\TeacherList.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\RegisterChoose.cshtml" />
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -678,7 +704,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadedFiles\" />
-    <Folder Include="Views\Teacher\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

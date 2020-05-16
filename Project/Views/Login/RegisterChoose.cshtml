@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "RegisterChoose";
+}
+
+<h2>Choose Your category</h2>
+
+<div>
+    <div class="form-group">
+        @Html.ActionLink("Teacher", "Create","Teacher","", new { @class="btn btn-info"})
+
+        @Html.ActionLink("Office Staff", "Create", "Office", "", new { @class = "btn btn-info" })
+
+        @Html.ActionLink("Cleaner", "Create", "Cleaner", "", new { @class = "btn btn-info" })
+       
+
+    </div>
+</div>
+
