@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Project.Models.UserFeedback>
+
+    @{
+        ViewBag.Title = "TeacherPage";
+        Layout = null;
+    }
+     <style>
+         .myactionlink:hover{color:black;}
+         .myactionlink{color:black;}
+     </style>
+    <div class="content">
+  
+         <form class="example" style="max-width:300px"  method ="post">
+            <input type="text" placeholder="Search.." name="searching">
+            <button type="submit">Search</button>
+        </form>
+  
+        <br />
+        <br />
+        <h1 class="agile-head text-center">Students Feedbacks..</h1>
+
+
+        <div class="ActionLink">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Teacher)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comment)
+                    </th>
+
+                  
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Teacher)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email, new { @class = "myactionlink" })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comment)
+                        </td>
+
+                       
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>

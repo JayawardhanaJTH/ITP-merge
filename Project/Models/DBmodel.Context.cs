@@ -44,5 +44,7 @@ namespace Project.Models
         public virtual DbSet<TeacherSalary> TeacherSalaries { get; set; }
         public virtual DbSet<upload_file> upload_file { get; set; }
         public virtual DbSet<upload_file_teacher> upload_file_teacher { get; set; }
+        public virtual DbSet<StaffNotice> StaffNotices { get; set; }
+        public virtual DbSet<UserFeedback> UserFeedbacks { get; set; }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model Project.Models.UserFeedback
+
+    @{
+        ViewBag.Title = "Details";
+        Layout = null;
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="content-w3ls">
+            <h1 class="agile-head text-center">Feedbacks Details</h1>
+
+            <div class="form-w3layouts">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  @Html.DisplayFor(model => model.Name) <br />
+                    </dd>
+                   
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Teacher) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Teacher) <br />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Comment) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Comment) <br />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  @Html.DisplayFor(model => model.Email) <br />
+                    </dd>
+
+                </dl>
+            </div>
+           
+                    <div>
+                        <button class="btn edit">@Html.ActionLink("Edit", "Edit", new { id = Model.id }) </button>  &nbsp;&nbsp;
+                        <button class="btn back" onclick="back()"> @Html.ActionLink("Back to List", "Index", new { style = "color: white" })</button>
+                        <script>
+                                      function back() {
+                                          alert("Do you want to go back to the feedback list");
+
+                                        }
+                        </script>
+                    </div>
+                </div>
+         
+  
+    }

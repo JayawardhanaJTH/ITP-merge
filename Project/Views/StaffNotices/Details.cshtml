@@ -1,0 +1,55 @@
+﻿@model Project.Models.StaffNotice
+
+    @{
+        ViewBag.Title = "Details";
+        Layout = null;
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="content-w3ls">
+            <h1 class="agile-head text-center"> Notice Details</h1>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-w3layouts">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Notice) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  @Html.DisplayFor(model => model.Notice)
+                    </dd>
+                   
+                    <dt> 
+                        @Html.DisplayNameFor(model => model.Type) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  @Html.DisplayFor(model => model.Type)
+                    </dd>
+                  
+                </dl>
+                <br />
+                <br />
+                <br />
+                <br />
+               
+                        <div>
+                            <button class="btn edit">@Html.ActionLink("Edit", "Edit", new { id = Model.id }) </button>  &nbsp;&nbsp;
+                            <button class="btn back" onclick="back()"> @Html.ActionLink("Back to List", "Index", new { style = "color: white" })</button>
+                            <script>
+                                      function back() {
+                                          alert("Do you want to go back to the feedback list");
+
+                                        }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+         
+    }

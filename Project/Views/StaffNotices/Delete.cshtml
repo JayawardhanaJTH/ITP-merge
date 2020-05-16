@@ -1,0 +1,65 @@
+﻿@model Project.Models.StaffNotice
+
+    @{
+        ViewBag.Title = "Delete";
+        Layout = null;
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="content-w3ls">
+            <h1 class="agile-head text-center">Remove Your Notices</h1>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="form-w3layouts">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Type) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  @Html.DisplayFor(model => model.Type)<br /><br />
+                    </dd>
+                    &nbsp;&nbsp;
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Notice) :
+                    </dt>
+
+                    <dd>
+                        &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Notice) <br /><br />
+                    </dd>
+                    &nbsp;&nbsp;
+                      
+                </dl>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="form-control w3ls-end">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Delete" class="register" id="btnalert" />
+                        <script type="text/javascript">
+                 $(document).ready(function () {
+                 $("#btnalert").click(function () {
+                     alert("Do you want to delete the notice");
+            });
+
+        });
+                        </script>
+                        <div>
+                            <button class="btn back" onclick="back()"> @Html.ActionLink("Back to List", "Index", new { style = "color: white" })</button>
+                            <script>
+                                      function back() {
+                                          alert("Do you want to go back to the Notice");
+
+                                        }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }

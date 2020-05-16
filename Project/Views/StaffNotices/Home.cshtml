@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Project.Models.StaffNotice>
+
+    @{
+        ViewBag.Title = "Home";
+    }
+    <br />
+    
+
+    <div class="rectangle">
+        <br> &nbsp &nbsp Notices <br>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+        <image src="../Content/ass.jpg" style="width:25px;height:25px; ">
+            &nbsp STAFF  &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+
+            <image src="../Content/clss.png" style="width:25px;height:25px;">
+                &nbsp CLASSES &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                <image src="../Content/ads.png" style="width:25px;height:25px;"> &nbsp ADMIN
+    </div>
+    <br>
+    <div class="rectangle3"></div>
+    <div class="rectangle2"></div>
+    <div class="rectangle1">
+        <br>Help Desk
+        <br> <br> <image src="../Content/hd.jpg" style="width:250px;height:250px;">
+    </div>	
+    <table class="table">
+        <tr>
+           
+            <th><image src="../Content/bell.png" style="width:25px;height:25px; "> &nbsp Latest Notices...</th> 
+
+            
+           
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                
+                    <td>
+
+                       @Html.DisplayFor(modelItem => item.Notice)
+                    </td>
+
+
+    </tr>
+    
+        }
+       
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

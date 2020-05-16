@@ -243,10 +243,13 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Controllers\PayRollController.cs" />
+    <Compile Include="Controllers\StaffNoticesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
+    <Compile Include="Controllers\UserFeedbacksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -293,6 +296,9 @@
     </Compile>
     <Compile Include="Models\OfficeSalaryView.cs" />
     <Compile Include="Models\report.cs" />
+    <Compile Include="Models\StaffNotice.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentFee.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -336,6 +342,9 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserFeedback.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewFileList.cs" />
     <Compile Include="OficeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -802,6 +811,13 @@
     <Content Include="Views\PayRoll\Salary_edit_office.cshtml" />
     <Content Include="Views\PayRoll\Salary_edit_teacher.cshtml" />
     <Content Include="Views\PayRoll\StudentList.cshtml" />
+    <Content Include="Views\StaffNotices\Index.cshtml" />
+    <Content Include="Views\StaffNotices\Create.cshtml" />
+    <Content Include="Views\StaffNotices\Delete.cshtml" />
+    <Content Include="Views\StaffNotices\Details.cshtml" />
+    <Content Include="Views\StaffNotices\Edit.cshtml" />
+    <Content Include="Views\StaffNotices\Home.cshtml" />
+    <Content Include="Views\Sweet\Index.cshtml" />
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -832,6 +848,12 @@
     <Content Include="Views\UploadFile\ViewList.cshtml" />
     <Content Include="Views\UploadFile\Delete.cshtml" />
     <Content Include="Views\UploadFile\Edit.cshtml" />
+    <Content Include="Views\UserFeedbacks\Index.cshtml" />
+    <Content Include="Views\UserFeedbacks\Create.cshtml" />
+    <Content Include="Views\UserFeedbacks\Delete.cshtml" />
+    <Content Include="Views\UserFeedbacks\Details.cshtml" />
+    <Content Include="Views\UserFeedbacks\Edit.cshtml" />
+    <Content Include="Views\UserFeedbacks\TeacherPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

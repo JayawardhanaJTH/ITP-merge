@@ -1,0 +1,74 @@
+﻿@model Project.Models.UserFeedback
+
+    @{
+        ViewBag.Title = "Delete";
+        Layout = null;
+    }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content-w3ls">
+        <h1 class="agile-head text-center">Remove Your Feedback</h1>
+        <div class="form-w3layouts">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name) :
+                </dt>
+
+                <dd>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Name)
+                </dd>
+                &nbsp;&nbsp;
+                <dt>
+                    @Html.DisplayNameFor(model => model.Teacher):
+                </dt>
+
+                <dd>
+                    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; @Html.DisplayFor(model => model.Teacher)
+                </dd>
+                &nbsp;&nbsp;
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email):
+                </dt>
+
+                <dd>
+                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Email)
+                </dd>
+                &nbsp;&nbsp;
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Comment):
+                </dt>
+
+                <dd>
+                     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;@Html.DisplayFor(model => model.Comment)
+                </dd>
+                &nbsp;&nbsp;
+            </dl>
+            <div class="form-control w3ls-end">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Delete" class="register" id="btnalert" />
+                    <script type="text/javascript">
+                 $(document).ready(function () {
+                 $("#btnalert").click(function () {
+                     alert("Do you want to delete the feedback");
+            });
+
+        });
+                    </script>
+                    <div>
+                        <button class="btn back" onclick="back()"  > @Html.ActionLink("Back to List", "Index" , new {  style = "color: white" })</button>
+                        <script>
+                                      function back() {
+                                          alert("Do you want to go back to the feedback list");
+
+                                        }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+}
+   

@@ -72,6 +72,14 @@
           <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="StaffNotices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Notice" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="StudentFee">
           <Key>
             <PropertyRef Name="SalaryId" />
@@ -191,6 +199,16 @@
           <Property Name="file_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="teacher_id" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserFeedbacks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Teacher" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CleanerSalary_Cleaner">
           <End Role="Cleaner" Type="Self.Cleaner" Multiplicity="1" />
           <End Role="CleanerSalary" Type="Self.CleanerSalary" Multiplicity="*" />
@@ -295,6 +313,7 @@
           <EntitySet Name="GradeList" EntityType="Self.GradeList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OfficeSalary" EntityType="Self.OfficeSalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffNotices" EntityType="Self.StaffNotices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentFee" EntityType="Self.StudentFee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentTB" EntityType="Self.StudentTB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subject" EntityType="Self.subject" Schema="dbo" store:Type="Tables" />
@@ -307,6 +326,7 @@
           <EntitySet Name="TeacherSalary" EntityType="Self.TeacherSalary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file" EntityType="Self.upload_file" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFeedbacks" EntityType="Self.UserFeedbacks" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CleanerSalary_Cleaner" Association="Self.FK_CleanerSalary_Cleaner">
             <End Role="Cleaner" EntitySet="Cleaner" />
             <End Role="CleanerSalary" EntitySet="CleanerSalary" />
@@ -396,6 +416,8 @@
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherSalary" EntitySet="TeacherSalaries" />
           </AssociationSet>
+          <EntitySet Name="StaffNotices" EntityType="SipminiModel.StaffNotice" />
+          <EntitySet Name="UserFeedbacks" EntityType="SipminiModel.UserFeedback" />
         </EntityContainer>
         <EntityType Name="Biil">
           <Key>
@@ -695,6 +717,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="StaffNotice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Notice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserFeedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -903,6 +943,26 @@
               <MappingFragment StoreEntitySet="upload_file_teacher">
                 <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
                 <ScalarProperty Name="file_id" ColumnName="file_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffNotices">
+            <EntityTypeMapping TypeName="SipminiModel.StaffNotice">
+              <MappingFragment StoreEntitySet="StaffNotices">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFeedbacks">
+            <EntityTypeMapping TypeName="SipminiModel.UserFeedback">
+              <MappingFragment StoreEntitySet="UserFeedbacks">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
