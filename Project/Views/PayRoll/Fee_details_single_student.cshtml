@@ -1,0 +1,91 @@
+﻿@model Project.Models.StudentFee
+
+@{
+    ViewBag.Title = "Fee_details_single_student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<h3 class="display-3">Payment Details of <b><u>@Html.DisplayFor(model => model.Name)</u></b> Salary Id <b><u> @Html.DisplayFor(model => model.SalaryId)</u></b></h3>
+<div>
+    <br />
+    <hr />
+    <dl class="dl-horizontal" style="font-size:20px;border-style: solid;">
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Time)
+        </dd>
+
+    </dl>
+</div>
+
+    <div style="font-size:15px">
+        @Html.ActionLink("Back to List", "Fee_details_students", new { htmlAttributes = new { style = "font-size:15px" } })
+    </div>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

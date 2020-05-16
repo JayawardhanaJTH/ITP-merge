@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Project.Models.TeacherSalary>
+
+@{
+    ViewBag.Title = "Salary_details_teacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<body style="padding: 10px">
+    <p class="display-1">Teacher Salary Details</p>
+    <button style="font-size:20px;color:black">
+        @Html.ActionLink("Back to Teacher List", "TeacherList")
+    </button>
+    <button style="font-size:20px;color:black">
+        @Html.ActionLink("Main menu", "Payment")
+    </button>
+    <button style="font-size:20px;color:black">
+        Total Amount: @Model.Sum(i => i.Amount)
+    </button>
+    <br />
+    <br />
+
+    <div style="font-size:15px">
+        @using (Html.BeginForm("Salary_details_teacher", "PayRoll", FormMethod.Get))
+        {
+            @Html.TextBox("searching")<input type="submit" value="Search" />
+        }
+    </div>
+    <br />
+    <table class="table table-hover" style="font-size:15px;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SalaryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Time)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalaryId)
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeacherID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Month)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Time)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Salary_edit_teacher", new { id = item.SalaryId }) |
+                    @Html.ActionLink("Details", "Salary_details_single_teacher", new { id = item.SalaryId }) |
+                    @Html.ActionLink("Delete", "Salary_delete_teacher", new { id = item.SalaryId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+
+    </div>
+</body>
+<br />
+<br />
+<br />
+<br />
+<br /><br />
+<br />

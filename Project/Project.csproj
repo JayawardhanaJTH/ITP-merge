@@ -242,6 +242,7 @@
     <Compile Include="Controllers\HomepageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
+    <Compile Include="Controllers\PayRollController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Models\CleanerSalary.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CleanerSalaryView.cs" />
     <Compile Include="Models\DBmodel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -289,9 +291,12 @@
     <Compile Include="Models\OfficeSalary.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OfficeSalaryView.cs" />
+    <Compile Include="Models\report.cs" />
     <Compile Include="Models\StudentFee.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentFeeView.cs" />
     <Compile Include="Models\StudentTB.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -316,6 +321,7 @@
     <Compile Include="Models\TeacherSalary.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TeacherSalaryView.cs" />
     <Compile Include="Models\teacher_grade.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -336,6 +342,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OficeDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="pay_RollDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>pay_RollDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SipminiDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -352,6 +363,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SubjectTBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Teacher.xsd</DependentUpon>
     </Compile>
     <Compile Include="TeachersDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -542,6 +558,17 @@
     <Content Include="OficeDataSet.xss">
       <DependentUpon>OficeDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="pay_RollDataSet.xsc">
+      <DependentUpon>pay_RollDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="pay_RollDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>pay_RollDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="pay_RollDataSet.xss">
+      <DependentUpon>pay_RollDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -715,6 +742,17 @@
     <Content Include="TeachersDataSet.xsc">
       <DependentUpon>TeachersDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Teacher.xsc">
+      <DependentUpon>Teacher.xsd</DependentUpon>
+    </Content>
+    <None Include="Teacher.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Teacher.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Teacher.xss">
+      <DependentUpon>Teacher.xsd</DependentUpon>
+    </Content>
     <None Include="TeachersDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TeachersDataSet.Designer.cs</LastGenOutput>
@@ -734,6 +772,36 @@
     <Content Include="UploadFiles.xss">
       <DependentUpon>UploadFiles.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\PayRoll\TeacherList.cshtml" />
+    <Content Include="Views\PayRoll\Add_cleaner_salary.cshtml" />
+    <Content Include="Views\PayRoll\Add_office_salary.cshtml" />
+    <Content Include="Views\PayRoll\Add_student_fee.cshtml" />
+    <Content Include="Views\PayRoll\Add_teacher_salary.cshtml" />
+    <Content Include="Views\PayRoll\BillList.cshtml" />
+    <Content Include="Views\PayRoll\CleanerList.cshtml" />
+    <Content Include="Views\PayRoll\CreateAccount_bill.cshtml" />
+    <Content Include="Views\PayRoll\DeleteDetails_bill.cshtml" />
+    <Content Include="Views\PayRoll\Details_bill.cshtml" />
+    <Content Include="Views\PayRoll\EditDetails_bill.cshtml" />
+    <Content Include="Views\PayRoll\Fee_delete_student.cshtml" />
+    <Content Include="Views\PayRoll\Fee_details_single_student.cshtml" />
+    <Content Include="Views\PayRoll\Fee_details_students.cshtml" />
+    <Content Include="Views\PayRoll\Fee_edit_student.cshtml" />
+    <Content Include="Views\PayRoll\OfficeList.cshtml" />
+    <Content Include="Views\PayRoll\Payment.cshtml" />
+    <Content Include="Views\PayRoll\Salary_delete_cleaner.cshtml" />
+    <Content Include="Views\PayRoll\Salary_delete_office.cshtml" />
+    <Content Include="Views\PayRoll\Salary_delete_teacher.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_cleaner.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_office.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_single_cleaner.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_single_office.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_single_teacher.cshtml" />
+    <Content Include="Views\PayRoll\Salary_details_teacher.cshtml" />
+    <Content Include="Views\PayRoll\Salary_edit_cleaner.cshtml" />
+    <Content Include="Views\PayRoll\Salary_edit_office.cshtml" />
+    <Content Include="Views\PayRoll\Salary_edit_teacher.cshtml" />
+    <Content Include="Views\PayRoll\StudentList.cshtml" />
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -778,6 +846,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\CleanersReport.rdlc" />
+    <EmbeddedResource Include="Reports\IncomeOutcome.rdlc" />
     <EmbeddedResource Include="Reports\OfficesReport.rdlc" />
     <EmbeddedResource Include="Reports\StudentReport.rdlc" />
     <EmbeddedResource Include="Reports\SubjectReport.rdlc" />

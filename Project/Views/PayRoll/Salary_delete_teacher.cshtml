@@ -1,0 +1,88 @@
+﻿@model Project.Models.TeacherSalary
+
+@{
+    ViewBag.Title = "Salary_delete_teacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<h3 class="display-3">Are you sure you want to delete SalaryId <b><u>  @Html.DisplayFor(model => model.SalaryId) </u></b></h3>
+<div>
+    <br />
+    <hr />
+    <dl class="dl-horizontal" style="font-size:20px;border-style: solid;">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeacherID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Time)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="font-size:15px">
+            <input type="submit" value="Delete" class="btn btn-default" style="font-size:15px" /> |
+            @Html.ActionLink("Back to List", "Salary_details_teacher", new { htmlAttributes = new { style = "font-size:15px" } })
+        </div>
+    }
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

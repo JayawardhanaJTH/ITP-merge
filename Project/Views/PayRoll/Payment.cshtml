@@ -1,0 +1,271 @@
+﻿@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<div style="text-align:right">
+    <button style='font-size:24px'>
+        <i class='far fa-calendar-alt' style='font-size:36px'>
+        </i> @DateTime.Now.ToString("MM/dd/yyyy")
+        <i class='fas fa-clock' style='font-size:36px'>
+        </i>@DateTime.Now.ToString("hh:mm tt")
+    </button>
+    </div>
+    <p style="font-size:40px;text-align:center"><b><u>PAYMENT MANAGMENT</u></b></p>
+
+    <head>
+        <link rel="stylesheet" href="~/Content/bootstrap.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+            }
+
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: center; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0,0,0); /* Fallback color */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                align-content: center;
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 40%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: inherit;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+                .close:hover,
+                .close:focus {
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            /* The Close Button */
+            .close2 {
+                color: #aaaaaa;
+                float: inherit;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+                .close2:hover,
+                .close2:focus {
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            .close3 {
+                color: #aaaaaa;
+                float: inherit;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+                .close3:hover,
+                .close3:focus {
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+
+            .button_main {
+                background-color:aquamarine;
+                border: none;
+                color: black;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: 50%;
+                font-size: 36px;
+            }
+
+            .button_sub {
+                background-color: white;
+                color: black;
+                border: 2px solid #555555;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 36px;
+                margin: 4px 2px;
+                cursor: pointer;
+                width: auto;
+            }
+        </style>
+
+    </head>
+    <br />
+<br />
+
+    <body>
+        <br />
+        <div style="text-align:center">
+            <button id="Btn_payment" class="button_main"><i class="fa fa-credit-card"></i> Make Payment</button>
+
+            <!-- The Modal -->
+            <div id="Payment" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <button class="button_sub"> @Html.ActionLink("Teacher", "TeacherList")</button>
+                    <button class="button_sub"> @Html.ActionLink("Student", "StudentList")</button>
+                    <button class="button_sub"> @Html.ActionLink("Office Staff", "OfficeList")</button>
+                    <button class="button_sub"> @Html.ActionLink("Cleaner", "CleanerList")</button>
+                    <button class="button_sub"> @Html.ActionLink("Bills", "BillList")</button>
+                </div>
+
+            </div>
+
+
+            <br />
+            <button id="Btn_viewPayments" class="button_main"><i class="fa fa-table"></i>  View Payment Details</button>
+
+            <!-- The Modal -->
+            <div id="View_payment" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close2">&times;</span>
+                    <button class="button_sub"> @Html.ActionLink("Teacher", "Salary_details_teacher")</button>
+                    <button class="button_sub"> @Html.ActionLink("Student", "Fee_details_Students")</button>
+                    <button class="button_sub"> @Html.ActionLink("Office Staff", "Salary_details_Office")</button>
+                    <button class="button_sub"> @Html.ActionLink("Cleaner", "Salary_details_Cleaner")</button>
+                    <button class="button_sub"> @Html.ActionLink("Bills", "BillList")</button>
+                </div>
+
+            </div>
+
+            <br />
+
+            <button id="btn_report" class="button_main"><i class="fa fa-bar-chart"></i> Report</button>
+
+            <div id="get_report" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close3">&times;</span>
+                    <button class="button_sub"> @Html.ActionLink("Get Report-PDF", "IncomeOutcome", new { ReportType = "PDF" })</button>
+                    
+                </div>
+
+            </div>
+
+        </div>
+        <script>
+            // Get the modal
+            var modal2 = document.getElementById("Payment");
+
+            // Get the button that opens the modal
+            var btn2 = document.getElementById("Btn_payment");
+
+            // Get the <span> element that closes the modal
+            var span2 = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal
+            btn2.onclick = function () {
+                modal2.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span2.onclick = function () {
+                modal2.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal2) {
+                    modal2.style.display = "none";
+                }
+            }
+            // Get the modal
+            var modal = document.getElementById("View_payment");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("Btn_viewPayments");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close2")[0];
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
+            var modal3 = document.getElementById("get_report");
+
+            // Get the button that opens the modal
+            var btn3 = document.getElementById("btn_report");
+
+            // Get the <span> element that closes the modal
+            var span3 = document.getElementsByClassName("close3")[0];
+
+            // When the user clicks the button, open the modal
+            btn3.onclick = function () {
+                modal3.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span3.onclick = function () {
+                modal3.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal3) {
+                    modal3.style.display = "none";
+                }
+            }
+
+           
+
+        </script>
+    </body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+   

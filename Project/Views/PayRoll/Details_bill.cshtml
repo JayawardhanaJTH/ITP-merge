@@ -1,0 +1,64 @@
+﻿@model Project.Models.Biil
+
+@{
+    ViewBag.Title = "Details_bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+<h3 class="display-3">Details of Payment <b><u> @Html.DisplayFor(model => model.Payment_Name) </u></b></h3>
+<div>
+    <br />
+    <hr />
+    <dl class="dl-horizontal" style="font-size:20px;border-style: solid;">
+        <dt>
+            @Html.DisplayNameFor(model => model.BillId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+    </dl>
+</div>
+<div style="font-size:15px">
+    @Html.ActionLink("Back to List", "BillList", new { htmlAttributes = new { style = "font-size:15px" } })
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
