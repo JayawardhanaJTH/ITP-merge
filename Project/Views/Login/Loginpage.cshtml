@@ -1,0 +1,111 @@
+﻿@model Project.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Loginpage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        #login-div {
+            position: absolute;
+            left: 40%;
+            top: 30%;
+            border: 2px solid #808080;
+            padding: 10px 10px;
+        }
+
+        .field-validation-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed">
+        <a class="navbar-brand" href="#">SIPMINI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Homepage/Index">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Login/Loginpage">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact US</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="position-absolute" style="margin-top:200px;">
+        <img src="~/Image/Login.jpg" height="600" width="500" />
+    </div>
+    <div class="position-absolute">
+        <img src="~/Image/Top_bottom2.png" height="950" width="1278" />
+    </div>
+    <div id="login-div" class="bg-light">
+        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        {
+            <table class="bg-light">
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => Model.Username, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </td>
+                    <td>
+                        <br />
+                        @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control col-md-10" } })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <label class="field-validation-error"> @Html.DisplayFor(model => model.LoginErrorMessage, new { @class = "text-danger" }) </label>
+                    </td>
+                </tr>
+            </table>
+            <div class="mb-3">
+                <input class="btn btn-primary btn-sm btn-block mr5" type="submit" name="name" value="Login" title="Login" />
+            </div>
+            <div>
+                <input class="btn btn-danger btn-sm btn-block mb-3 " type="reset" name="name" value="Clear" title="Reset" />
+            </div>
+           
+        }
+        
+    </div>
+    
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

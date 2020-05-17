@@ -103,18 +103,30 @@ namespace Staff_Management1.Controllers
             {
                 using (DBmodel dbModel = new DBmodel())
                 {
-                    dbModel.Teachers.Add(teacher);
-                    dbModel.SaveChanges();
+                    if (dbModel.StudentTBs.Any(m => m.username == teacher.Username)
+                        && dbModel.Teachers.Any(m => m.Username == teacher.Username)
+                        && dbModel.Cleaners.Any(m => m.Username == teacher.Username)
+                        && dbModel.Offices.Any(m => m.Username == teacher.Username))
+                    {
+                        ViewBag.Error = "User name already exist! please use another one";
+                        return View(teacher);
+                    }
+                    else
+                    {
 
-                    TeacherList log = new TeacherList();
-                    List<Teacher> list = dbModel.Teachers.ToList();
-                    Teacher model = list.Last();
+                        dbModel.Teachers.Add(teacher);
+                        dbModel.SaveChanges();
 
-                    log.teacher_id = model.UserID;
-                    log.teacher_name = teacher.Name;
+                        TeacherList log = new TeacherList();
+                        List<Teacher> list = dbModel.Teachers.ToList();
+                        Teacher model = list.Last();
 
-                    dbModel.TeacherLists.Add(log);
-                    dbModel.SaveChanges();
+                        log.teacher_id = model.UserID;
+                        log.teacher_name = teacher.Name;
+
+                        dbModel.TeacherLists.Add(log);
+                        dbModel.SaveChanges();
+                    }
                 }
                 // TODO: Add insert logic here
 

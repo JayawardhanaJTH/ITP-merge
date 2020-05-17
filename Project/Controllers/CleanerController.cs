@@ -96,8 +96,19 @@ namespace Staff_Management1.Controllers
                 // TODO: Add insert logic here
                 using (DBmodel dbModel = new DBmodel())
                 {
-                    dbModel.Cleaners.Add(cleaner);
-                    dbModel.SaveChanges();
+                    if (dbModel.StudentTBs.Any(m => m.username == cleaner.Username)
+                        && dbModel.Teachers.Any(m => m.Username == cleaner.Username)
+                        && dbModel.Cleaners.Any(m => m.Username == cleaner.Username)
+                        && dbModel.Offices.Any(m => m.Username == cleaner.Username))
+                    {
+                        ViewBag.Error = "User name already exist! please use another one";
+                        return View(cleaner);
+                    }
+                    else
+                    {
+                        dbModel.Cleaners.Add(cleaner);
+                        dbModel.SaveChanges();
+                    }
                 }
 
                 return RedirectToAction("Index");

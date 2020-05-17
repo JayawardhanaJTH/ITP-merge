@@ -1,4 +1,4 @@
-﻿
+﻿@model Project.Models.AdminPanel
 @{
     ViewBag.Title = "Admin Panel";
 }
@@ -44,24 +44,59 @@
    
         </table>
    </div>
+    <div class="float-right mr-5">
+        <table class="table bg-dark" style="width:200px; ">
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Add Student", "Create", "Student", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Add Teacher", "Create", "Teacher", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Add Office Staff", "Create", "Office", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Add Cleaner", "Create", "Cleaner", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Add Subject", "Create", "Subject", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    @Html.ActionLink("Upload File", "Index", "UploadFile", "", new { @class = "btn btn-success" })
+                </td>
+            </tr>
+
+        </table>
+    </div>
 
     
-        <div class="bg-light clearfix">
+        <div class="bg-light clearfix" style="width:1050px;">
             <div>
                 <table>
                     <tr >
-                        <td class="pb-4">
-                            <h2>Total Teachers :</h2>
+                        <td class="pt-5 pb-4 pl-5">
+                            <h2>Total Teachers : @Model.totalTeachers </h2>
                         </td>
                     </tr>
                     <tr>
-                        <td class="pb-4">
-                            <h2>Total Staff</h2>
+                        <td class="pb-4 pl-5">
+                            <h2>Total Staff Members : @Model.totalStaff</h2>
                         </td>
                     </tr>
                     <tr>
-                        <td class="pb-4">
-                            <h2>Total Students</h2>
+                        <td class="pb-4 pl-5">
+                            <h2>Total Students : @Model.totalStudents</h2>
                         </td>
                     </tr>
                 </table>

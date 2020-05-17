@@ -5,7 +5,7 @@ using System.Web;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Staff_Management1.Models
+namespace Project.Models
 {
     public class User
     {

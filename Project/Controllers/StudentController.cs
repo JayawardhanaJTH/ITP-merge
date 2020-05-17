@@ -10,39 +10,6 @@ namespace Project.Controllers
 {
     public class StudentController : Controller
     {
-        public ActionResult Loginpage()
-        {
-            return View();
-        }
-
-        public ActionResult Autherize(Project.Models.StudentTB studentTB)
-        {
-            using (DBmodel dBModels = new DBmodel())
-            {
-                string username = studentTB.username;
-                string password = studentTB.password;
-                var studentDetails = dBModels.StudentTBs.Where(x => x.username == studentTB.username && x.password == studentTB.password).FirstOrDefault();
-
-                if (username == "Admin" && password == "admin")
-                {
-                    return RedirectToAction("Homepage", "Student");
-
-                }
-                else if (studentDetails == null)
-                {
-                    studentTB.LoginErrorMessage = "Wrong username or password";
-                    return View("Loginpage", studentTB);
-
-                }
-                else
-                {
-                    Session["sid"] = studentDetails.sid;
-                    return RedirectToAction("Index", "Homepage");
-                }
-            }
-
-        }
-
         // GET: Student/Home
         public ActionResult Homepage()
         {
@@ -105,6 +72,15 @@ namespace Project.Controllers
         // GET: Student/Create
         public ActionResult Create()
         {
+            DBmodel db = new DBmodel();
+
+            List<GradeList> grades = db.GradeLists.ToList();
+            List<subject> subjects = db.subjects.ToList();
+
+            ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+            ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+
+
             return View();
         }
 
@@ -116,21 +92,34 @@ namespace Project.Controllers
             {
                 using (DBmodel dBModels = new DBmodel())
                 {
-                    dBModels.StudentTBs.Add(studentTB);
-
-
-                    if (ModelState.IsValid)
+                   if(dBModels.StudentTBs.Any(m=>m.username == studentTB.username) 
+                        || dBModels.Teachers.Any(m=>m.Username == studentTB.username)
+                        || dBModels.Cleaners.Any(m=>m.Username == studentTB.username)
+                        || dBModels.Offices.Any(m=>m.Username == studentTB.username))
                     {
-                        dBModels.SaveChanges();
-                        return RedirectToAction("Loginpage", "Student");
+                        ViewBag.Error = "User name already exist! please use another one";
 
+                        List<GradeList> grades = dBModels.GradeLists.ToList();
+                        List<subject> subjects = dBModels.subjects.ToList();
+
+                        ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                        ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+                        return View(studentTB);
                     }
                     else
                     {
-                        return new JsonResult { Data = "Student not Registered" };
+                        dBModels.StudentTBs.Add(studentTB);
+
+                        if (ModelState.IsValid)
+                        {
+                            dBModels.SaveChanges();
+                            return RedirectToAction("Index", "Student");
+                        }
+                        else
+                        {
+                            return new JsonResult { Data = "Student not Registered" };
+                        }
                     }
-
-
                 }
 
                 //return RedirectToAction("Loginpage", "Student");

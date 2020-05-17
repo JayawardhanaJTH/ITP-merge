@@ -398,11 +398,6 @@ namespace Project.Controllers
             }
         }
 
-        public ActionResult homepage()
-        {
-            return View();
-        }
-
         ////////////////////////////////////////////////////////////
         ////                                                    ////                    
         ////                   Student Side                     ////

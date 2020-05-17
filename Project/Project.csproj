@@ -493,10 +493,19 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\2399830.jpg" />
+    <Content Include="Image\2404969.jpg" />
+    <Content Include="Image\2415799.jpg" />
+    <Content Include="Image\2417085.jpg" />
+    <Content Include="Image\2434270.jpg" />
+    <Content Include="Image\2456277.jpg" />
+    <Content Include="Image\2521743.jpg" />
+    <Content Include="Image\Login.jpg" />
     <Content Include="Image\ClassroomManagement-750x300.jpg" />
     <Content Include="Image\images.jpg" />
-    <Content Include="Image\rp.jpg" />
     <Content Include="Image\synopsys-education-center.jpg" />
+    <Content Include="Image\Top_bottom.png" />
+    <Content Include="Image\Top_bottom2.png" />
     <Content Include="Localization\ar.xml" />
     <Content Include="Localization\be.xml" />
     <Content Include="Localization\bg.xml" />
@@ -757,7 +766,7 @@
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Loginpage.cshtml" />
+    <Content Include="Views\Login\Loginpage.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Homepage.cshtml" />
     <Content Include="Views\Homepage\Index.cshtml" />
@@ -779,8 +788,6 @@
     <Content Include="Views\Teacher\Details.cshtml" />
     <Content Include="Views\Teacher\Edit.cshtml" />
     <Content Include="Views\Teacher\TeacherList.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\RegisterChoose.cshtml" />
     <Content Include="TeachersDataSet.xsc">
       <DependentUpon>TeachersDataSet.xsd</DependentUpon>
     </Content>
@@ -851,7 +858,6 @@
     <Content Include="Views\StaffNotices\Edit.cshtml" />
     <Content Include="Views\StaffNotices\Home.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
-    <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

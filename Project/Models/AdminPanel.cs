@@ -7,5 +7,9 @@ namespace Project.Models
 {
     public class AdminPanel
     {
+        public int totalStudents { get; set; }
+        public int totalTeachers { get; set; }
+        public int totalStaff { get; set; }
+
     }
 }
