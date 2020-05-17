@@ -43,14 +43,40 @@ namespace Project.Controllers
                     if (ModelState.IsValid)
                     {
                         SubjectTB model = new SubjectTB();
+                        subject model_subject = new subject();
+                        teacher_grade model_grade = new teacher_grade();
+                        teacher_subject model_teacher = new teacher_subject();
+
                         model.Grade = viewModel.Subject.Grade;
                         model.SubjectName = viewModel.Subject.SubjectName;
                         model.Teacher = viewModel.Subject.Teacher;
-                        model.Grade = viewModel.Subject.Grade;
+                       
+
                         if (!DBmodel.SubjectTBs.Any(x => x.Teacher == viewModel.Subject.Teacher && x.Grade == viewModel.Subject.Grade && x.SubjectName == viewModel.Subject.SubjectName))
                         {
                             DBmodel.SubjectTBs.Add(model);
                             DBmodel.SaveChanges();
+
+                            List<SubjectTB> list = DBmodel.SubjectTBs.ToList();
+                            SubjectTB index = list.Last();
+
+                            model_subject.subject_id = index.SubjectCode;
+                            model_subject.subject1 = index.SubjectName;
+
+                            model_grade.grade = index.Grade;
+                            model_grade.teacher_id = index.Teacher;
+                            model_grade.grade_id = DBmodel.GradeLists.Find(index.Grade).ID;
+                            model_grade.subjectCode = index.SubjectCode;
+
+                            model_teacher.subject_id = index.SubjectCode;
+                            model_teacher.teacher_id = index.Teacher;
+
+                            DBmodel.subjects.Add(model_subject);
+                            DBmodel.teacher_grade.Add(model_grade);
+                            DBmodel.teacher_subject.Add(model_teacher);
+
+                            DBmodel.SaveChanges();
+
                             return RedirectToAction("SubjectList");
                         }
                         else
@@ -62,7 +88,7 @@ namespace Project.Controllers
                 }
                 catch
                 {
-
+                   
                 }
                 viewModel.Teachers = DBmodel.TeacherLists.ToList<TeacherList>();
                 viewModel.Grades = DBmodel.GradeLists.ToList<GradeList>();
@@ -128,6 +154,9 @@ namespace Project.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        subject model_subject = DBmodel.subjects.Find(id);
+                        teacher_grade model_grade = DBmodel.teacher_grade.Find(id);
+                        teacher_subject model_teacher = DBmodel.teacher_subject.Find(id);
 
                         model.Subject.SubjectCode = id;
                         var subject = DBmodel.SubjectTBs.Where(x => x.SubjectCode == id).FirstOrDefault();
@@ -142,6 +171,20 @@ namespace Project.Controllers
                         {
                             DBmodel.Entry(subject).State = EntityState.Modified;
                             DBmodel.SaveChanges();
+
+                            model_subject.subject1 = model.Subject.SubjectName;
+
+                            model_grade.grade = model.Subject.Grade;
+                            model_grade.teacher_id = model.Subject.Teacher;
+                            model_grade.grade_id = DBmodel.GradeLists.Find(model.Subject.Grade).ID;
+
+                            model_teacher.teacher_id = model.Subject.Teacher;
+
+                            DBmodel.Entry(model_subject).State = EntityState.Modified;
+                            DBmodel.Entry(model_grade).State = EntityState.Modified;
+                            DBmodel.Entry(model_teacher).State = EntityState.Modified;
+                            DBmodel.SaveChanges();
+
                             return RedirectToAction("SubjectList");
                         }
                         else
@@ -229,6 +272,10 @@ namespace Project.Controllers
             {
                 using (DBmodel DBmodel = new DBmodel())
                 {
+                    subject model_subject = DBmodel.subjects.Find(id);
+                    teacher_grade model_grade = DBmodel.teacher_grade.Find(id);
+                    teacher_subject model_teacher = DBmodel.teacher_subject.Find(id);
+
                     SubjectDetail subDetail = new SubjectDetail();
                     subject = DBmodel.SubjectTBs.Where(x => x.SubjectCode == id).FirstOrDefault();
                     if (DBmodel.SubjectDetails.Any(x => x.SubjectID == id))
@@ -238,6 +285,16 @@ namespace Project.Controllers
 
                     }
                     DBmodel.SubjectTBs.Remove(subject);
+                    DBmodel.SaveChanges();
+
+                    string grade = model_grade.grade;
+                    int grade2 = model_grade.grade_id;
+                    int grade3 = model_grade.subjectCode;
+                    int grade4 = model_grade.teacher_id;
+
+                    DBmodel.teacher_grade.Remove(model_grade);
+                   // DBmodel.subjects.Remove(model_subject);
+                   // DBmodel.teacher_subject.Remove(model_teacher);
                     DBmodel.SaveChanges();
 
                 }

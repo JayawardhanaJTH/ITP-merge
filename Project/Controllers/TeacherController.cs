@@ -105,6 +105,16 @@ namespace Staff_Management1.Controllers
                 {
                     dbModel.Teachers.Add(teacher);
                     dbModel.SaveChanges();
+
+                    TeacherList log = new TeacherList();
+                    List<Teacher> list = dbModel.Teachers.ToList();
+                    Teacher model = list.Last();
+
+                    log.teacher_id = model.UserID;
+                    log.teacher_name = teacher.Name;
+
+                    dbModel.TeacherLists.Add(log);
+                    dbModel.SaveChanges();
                 }
                 // TODO: Add insert logic here
 
@@ -136,6 +146,15 @@ namespace Staff_Management1.Controllers
                 {
                     dbModel.Entry(teacher).State = EntityState.Modified;
                     dbModel.SaveChanges();
+
+                    TeacherList model = dbModel.TeacherLists.Find(id);
+                    model.teacher_name = teacher.Name;
+
+                    dbModel.Entry(model).State = EntityState.Modified;
+                    dbModel.SaveChanges();
+
+
+                   
                 }
                 // TODO: Add update logic here
 
@@ -158,7 +177,7 @@ namespace Staff_Management1.Controllers
 
         // POST: Teacher/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Teacher model)
         {
             try
             {
@@ -166,8 +185,14 @@ namespace Staff_Management1.Controllers
                 using (DBmodel dbModel = new DBmodel())
                 {
                     Teacher teacher = dbModel.Teachers.Where(x => x.UserID == id).FirstOrDefault();
-                    dbModel.Teachers.Remove(teacher);
+                    dbModel.Teachers.Remove(model);
                     dbModel.SaveChanges();
+
+                    //TeacherList model = dbModel.TeacherLists.Find(id);
+                    
+
+                    //dbModel.TeacherLists.Remove(model);
+                    //dbModel.SaveChanges();
                 }
                 return RedirectToAction("Index");
             }

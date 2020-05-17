@@ -16,5 +16,7 @@ namespace Project.Models
     {
         public int subject_id { get; set; }
         public string subject1 { get; set; }
+    
+        public virtual SubjectTB SubjectTB { get; set; }
     }
 }

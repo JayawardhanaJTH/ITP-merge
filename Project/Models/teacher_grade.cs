@@ -14,8 +14,9 @@ namespace Project.Models
     
     public partial class teacher_grade
     {
-        public int grade_id { get; set; }
+        public int subjectCode { get; set; }
         public int teacher_id { get; set; }
         public string grade { get; set; }
+        public int grade_id { get; set; }
     }
 }

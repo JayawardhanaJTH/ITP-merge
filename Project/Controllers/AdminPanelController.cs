@@ -6,11 +6,12 @@ using System.Web.Mvc;
 
 namespace Project.Controllers
 {
-    public class SweetController : Controller
+    public class AdminPanelController : Controller
     {
-        // GET: Sweet
+        // GET: AdminPanel
         public ActionResult Index()
         {
+
             return View();
         }
     }

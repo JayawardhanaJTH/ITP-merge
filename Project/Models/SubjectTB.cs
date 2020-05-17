@@ -17,9 +17,10 @@ namespace Project.Models
         public int SubjectCode { get; set; }
         public string SubjectName { get; set; }
         public string Grade { get; set; }
-        public Nullable<int> Teacher { get; set; }
+        public int Teacher { get; set; }
     
         public virtual GradeList GradeList { get; set; }
+        public virtual subject subject { get; set; }
         public virtual TeacherList TeacherList { get; set; }
         public virtual teacher_subject teacher_subject { get; set; }
     }

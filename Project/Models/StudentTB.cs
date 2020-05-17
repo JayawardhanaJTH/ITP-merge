@@ -34,7 +34,9 @@ namespace Project.Models
         public string parentname { get; set; }
         public string parenttpnum { get; set; }
         public string imagepath { get; set; }
+
         public string LoginErrorMessage { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StudentFee> StudentFees { get; set; }
     }

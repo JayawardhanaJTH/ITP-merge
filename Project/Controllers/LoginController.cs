@@ -34,7 +34,7 @@ namespace Staff_Management1.Controllers
                 else if (managerDetails != null)
                 {
                     Session["UserID"] = managerDetails.UserID;
-                    return RedirectToAction("Index", "Home1");
+                    return RedirectToAction("Index", "AdminPanel");
                 }
                 else if (cleanerDetails != null)
                 {

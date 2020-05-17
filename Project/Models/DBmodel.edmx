@@ -132,10 +132,10 @@
           <Key>
             <PropertyRef Name="SubjectCode" />
           </Key>
-          <Property Name="SubjectCode" Type="int" Nullable="false" />
-          <Property Name="SubjectName" Type="varchar" MaxLength="50" />
-          <Property Name="Grade" Type="varchar" MaxLength="50" />
-          <Property Name="Teacher" Type="int" />
+          <Property Name="SubjectCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Teacher" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -150,11 +150,12 @@
         </EntityType>
         <EntityType Name="teacher_grade">
           <Key>
-            <PropertyRef Name="grade_id" />
+            <PropertyRef Name="subjectCode" />
           </Key>
-          <Property Name="grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="subjectCode" Type="int" Nullable="false" />
           <Property Name="teacher_id" Type="int" Nullable="false" />
           <Property Name="grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="grade_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="teacher_subject">
           <Key>
@@ -245,8 +246,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_subject_SubjectTB">
+          <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SubjectTB_GradeList">
-          <End Role="GradeList" Type="Self.GradeList" Multiplicity="0..1" />
+          <End Role="GradeList" Type="Self.GradeList" Multiplicity="1" />
           <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GradeList">
@@ -258,7 +271,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubjectTB_TeacherList">
-          <End Role="TeacherList" Type="Self.TeacherList" Multiplicity="0..1" />
+          <End Role="TeacherList" Type="Self.TeacherList" Multiplicity="1" />
           <End Role="SubjectTB" Type="Self.SubjectTB" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TeacherList">
@@ -339,6 +352,10 @@
             <End Role="StudentTB" EntitySet="StudentTB" />
             <End Role="StudentFee" EntitySet="StudentFee" />
           </AssociationSet>
+          <AssociationSet Name="FK_subject_SubjectTB" Association="Self.FK_subject_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTB" />
+            <End Role="subject" EntitySet="subject" />
+          </AssociationSet>
           <AssociationSet Name="FK_SubjectTB_GradeList" Association="Self.FK_SubjectTB_GradeList">
             <End Role="GradeList" EntitySet="GradeList" />
             <End Role="SubjectTB" EntitySet="SubjectTB" />
@@ -372,18 +389,19 @@
           <EntitySet Name="GradeLists" EntityType="SipminiModel.GradeList" />
           <EntitySet Name="Offices" EntityType="SipminiModel.Office" />
           <EntitySet Name="OfficeSalaries" EntityType="SipminiModel.OfficeSalary" />
+          <EntitySet Name="StaffNotices" EntityType="SipminiModel.StaffNotice" />
           <EntitySet Name="StudentFees" EntityType="SipminiModel.StudentFee" />
           <EntitySet Name="StudentTBs" EntityType="SipminiModel.StudentTB" />
           <EntitySet Name="subjects" EntityType="SipminiModel.subject" />
           <EntitySet Name="SubjectDetails" EntityType="SipminiModel.SubjectDetail" />
           <EntitySet Name="SubjectTBs" EntityType="SipminiModel.SubjectTB" />
           <EntitySet Name="Teachers" EntityType="SipminiModel.Teacher" />
-          <EntitySet Name="teacher_grade" EntityType="SipminiModel.teacher_grade" />
           <EntitySet Name="teacher_subject" EntityType="SipminiModel.teacher_subject" />
           <EntitySet Name="TeacherLists" EntityType="SipminiModel.TeacherList" />
           <EntitySet Name="TeacherSalaries" EntityType="SipminiModel.TeacherSalary" />
           <EntitySet Name="upload_file" EntityType="SipminiModel.upload_file" />
           <EntitySet Name="upload_file_teacher" EntityType="SipminiModel.upload_file_teacher" />
+          <EntitySet Name="UserFeedbacks" EntityType="SipminiModel.UserFeedback" />
           <AssociationSet Name="FK_CleanerSalary_Cleaner" Association="SipminiModel.FK_CleanerSalary_Cleaner">
             <End Role="Cleaner" EntitySet="Cleaners" />
             <End Role="CleanerSalary" EntitySet="CleanerSalaries" />
@@ -399,6 +417,10 @@
           <AssociationSet Name="FK_StudentTB" Association="SipminiModel.FK_StudentTB">
             <End Role="StudentTB" EntitySet="StudentTBs" />
             <End Role="StudentFee" EntitySet="StudentFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subject_SubjectTB" Association="SipminiModel.FK_subject_SubjectTB">
+            <End Role="SubjectTB" EntitySet="SubjectTBs" />
+            <End Role="subject" EntitySet="subjects" />
           </AssociationSet>
           <AssociationSet Name="FK_SubjectTB_TeacherList" Association="SipminiModel.FK_SubjectTB_TeacherList">
             <End Role="TeacherList" EntitySet="TeacherLists" />
@@ -416,8 +438,7 @@
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherSalary" EntitySet="TeacherSalaries" />
           </AssociationSet>
-          <EntitySet Name="StaffNotices" EntityType="SipminiModel.StaffNotice" />
-          <EntitySet Name="UserFeedbacks" EntityType="SipminiModel.UserFeedback" />
+          <EntitySet Name="teacher_grade" EntityType="SipminiModel.teacher_grade" />
         </EntityContainer>
         <EntityType Name="Biil">
           <Key>
@@ -491,6 +512,14 @@
           <Property Name="Date_Time" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Office" Relationship="SipminiModel.FK_OfficeSalary_Office" FromRole="OfficeSalary" ToRole="Office" />
         </EntityType>
+        <EntityType Name="StaffNotice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Notice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="StudentFee">
           <Key>
             <PropertyRef Name="SalaryId" />
@@ -530,6 +559,7 @@
           </Key>
           <Property Name="subject_id" Type="Int32" Nullable="false" />
           <Property Name="subject1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SubjectTB" Relationship="SipminiModel.FK_subject_SubjectTB" FromRole="subject" ToRole="SubjectTB" />
         </EntityType>
         <EntityType Name="SubjectDetail">
           <Key>
@@ -545,11 +575,12 @@
           <Key>
             <PropertyRef Name="SubjectCode" />
           </Key>
-          <Property Name="SubjectCode" Type="Int32" Nullable="false" />
-          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Grade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Teacher" Type="Int32" />
+          <Property Name="SubjectCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="Int32" Nullable="false" />
           <NavigationProperty Name="GradeList" Relationship="SipminiModel.FK_SubjectTB_GradeList" FromRole="SubjectTB" ToRole="GradeList" />
+          <NavigationProperty Name="subject" Relationship="SipminiModel.FK_subject_SubjectTB" FromRole="SubjectTB" ToRole="subject" />
           <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_SubjectTB_TeacherList" FromRole="SubjectTB" ToRole="TeacherList" />
           <NavigationProperty Name="teacher_subject" Relationship="SipminiModel.FK_teacher_subject_SubjectTB" FromRole="SubjectTB" ToRole="teacher_subject" />
         </EntityType>
@@ -565,14 +596,6 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TeacherList" Relationship="SipminiModel.FK_TeacherList_Teacher" FromRole="Teacher" ToRole="TeacherList" />
           <NavigationProperty Name="TeacherSalaries" Relationship="SipminiModel.FK_TeacherSalary_Teacher" FromRole="Teacher" ToRole="TeacherSalary" />
-        </EntityType>
-        <EntityType Name="teacher_grade">
-          <Key>
-            <PropertyRef Name="grade_id" />
-          </Key>
-          <Property Name="grade_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="teacher_id" Type="Int32" Nullable="false" />
-          <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="teacher_subject">
           <Key>
@@ -621,6 +644,16 @@
           <Property Name="file_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="teacher_id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserFeedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Teacher" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <Association Name="FK_CleanerSalary_Cleaner">
           <End Type="SipminiModel.Cleaner" Role="Cleaner" Multiplicity="1" />
           <End Type="SipminiModel.CleanerSalary" Role="CleanerSalary" Multiplicity="*" />
@@ -634,7 +667,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubjectTB_GradeList">
-          <End Type="SipminiModel.GradeList" Role="GradeList" Multiplicity="0..1" />
+          <End Type="SipminiModel.GradeList" Role="GradeList" Multiplicity="1" />
           <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GradeList">
@@ -669,8 +702,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_subject_SubjectTB">
+          <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="1" />
+          <End Type="SipminiModel.subject" Role="subject" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectTB">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="subject">
+              <PropertyRef Name="subject_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SubjectTB_TeacherList">
-          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="0..1" />
+          <End Type="SipminiModel.TeacherList" Role="TeacherList" Multiplicity="1" />
           <End Type="SipminiModel.SubjectTB" Role="SubjectTB" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TeacherList">
@@ -717,23 +762,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="StaffNotice">
+        <EntityType Name="teacher_grade">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="subjectCode" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Notice" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="UserFeedback">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Teacher" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="subjectCode" Type="Int32" Nullable="false" />
+          <Property Name="teacher_id" Type="Int32" Nullable="false" />
+          <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="grade_id" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -815,6 +851,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="StaffNotices">
+            <EntityTypeMapping TypeName="SipminiModel.StaffNotice">
+              <MappingFragment StoreEntitySet="StaffNotices">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StudentFees">
             <EntityTypeMapping TypeName="SipminiModel.StudentFee">
               <MappingFragment StoreEntitySet="StudentFee">
@@ -889,15 +934,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="teacher_grade">
-            <EntityTypeMapping TypeName="SipminiModel.teacher_grade">
-              <MappingFragment StoreEntitySet="teacher_grade">
-                <ScalarProperty Name="grade" ColumnName="grade" />
-                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
-                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="teacher_subject">
             <EntityTypeMapping TypeName="SipminiModel.teacher_subject">
               <MappingFragment StoreEntitySet="teacher_subject">
@@ -946,15 +982,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StaffNotices">
-            <EntityTypeMapping TypeName="SipminiModel.StaffNotice">
-              <MappingFragment StoreEntitySet="StaffNotices">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Notice" ColumnName="Notice" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserFeedbacks">
             <EntityTypeMapping TypeName="SipminiModel.UserFeedback">
               <MappingFragment StoreEntitySet="UserFeedbacks">
@@ -963,6 +990,16 @@
                 <ScalarProperty Name="Teacher" ColumnName="Teacher" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teacher_grade">
+            <EntityTypeMapping TypeName="SipminiModel.teacher_grade">
+              <MappingFragment StoreEntitySet="teacher_grade">
+                <ScalarProperty Name="grade_id" ColumnName="grade_id" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
+                <ScalarProperty Name="subjectCode" ColumnName="subjectCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

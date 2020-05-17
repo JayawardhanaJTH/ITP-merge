@@ -1,0 +1,80 @@
+﻿ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font-size:20px;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color:orange;
+}
+
+input[type=text]{
+  font-size:18px;
+  background-color:#333;
+  resize: vertical;
+  font-family: italic, Helvetica, sans-serif;
+  font-color:white;
+
+ }
+input[type=submit]:hover {
+  cursor:pointer;
+  background-color:#ffc107;
+  color:#000;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.footer{
+	width:100%;
+	height:20px;
+	position:bottom;
+	top:100%;
+}
+.main2{
+	
+	background:black;
+	border:none;
+	font-family:Arial;
+	padding-left:1%;
+	line-height:6.5em;
+	
+	
+}
+/*footer text style*/
+.p1{
+	font-family:Arial;
+	color:white;
+	font-size:12px;
+	margin-left:10px;
+}

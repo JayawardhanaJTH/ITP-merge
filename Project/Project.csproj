@@ -238,6 +238,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CleanersDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\CleanerController.cs" />
     <Compile Include="Controllers\HomepageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -246,7 +247,6 @@
     <Compile Include="Controllers\StaffNoticesController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
     <Compile Include="Controllers\UserFeedbacksController.cs" />
@@ -254,6 +254,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminPanel.cs" />
     <Compile Include="Models\Biil.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -390,13 +391,45 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\2.jpg" />
+    <Content Include="Content\3.jpg" />
+    <Content Include="Content\ads.png" />
+    <Content Include="Content\as.jpg" />
+    <Content Include="Content\ass.jpg" />
+    <Content Include="Content\b.jpg" />
+    <Content Include="Content\ba.jpg" />
+    <Content Include="Content\bb.jpg" />
+    <Content Include="Content\bc.jpg" />
+    <Content Include="Content\bell.png" />
+    <Content Include="Content\bg.jpg" />
+    <Content Include="Content\bg2.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cls.jpg" />
+    <Content Include="Content\clss.png" />
+    <Content Include="Content\fd.css" />
+    <Content Include="Content\fdbk.css" />
+    <Content Include="Content\fdbkk.css" />
+    <Content Include="Content\feedbackcss.css" />
+    <Content Include="Content\hd.jpg" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\homepage.css" />
+    <Content Include="Content\icon.png" />
     <Content Include="Content\images\bg2.jpg" />
+    <Content Include="Content\index.css" />
+    <Content Include="Content\l.png" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\not.jpg" />
+    <Content Include="Content\notcss.css" />
+    <Content Include="Content\notice.css" />
+    <Content Include="Content\prof.jpg" />
+    <Content Include="Content\search.png" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\teacher.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -817,7 +850,7 @@
     <Content Include="Views\StaffNotices\Details.cshtml" />
     <Content Include="Views\StaffNotices\Edit.cshtml" />
     <Content Include="Views\StaffNotices\Home.cshtml" />
-    <Content Include="Views\Sweet\Index.cshtml" />
+    <Content Include="Views\AdminPanel\Index.cshtml" />
     <None Include="Views\UploadFile\homepage.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -848,11 +881,11 @@
     <Content Include="Views\UploadFile\ViewList.cshtml" />
     <Content Include="Views\UploadFile\Delete.cshtml" />
     <Content Include="Views\UploadFile\Edit.cshtml" />
-    <Content Include="Views\UserFeedbacks\Index.cshtml" />
     <Content Include="Views\UserFeedbacks\Create.cshtml" />
     <Content Include="Views\UserFeedbacks\Delete.cshtml" />
     <Content Include="Views\UserFeedbacks\Details.cshtml" />
     <Content Include="Views\UserFeedbacks\Edit.cshtml" />
+    <Content Include="Views\UserFeedbacks\Index.cshtml" />
     <Content Include="Views\UserFeedbacks\TeacherPage.cshtml" />
   </ItemGroup>
   <ItemGroup>

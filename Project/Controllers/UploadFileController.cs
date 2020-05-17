@@ -9,6 +9,7 @@ using System.Net;
 using System.Data.Entity;
 using Microsoft.Reporting.WebForms;
 using System.Data.Entity.Validation;
+using System.Collections;
 
 namespace Project.Controllers
 {
@@ -47,14 +48,15 @@ namespace Project.Controllers
             try {
                 DBmodel db = new DBmodel();
                 List<teacher_subject> subID = db.teacher_subject.Where(x => x.teacher_id == teacher_id).ToList();
-
+                List<subject> subjects = new List<subject>();
                 foreach (var item in subID)
                 {
                     int subjectId = item.subject_id;
 
-                    List<subject> subjects = db.subjects.Where(x => x.subject_id == subjectId).ToList();
-                    ViewBag.subList = new SelectList(subjects, "subject_id", "subject1");
+                     subjects.Add(db.subjects.Where(x => x.subject_id == subjectId).FirstOrDefault());
+
                 }
+                ViewBag.subList = new SelectList(subjects, "subject_id", "subject1");
 
 
                 return PartialView("DisplaySubjects");
@@ -66,11 +68,11 @@ namespace Project.Controllers
             }
         }
 
-        public ActionResult GetGradeList(int teacher_id)
+        public ActionResult GetGradeList(int teacher_id,int subject_id)
         {
             try {
                 DBmodel db = new DBmodel();
-                List<teacher_grade> grades = db.teacher_grade.Where(x => x.teacher_id == teacher_id).ToList();
+                List<teacher_grade> grades = db.teacher_grade.Where(x => x.teacher_id == teacher_id && x.subjectCode == subject_id).ToList();
 
                 ViewBag.gradeList = new SelectList(grades, "grade_id", "grade");
 

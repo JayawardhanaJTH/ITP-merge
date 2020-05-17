@@ -81,7 +81,7 @@
 @*when detect a change on teacher drop down list fire this script code and set subject and grade according it.*@
 <script>
     $(document).ready(function () {
-        //take student list
+        //take subject list
         $("#teacher_id").change(function () {
             var teacherID = $(this).val();
             debugger
@@ -97,12 +97,13 @@
             })
         })
     //take Grade list
-        $("#teacher_id").change(function () {
-            var teacherID = $(this).val();
+        $("#subject_id").change(function () {
+            var subjectID = $(this).val();
+            var teacherID = $('#teacher_id').val();
             debugger
             $.ajax({
                 type: "post",
-                url: "/UploadFile/GetGradeList?teacher_id=" + teacherID,
+                url: "/UploadFile/GetGradeList?teacher_id=" + teacherID+"&subject_id=" + subjectID,
                 contentType: "html",
                 success: function (response) {
                     debugger

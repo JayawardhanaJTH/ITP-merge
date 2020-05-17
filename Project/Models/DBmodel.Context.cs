@@ -32,19 +32,19 @@ namespace Project.Models
         public virtual DbSet<GradeList> GradeLists { get; set; }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<OfficeSalary> OfficeSalaries { get; set; }
+        public virtual DbSet<StaffNotice> StaffNotices { get; set; }
         public virtual DbSet<StudentFee> StudentFees { get; set; }
         public virtual DbSet<StudentTB> StudentTBs { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
         public virtual DbSet<SubjectDetail> SubjectDetails { get; set; }
         public virtual DbSet<SubjectTB> SubjectTBs { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
-        public virtual DbSet<teacher_grade> teacher_grade { get; set; }
         public virtual DbSet<teacher_subject> teacher_subject { get; set; }
         public virtual DbSet<TeacherList> TeacherLists { get; set; }
         public virtual DbSet<TeacherSalary> TeacherSalaries { get; set; }
         public virtual DbSet<upload_file> upload_file { get; set; }
         public virtual DbSet<upload_file_teacher> upload_file_teacher { get; set; }
-        public virtual DbSet<StaffNotice> StaffNotices { get; set; }
         public virtual DbSet<UserFeedback> UserFeedbacks { get; set; }
+        public virtual DbSet<teacher_grade> teacher_grade { get; set; }
     }
 }
