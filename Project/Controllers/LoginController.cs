@@ -1,21 +1,60 @@
-﻿using Project.Models;
+﻿using Microsoft.AspNet.Identity.Owin;
+using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Staff_Management1.Controllers
+namespace Project.Controllers
 {
     public class LoginController : Controller
     {
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public LoginController()
+        {
+        }
+
+        public LoginController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Loginpage()
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Autherize(User userModel)
+        
+        public ActionResult Autheriz(User userModel)
         {
             using (DBmodel db = new DBmodel())
             {
@@ -30,26 +69,34 @@ namespace Staff_Management1.Controllers
                 if (teacherDetails != null)
                 {
                     Session["UserID"] = teacherDetails.UserID;
-                    return RedirectToAction("Index", "Home1");
+                        Session["Role"] = "Teacher";
+                    return RedirectToAction("Index", "Homepage");
                 }
                 else if (managerDetails != null)
                 {
                     Session["UserID"] = managerDetails.UserID;
-                    return RedirectToAction("Index", "AdminPanel");
+                        Session["Role"] = "Staff";
+                        return RedirectToAction("Index", "AdminPanel");
                 }
                 else if (cleanerDetails != null)
                 {
                     Session["UserID"] = cleanerDetails.UserID;
-                    return RedirectToAction("Index", "Home1");
+                        Session["Role"] = "Cleaner";
+                        return RedirectToAction("Index", "Homepage");
                 }
-                else if(studentDetails != null)
+                else if (studentDetails != null)
                 {
                     Session["sid"] = studentDetails.sid;
+                    Session["Role"] = "Student";
+                    Session["Subject"] = studentDetails.subject;
+                    Session["Grade"] = studentDetails.grade;
                     return RedirectToAction("Index", "Homepage");
                 }
                 else if (username == "Admin" && password == "admin")
                 {
-                    return RedirectToAction("Index", "AdminPanel");
+                    
+                        Session["Role"] = "Admin";
+                        return RedirectToAction("Index", "AdminPanel");
 
                 }
                 else
@@ -59,11 +106,15 @@ namespace Staff_Management1.Controllers
 
                 }
             }
+
         }
 
-        public ActionResult RegisterChoose()
+        public ActionResult Logout()
         {
-            return View();
+            Session["UserID"] = null;
+            Session["sid"] = null;
+            Session["Role"] = null;
+            return  RedirectToAction("Index", "Homepage");
         }
     }
 }

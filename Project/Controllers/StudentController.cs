@@ -1,8 +1,11 @@
-﻿using Microsoft.Reporting.WebForms;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Reporting.WebForms;
 using Project.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,13 +13,16 @@ namespace Project.Controllers
 {
     public class StudentController : Controller
     {
+
         // GET: Student/Home
+        [AllowAnonymous]
         public ActionResult Homepage()
         {
             return View();
         }
 
         // GET: Student
+        
         public ActionResult Index()
         {
             using (DBmodel dBModels = new DBmodel())
@@ -25,6 +31,7 @@ namespace Project.Controllers
             }
         }
 
+        
         public ActionResult Reports(string ReportType)
         {
             LocalReport localreport = new LocalReport();
@@ -61,6 +68,7 @@ namespace Project.Controllers
         }
 
         // GET: Student/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             using (DBmodel dBModels = new DBmodel())
@@ -70,6 +78,7 @@ namespace Project.Controllers
         }
 
         // GET: Student/Create
+        
         public ActionResult Create()
         {
             DBmodel db = new DBmodel();
@@ -86,6 +95,8 @@ namespace Project.Controllers
 
         // POST: Student/Create
         [HttpPost]
+        
+        [ValidateAntiForgeryToken]
         public ActionResult Create(StudentTB studentTB)
         {
             try
@@ -108,6 +119,7 @@ namespace Project.Controllers
                     }
                     else
                     {
+                       
                         dBModels.StudentTBs.Add(studentTB);
 
                         if (ModelState.IsValid)
@@ -132,6 +144,7 @@ namespace Project.Controllers
         }
 
         // GET: Student/Edit/5
+        [AllowAnonymous]
         public ActionResult Edit(int id)
         {
             using (DBmodel dBModels = new DBmodel())
@@ -142,6 +155,7 @@ namespace Project.Controllers
 
         // POST: Student/Edit/5
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Edit(int id, StudentTB studentTB)
         {
             try
@@ -161,6 +175,7 @@ namespace Project.Controllers
         }
 
         // GET: Student/Delete/5
+        
         public ActionResult Delete(int id)
         {
             using (DBmodel dBModels = new DBmodel())
@@ -171,6 +186,7 @@ namespace Project.Controllers
 
         // POST: Student/Delete/5
         [HttpPost]
+        
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

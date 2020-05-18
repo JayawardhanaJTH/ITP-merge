@@ -230,5 +230,9 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.sid }, new { @class = "btn btn-primary", style = "margin-left:400px" }) <br />
-    @Html.ActionLink("Back to List", "Index")
+    @if (Session["Role"].ToString().Equals( "Admin"))
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
+    
 </p>

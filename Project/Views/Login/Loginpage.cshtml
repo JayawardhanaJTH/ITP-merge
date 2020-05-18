@@ -26,24 +26,30 @@
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed">
         <a class="navbar-brand" href="#">SIPMINI</a>
+        @if (Session["Role"] != null)
+        {
+            <strong class="text-white-50">@Session["Role"]</strong>
+        }
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav ml-auto">
+           
+            <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/Homepage/Index">Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Login/Loginpage">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact US</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
+                
+                @if (Session["Role"] == null)
+                {
+                    <li>@Html.ActionLink("Log in", "Loginpage", "Login", "", new { @class = "nav-link" })</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Log out", "Logout", "Login", "", new { @class = "nav-link" })</li>
+                }
             </ul>
+            
         </div>
     </nav>
     <div class="position-absolute" style="margin-top:200px;">
@@ -53,7 +59,7 @@
         <img src="~/Image/Top_bottom2.png" height="950" width="1278" />
     </div>
     <div id="login-div" class="bg-light">
-        @using (Html.BeginForm("Autherize", "Login", FormMethod.Post))
+        @using (Html.BeginForm("Autheriz", "Login", FormMethod.Post))
         {
             <table class="bg-light">
                 <tr>
@@ -92,7 +98,16 @@
                         <label class="field-validation-error"> @Html.DisplayFor(model => model.LoginErrorMessage, new { @class = "text-danger" }) </label>
                     </td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="2">
+                        <label class="text-danger">Message @ViewBag.sessionError</label>
+                    </td>
+                </tr>
             </table>
+            
+                    
+                
             <div class="mb-3">
                 <input class="btn btn-primary btn-sm btn-block mr5" type="submit" name="name" value="Login" title="Login" />
             </div>

@@ -43,7 +43,7 @@ namespace TutionClassManagmentSystem.Controllers
 
             DBmodel payrollentities = new DBmodel();
             Teacher teacher = payrollentities.
-                        Teachers.SingleOrDefault(x => x.UserID == id);
+                Teachers.SingleOrDefault(x => x.UserID == id);
 
             TeacherSalaryView teachersalaryView = new TeacherSalaryView();
             teachersalaryView.TeacherID = teacher.UserID;

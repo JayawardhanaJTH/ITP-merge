@@ -428,20 +428,35 @@ namespace Project.Controllers
             try {
                 DBmodel db = new DBmodel();
 
-                var grades = db.GradeLists.Where(u => u.ID == model.grade_id)
-                                                                .Select(u => new
-                                                                {
-                                                                    grade = u.Grade
-                                                                }).Single();
+                //var grades = db.GradeLists.Where(u => u.ID == model.grade_id)
+                //                                                .Select(u => new
+                //                                                {
+                //                                                    grade = u.Grade
+                //                                                }).Single();
 
-                var subjects = db.subjects.Where(u => u.subject_id == model.subject_id)
-                                                .Select(u => new
-                                                {
-                                                    subject = u.subject1
-                                                }).Single();
+                //var subjects = db.subjects.Where(u => u.subject_id == model.subject_id)
+                //                                .Select(u => new
+                //                                {
+                //                                    subject = u.subject1
+                //                                }).Single();
+                string grades = null;
+                string subject = null;
+                if (Session["Grade"] != null && Session["Subject"] != null)
+                {
+                     grades = Session["Grade"].ToString();
+                     subject = Session["Subject"].ToString();
+                }
+                else
+                {
+                    ViewBag.sessionError = "Session time out";
+                    return RedirectToAction("Loginpage", "Login");
+                   
+                }
+                
 
-                List<upload_file> files = db.upload_file.Where(x => x.grade == grades.grade && x.subject == subjects.subject).ToList();
-                //List<upload_file> files = db.upload_file.ToList();
+
+                //List<upload_file> files = db.upload_file.Where(x => x.grade == grades.grade && x.subject == subjects.subject).ToList();
+                List<upload_file> files = db.upload_file.Where(x=> x.grade == grades && x.subject == subject).ToList();
                 return View(files);
             }
             catch (Exception ex)

@@ -105,5 +105,10 @@ namespace Project
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
+
+        internal Task PasswordSignInAsync(int userID, string password, bool isPersistent, bool shouldLockout)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

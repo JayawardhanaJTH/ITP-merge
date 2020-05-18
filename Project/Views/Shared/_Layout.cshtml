@@ -11,33 +11,63 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">SIPMINI</a>
+        @if (Session["Role"] != null)
+        {
+            <strong class="text-white-50">@Session["Role"]</strong>
+        }
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/UploadFile/homepage">Home</a>
+                    <a class="nav-link" href="/Homepage/Index">Home</a>
                 </li>
-                <li class="nav-item">
-                   
-                    <a class="nav-link" href="/StaffNotices/Home">Notices</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/UploadFile/ViewList">File List</a>
-                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/UploadFile/GetFileList">File List Student</a>
-                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact US</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">About Us</a>
-                </li>
+                
+                @if (Session["Role"] == null)
+                {
+                    <li>@Html.ActionLink("Log in", "Loginpage", "Login", "", new { @class = "nav-link" })</li>
+                }
+                else
+                {
+                    if (Session["Role"].ToString().Equals("Teacher"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/UploadFile/Index">Upload Materials</a>
+                        </li>
+                    }
+                    if (Session["Role"].ToString().Equals("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/AdminPanel/Index">Admin Panel</a>
+                        </li>
+                    }
+                    if (Session["Role"].ToString().Equals("Student"))
+                    {
+                        <li class="dropdown nav-item">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#">
+                                My Class
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                @{
+                                    for (int i = 0; i < 5; i++)
+                                    {
+                                        <li class="dropdown-item">@Html.ActionLink(Session["Subject"].ToString(), "GetFiles", "UploadFile", "", new { id = Session["Role"] })</li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("My profile", "Details", "Student", new { id = Int32.Parse(Session["sid"].ToString()) }, new { @class = "nav-link" })
+
+                        </li>
+                                    }
+                    <li>@Html.ActionLink("Log out", "Logout", "Login", "", new { @class= "nav-link" })</li>
+                }
+                
             </ul>
+           
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
