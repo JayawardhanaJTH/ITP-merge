@@ -15,7 +15,12 @@ namespace Project.Controllers
 {
     public class UploadFileController : Controller
     {
-        
+        ////////////////////////////////////////////////////////////
+        ////                                                    ////                    
+        ////                   Admin Side                       ////
+        ////                                                    ////
+        ////////////////////////////////////////////////////////////
+
         // GET: UploadFile
         public ActionResult Index()
         {
@@ -102,9 +107,26 @@ namespace Project.Controllers
                         {
                             foreach (var file in files)
                             {
+                                //check is the file name is already in the database
+                                string filename = file.FileName;
+                                List<upload_file> list = db.upload_file.ToList();
+                                foreach (var item in list)
+                                {
+                                    if (item.file_name.Contains(filename))
+                                    {
+                                        ViewBag.DuplicateFile = "File name is already used!";
+                                        return new JsonResult { Data = "File not uploaded, File name is already used!" };
+                                    }
+                                else
+                                    {
+                                        ViewBag.DuplicateFile = "File name is already used!";
+                                    }
+                                }
+
                                 if (file != null && file.ContentLength > 0)
                                 {
                                     var fileName = file.FileName;
+                                    
                                     var path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
                                     
 
@@ -398,13 +420,46 @@ namespace Project.Controllers
             }
         }
 
+        public ActionResult Report(string ReportType)
+        {
+            try
+            {
+                DBmodel db = new DBmodel();
+                LocalReport localReport = new LocalReport();
+                localReport.ReportPath = Server.MapPath("~/Reports/uploadFileReport.rdlc");
+
+                ReportDataSource reportDataSource = new ReportDataSource();
+                reportDataSource.Name = "UploadFiles";
+                reportDataSource.Value = db.upload_file.ToList();
+
+                localReport.DataSources.Add(reportDataSource);
+
+                string Rtype = ReportType;
+                string fileNameExtention = "pdf";
+                byte[] renderByte;
+
+                renderByte = localReport.Render(Rtype);
+
+                Response.AddHeader("content-disposition", "attachment:filename = upload_file_report_" + DateTime.Now + "." + fileNameExtention);
+                return File(renderByte, fileNameExtention);
+            }
+            catch (FileNotFoundException ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Report"));
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Report"));
+            }
+        }
+
         ////////////////////////////////////////////////////////////
         ////                                                    ////                    
         ////                   Student Side                     ////
         ////                                                    ////
         ////////////////////////////////////////////////////////////
 
-          
+
         public ActionResult GetFileList()
         {
             try {
@@ -450,11 +505,7 @@ namespace Project.Controllers
                 {
                     ViewBag.sessionError = "Session time out";
                     return RedirectToAction("Loginpage", "Login");
-                   
                 }
-                
-
-
                 //List<upload_file> files = db.upload_file.Where(x => x.grade == grades.grade && x.subject == subjects.subject).ToList();
                 List<upload_file> files = db.upload_file.Where(x=> x.grade == grades && x.subject == subject).ToList();
                 return View(files);
@@ -481,37 +532,147 @@ namespace Project.Controllers
             }
         }
 
-        public ActionResult Report(string ReportType)
+
+        ////////////////////////////////////////////////////////////
+        ////                                                    ////                    
+        ////                   Teacher Side                     ////
+        ////                                                    ////
+        ////////////////////////////////////////////////////////////
+
+        public ActionResult TeacherUpload()
         {
-            try {
+            try
+            {
                 DBmodel db = new DBmodel();
-                LocalReport localReport = new LocalReport();
-                localReport.ReportPath = Server.MapPath("~/Reports/uploadFileReport.rdlc");
+                int teacherID = Int32.Parse(Session["UserID"].ToString());
+                List<teacher_subject> subID = db.teacher_subject.Where(x => x.teacher_id == teacherID).ToList();
+                List<subject> subjects = new List<subject>();
+                foreach (var item in subID)
+                {
+                    int subjectId = item.subject_id;
 
-                ReportDataSource reportDataSource = new ReportDataSource();
-                reportDataSource.Name = "UploadFiles";
-                reportDataSource.Value = db.upload_file.ToList();
+                    subjects.Add(db.subjects.Where(x => x.subject_id == subjectId).FirstOrDefault());
 
-                localReport.DataSources.Add(reportDataSource);
+                }
+                ViewBag.subList = new SelectList(subjects, "subject_id", "subject1");
 
-                string Rtype = ReportType;
-                string fileNameExtention = "pdf";
-                byte[] renderByte;
-
-                renderByte = localReport.Render(Rtype);
-
-                Response.AddHeader("content-disposition", "attachment:filename = upload_file_report_" + DateTime.Now + "." + fileNameExtention);
-                return File(renderByte, fileNameExtention);
+                ViewBag.FileMessage = "Select file you want to upload";
+                //List<subject> list = db.subjects.ToList();
+                //ViewBag.subList = new SelectList(list, "subject_id", "subject1");
+                return View();
             }
-            catch(FileNotFoundException ex)
+            catch (Exception ex)
             {
-                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Report"));
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherUpload"));
             }
-            catch(Exception ex)
+
+        }
+
+        public ActionResult TeacherGetGradeList( int subject_id)
+        {
+            try
             {
-                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Report"));
+                DBmodel db = new DBmodel();
+                int teacher_id = Int32.Parse(Session["UserID"].ToString());
+                List<teacher_grade> grades = db.teacher_grade.Where(x => x.teacher_id == teacher_id && x.subjectCode == subject_id).ToList();
+
+                ViewBag.gradeList = new SelectList(grades, "grade_id", "grade");
+
+                return PartialView("DisplayGrades");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherGetGradeList"));
             }
         }
 
+        [HttpPost]
+        public ActionResult TeacherUpload(IEnumerable<HttpPostedFileBase> files, TeacherRel model, String message)
+        {
+            try
+            {
+                DBmodel db = new DBmodel();
+                upload_file log = new upload_file();
+                upload_file_teacher log2 = new upload_file_teacher();
+
+                int count = 0;
+                if (!ModelState.IsValid)
+                {
+                    return new JsonResult { Data = "File not uploaded" };
+                }
+                else
+                {
+                    if (files != null)
+                    {
+                        foreach (var file in files)
+                        {
+
+                            //check is the file name is already in the database
+                            string filename = file.FileName;
+                            List<upload_file> list = db.upload_file.ToList();
+                            foreach (var item in list)
+                            {
+                                if (item.file_name.Contains(filename))
+                                {
+                                    ViewBag.DuplicateFile = "File name is already used!";
+                                    return new JsonResult { Data = "File not uploaded, File name is already used!" };
+                                }
+                            }
+                            if (file != null && file.ContentLength > 0)
+                            {
+                                var fileName = file.FileName;
+                                var path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+
+
+                                log.file_name = fileName;
+                                log.file_path = path;
+                                log.upload_date = DateTime.Now;
+
+                                int gradeid = model.grade_id;
+                                int subjectid = model.subject_id;
+
+                                var grades = db.GradeLists.Where(u => u.ID == gradeid)
+                                                                 .Select(u => new
+                                                                 {
+                                                                     grade = u.Grade
+                                                                 }).Single();
+
+                                var subjects = db.subjects.Where(u => u.subject_id == subjectid)
+                                                                .Select(u => new
+                                                                {
+                                                                    subject = u.subject1
+                                                                }).Single();
+
+                                log.grade = grades.grade;
+                                log.subject = subjects.subject;
+
+
+                                //db.SaveChanges();
+
+                                int teacherid = model.teacher_id;
+
+                                log2.teacher_id = teacherid;
+
+                                db.upload_file.Add(log);
+                                db.upload_file_teacher.Add(log2);
+
+                                file.SaveAs(path);
+                                db.SaveChanges();
+
+                                count++;
+                            }
+                        }
+                        return new JsonResult { Data = "Successfully file Uploaded" };
+                    }
+                    else
+                        return new JsonResult { Data = "File not uploaded" };
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Index"));
+            }
+        }
     }
 }

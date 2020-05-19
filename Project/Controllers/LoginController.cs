@@ -56,55 +56,62 @@ namespace Project.Controllers
         
         public ActionResult Autheriz(User userModel)
         {
-            using (DBmodel db = new DBmodel())
-            {
-                string username = userModel.Username;
-                string password = userModel.Password;
-
-                var teacherDetails = db.Teachers.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
-                var managerDetails = db.Offices.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
-                var cleanerDetails = db.Cleaners.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
-                var studentDetails = db.StudentTBs.Where(x => x.username == username && x.password == password).FirstOrDefault();
-
-                if (teacherDetails != null)
+            try {
+                using (DBmodel db = new DBmodel())
                 {
-                    Session["UserID"] = teacherDetails.UserID;
+                    string username = userModel.Username;
+                    string password = userModel.Password;
+
+                    var teacherDetails = db.Teachers.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+                    var managerDetails = db.Offices.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+                    var cleanerDetails = db.Cleaners.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+                    var studentDetails = db.StudentTBs.Where(x => x.username == username && x.password == password).FirstOrDefault();
+
+                    if (teacherDetails != null)
+                    {
+                        Session["UserID"] = teacherDetails.UserID;
                         Session["Role"] = "Teacher";
-                    return RedirectToAction("Index", "Homepage");
-                }
-                else if (managerDetails != null)
-                {
-                    Session["UserID"] = managerDetails.UserID;
+                        return RedirectToAction("Index", "Homepage");
+                    }
+                    else if (managerDetails != null)
+                    {
+                        Session["UserID"] = managerDetails.UserID;
                         Session["Role"] = "Staff";
                         return RedirectToAction("Index", "AdminPanel");
-                }
-                else if (cleanerDetails != null)
-                {
-                    Session["UserID"] = cleanerDetails.UserID;
+                    }
+                    else if (cleanerDetails != null)
+                    {
+                        Session["UserID"] = cleanerDetails.UserID;
                         Session["Role"] = "Cleaner";
                         return RedirectToAction("Index", "Homepage");
-                }
-                else if (studentDetails != null)
-                {
-                    Session["sid"] = studentDetails.sid;
-                    Session["Role"] = "Student";
-                    Session["Subject"] = studentDetails.subject;
-                    Session["Grade"] = studentDetails.grade;
-                    return RedirectToAction("Index", "Homepage");
-                }
-                else if (username == "Admin" && password == "admin")
-                {
-                    
+                    }
+                    else if (studentDetails != null)
+                    {
+                        Session["sid"] = studentDetails.sid;
+                        Session["Role"] = "Student";
+                        Session["Subject"] = studentDetails.subject;
+                        // Session["Grade"] = studentDetails.grade;
+                        return RedirectToAction("Index", "Homepage");
+                    }
+                    else if (username == "Admin" && password == "admin")
+                    {
+
                         Session["Role"] = "Admin";
                         return RedirectToAction("Index", "AdminPanel");
 
-                }
-                else
-                {
-                    userModel.LoginErrorMessage = "wrong username or password";
-                    return View("Loginpage", userModel);
+                    }
+                    else
+                    {
+                        userModel.LoginErrorMessage = "wrong username or password";
+                        return View("Loginpage", userModel);
 
+                    }
                 }
+            
+            }
+            catch(Exception ex)
+            {
+                return View(new HandleErrorInfo(ex, "Login", "Autheriz"));
             }
 
         }

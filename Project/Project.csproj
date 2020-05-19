@@ -329,6 +329,7 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TeacherSalaryView.cs" />
+    <Compile Include="Models\TeacherUpload.cs" />
     <Compile Include="Models\teacher_grade.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -893,6 +894,7 @@
     <Content Include="Views\UserFeedbacks\Edit.cshtml" />
     <Content Include="Views\UserFeedbacks\Index.cshtml" />
     <Content Include="Views\UserFeedbacks\TeacherPage.cshtml" />
+    <Content Include="Views\UploadFile\TeacherUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
