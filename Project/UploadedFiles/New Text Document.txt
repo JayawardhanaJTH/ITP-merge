@@ -1,0 +1,72 @@
+namespace Studentmanagmentsystem.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web;
+
+    public partial class StudentTB
+    {
+        [DisplayName("Student ID")]
+        public int sid { get; set; }
+
+        [DisplayName("Full Name")]
+        [Required(ErrorMessage = "Please enter name")]
+        public string fullname { get; set; }
+
+        [DisplayName("School")]
+        [Required(ErrorMessage = "Please enter school")]
+        public string school { get; set; }
+
+        [DisplayName("Username")]
+        [Required(ErrorMessage = "Please enter username")]
+        public string username { get; set; }
+
+        [DisplayName("Email")]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid")]
+        [Required(ErrorMessage = "Please enter email")]
+        public string email { get; set; }
+
+        [DataType(DataType.Password)]      
+        [DisplayName("Password")]
+        [Required(ErrorMessage = "Please enter password")]
+        public string password { get; set; }
+
+        [DisplayName("Address")]
+        [Required(ErrorMessage = "Please enter address")]
+        public string address { get; set; }
+
+        [DisplayName("Grade")]
+        [Required(ErrorMessage = "Please enter grade")]
+        public string grade { get; set; }
+
+        [DisplayName("Gender")]
+        [Required(ErrorMessage = "Please enter gender")]
+        public string gender { get; set; }
+
+        [DisplayName("Subject")]
+        [Required(ErrorMessage = "Please enter subject")]
+        public string subject { get; set; }
+
+        [DisplayName("Mobile Number")]
+        [Required(ErrorMessage = "Please enter telephone number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        public string tpnum { get; set; }
+
+        [DisplayName("ParentName")]        
+        [Required(ErrorMessage = "Please enter parent name")]
+        public string parentname { get; set; }
+
+        [DisplayName("Parent Mobile Number")]
+        [Required(ErrorMessage = "Please enter Phone number")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid Phone number")]
+        public string parenttpnum { get; set; }
+
+        [DisplayName("Choice Youer Image")]
+        public string imagepath { get; set; }
+
+        public string LoginErrorMessage { get; set; }
+
+    }
+}
