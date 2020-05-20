@@ -1,20 +1,18 @@
-﻿@model Project.Models.UploadFile
-
-
+﻿@model Project.Models.TeacherUpload
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "TeacherEdit";
 }
 <span><br /></span>
-<h2>Edit</h2>
+<h2>TeacherEdit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <hr />
     <div class="form-horizontal">
-       
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.file_id)
 
@@ -26,26 +24,19 @@
             </div>
         </div>
     </div>
-        
-            if (ViewBag.teachersList != null)
-            {
 
-                 @Html.Label("Choose Teacher", new { @class = "col-sm-2 control-label" })
-            <div class=" col-sm-10">
-                @Html.DropDownListFor(m => m.teacher_id, ViewBag.teachersList as SelectList, "-- Select Teacher --", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.teacher_id, "", new { @class = "text-danger" })
-            </div>
+    if (ViewBag.subList != null)
+    {
 
-             }
-    <span><br /></span>
-    <div class="form-group">
-        @Html.Label("Choose Subject Name", new { @class = "col-sm-2 control-label" })
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.subject_id, new SelectList(""), "-- Select Subject --", new { @class = "form-control  " })
+        @Html.Label("Choose Subject", new { @class = "col-sm-2 control-label" })
+        <div class=" col-sm-10">
+            @Html.DropDownListFor(m => m.subject_id, ViewBag.subList as SelectList, "-- Select Subject --", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.subject_id, "", new { @class = "text-danger" })
         </div>
-    </div>
+
+    }
     <span><br /></span>
+    
     <div class="form-group">
         @Html.Label("Choose Grade", new { @class = "col-sm-2 control-label" })
         <div class=" col-sm-10">
@@ -66,31 +57,15 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-<script>
+    <script>
     $(document).ready(function () {
-        //take student list
-        $("#teacher_id").change(function () {
-            var teacherID = $(this).val();
-            debugger
-            $.ajax({
-                type: "post",
-                url: "/UploadFile/GetSubjectList?teacher_id=" + teacherID,
-                contentType: "html",
-                success: function (response) {
-                    debugger
-                    $("#subject_id").empty();
-                    $("#subject_id").append(response);
-                }
-            })
-        })
     //take Grade list
         $("#subject_id").change(function () {
             var subjectID = $(this).val();
-            var teacherID = $('#teacher_id').val();
             debugger
             $.ajax({
                 type: "post",
-                url: "/UploadFile/GetGradeList?teacher_id=" + teacherID + "&subject_id=" + subjectID,
+                url: "/UploadFile/TeacherGetGradeList?subject_id=" + subjectID,
                 contentType: "html",
                 success: function (response) {
                     debugger
@@ -100,5 +75,7 @@
             })
         })
     })
-</script>
+    </script>
 }
+
+

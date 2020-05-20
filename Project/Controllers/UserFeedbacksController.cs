@@ -99,8 +99,8 @@ namespace FeedbackAndNotices.Controllers
         public ActionResult Create()
         {
 
-            var list = new List<String>() { "Hemal Sir", "Asela Sir", "Sumeda Sir", "Samantha Sir", "Bhanusha Miss" };
-            ViewBag.list = list;
+            List<TeacherList> list = db.TeacherLists.ToList();
+            ViewBag.list = new SelectList(list,"teacher_name", "teacher_name");
 
             return View();
         }

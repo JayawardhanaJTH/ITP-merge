@@ -21,7 +21,7 @@
             <div class="form-group">
                 @Html.Label("Choose Subject", new { @class = "col-sm-2 control-label" })
                 <div class=" col-sm-10">
-                    @Html.DropDownListFor(m => m.subject_id, ViewBag.subList as SelectList, "-- Select Teacher --", new { @class = "form-control btn-info" })
+                    @Html.DropDownListFor(m => m.subject_id, ViewBag.subList as SelectList, "-- Select Subject --", new { @class = "form-control btn-info" })
                     @Html.ValidationMessageFor(m => m.subject_id, "", new { @class = "text-danger" })
                 </div>
             </div>

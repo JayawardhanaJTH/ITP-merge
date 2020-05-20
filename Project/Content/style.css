@@ -332,7 +332,8 @@ h1.agile-head {
     font-weight: 600;
 }
 .content-w3ls {
-    width: 32%;
+    width: 50%;
+    height:50%;
     margin: 3em auto 2em;
     background: rgba(255,255,255,.5);
     padding: 3em;
@@ -451,9 +452,9 @@ color:#c1c1c1!important;
 }
 .register,.reset {
 	background:#00223c;
-    width:20%;
+    width:30%;
 	padding:0.7em 1em;
-	margin-right:5px;
+	margin-left:20px;
 	float:right;
     border: none;
     cursor: pointer;

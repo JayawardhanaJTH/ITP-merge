@@ -278,7 +278,15 @@ namespace Project.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("ViewList");
+                if(Session["Role"].ToString().Contains("Teacher"))
+                {
+                    return RedirectToAction("TeacherViewList");
+                }
+                else
+                {
+                    return RedirectToAction("ViewList");
+                }
+               
             }
             catch (FileNotFoundException ex)
             {
@@ -341,10 +349,10 @@ namespace Project.Controllers
                     int gradeID = model.grade_id;
                     int subjectID = model.subject_id;
 
-                    var grade = db.grades.Where(m => m.grade_id == gradeID)
+                    var grade = db.GradeLists.Where(m => m.ID == gradeID)
                                     .Select(u => new
                                     {
-                                        grade = u.grade1
+                                        grade = u.Grade
                                     }).Single();
 
                     var subject = db.subjects.Where(m => m.subject_id == subjectID)
@@ -482,20 +490,9 @@ namespace Project.Controllers
         {
             try {
                 DBmodel db = new DBmodel();
-
-                //var grades = db.GradeLists.Where(u => u.ID == model.grade_id)
-                //                                                .Select(u => new
-                //                                                {
-                //                                                    grade = u.Grade
-                //                                                }).Single();
-
-                //var subjects = db.subjects.Where(u => u.subject_id == model.subject_id)
-                //                                .Select(u => new
-                //                                {
-                //                                    subject = u.subject1
-                //                                }).Single();
                 string grades = null;
                 string subject = null;
+
                 if (Session["Grade"] != null && Session["Subject"] != null)
                 {
                      grades = Session["Grade"].ToString();
@@ -506,7 +503,7 @@ namespace Project.Controllers
                     ViewBag.sessionError = "Session time out";
                     return RedirectToAction("Loginpage", "Login");
                 }
-                //List<upload_file> files = db.upload_file.Where(x => x.grade == grades.grade && x.subject == subjects.subject).ToList();
+
                 List<upload_file> files = db.upload_file.Where(x=> x.grade == grades && x.subject == subject).ToList();
                 return View(files);
             }
@@ -649,9 +646,9 @@ namespace Project.Controllers
 
                                 //db.SaveChanges();
 
-                                int teacherid = model.teacher_id;
+                                int teacher_id = Int32.Parse(Session["UserID"].ToString());
 
-                                log2.teacher_id = teacherid;
+                                log2.teacher_id = teacher_id;
 
                                 db.upload_file.Add(log);
                                 db.upload_file_teacher.Add(log2);
@@ -671,7 +668,7 @@ namespace Project.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", new HandleErrorInfo(ex, "UploadFile", "Index"));
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherUpload"));
             }
         }
 
@@ -695,6 +692,112 @@ namespace Project.Controllers
             catch (Exception ex)
             {
                 return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherViewList"));
+            }
+        }
+
+        public ActionResult TeacherEdit(int? id)
+        {
+            try
+            {
+                DBmodel db = new DBmodel();
+                upload_file file = db.upload_file.Find(id);
+                TeacherUpload model = new TeacherUpload();
+
+                if (file == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    int teacherID = Int32.Parse(Session["UserID"].ToString());
+                    List<teacher_subject> subID = db.teacher_subject.Where(x => x.teacher_id == teacherID).ToList();
+                    List<subject> subjects = new List<subject>();
+
+                    foreach (var item in subID)
+                    {
+                        int subjectId = item.subject_id;
+
+                        subjects.Add(db.subjects.Where(x => x.subject_id == subjectId).FirstOrDefault());
+
+                    }
+                    ViewBag.subList = new SelectList(subjects, "subject_id", "subject1");
+
+                    model.file_id = file.file_id;
+                    model.file_name = file.file_name;
+                    model.file_path = file.file_path;
+                    model.grade = file.grade;
+                    model.subject = file.subject;
+                }
+
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherEditSucces"));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("TeacherEdit")]
+        public ActionResult TeacherEditSucces(int id, TeacherUpload model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    DBmodel db = new DBmodel();
+
+                    upload_file file = db.upload_file.Find(id);
+
+                    string oldName = file.file_name;
+
+                    file.file_name = model.file_name.Trim();
+
+                    int gradeID = model.grade_id;
+                    int subjectID = model.subject_id;
+
+                    var grade = db.GradeLists.Where(m => m.ID == gradeID)
+                                    .Select(u => new
+                                    {
+                                        grade = u.Grade
+                                    }).Single();
+
+                    var subject = db.subjects.Where(m => m.subject_id == subjectID)
+                                       .Select(u => new
+                                       {
+                                           subject = u.subject1
+                                       }).Single();
+
+                    file.grade = grade.grade;
+                    file.subject = subject.subject;
+
+                    var directory = new DirectoryInfo(Server.MapPath("~/UploadedFiles"));
+                    string path = directory.FullName + "\\" + model.file_name;
+
+                    // path = "D:\\MVC\\Project\\Project\\UploadedFiles\\" + fileName;
+                    file.file_path = path.Trim();
+                    //db.SaveChanges();
+
+                    int fileID = model.file_id;
+                    
+                    db.Entry(file).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ChangeFileName(fileID, model.file_name, oldName);
+
+                    return RedirectToAction("TeacherViewList");
+                }
+                else
+                {
+                    ViewBag.teachersList = new SelectList(GetteachersList(), "teacher_id", "teacher_name");
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherEditSucces"));
             }
         }
     }
