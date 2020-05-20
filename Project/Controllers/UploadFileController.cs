@@ -674,5 +674,28 @@ namespace Project.Controllers
                 return View("Error", new HandleErrorInfo(ex, "UploadFile", "Index"));
             }
         }
+
+        public ActionResult TeacherViewList()
+        {
+            try
+            {
+                DBmodel db = new DBmodel();
+                int teacher_id = Int32.Parse(Session["UserID"].ToString());
+
+                List<upload_file_teacher> fileList = db.upload_file_teacher.Where(m => m.teacher_id == teacher_id).ToList();
+                List<upload_file> files = new List<upload_file>();
+
+                foreach (var item in fileList)
+                {
+                    files.Add(db.upload_file.Where(m => m.file_id == item.file_id).FirstOrDefault());
+                }
+
+                return View(files);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new HandleErrorInfo(ex, "UploadFile", "TeacherViewList"));
+            }
+        }
     }
 }

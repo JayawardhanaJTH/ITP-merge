@@ -18,26 +18,36 @@
             <th>Grade</th>
             
         </tr>
-
-        @foreach (var item in Model)
+        @if (Model.Count() == 0)
         {
-            <tr>
-                <td>@Html.DisplayFor(file => item.file_id)</td>
-                <td>@Html.DisplayFor(file => item.file_name)</td>
-                <td>@Html.DisplayFor(file => item.upload_date)</td>
-                <td>@Html.DisplayFor(file => item.subject)</td>
-                <td>@Html.DisplayFor(file => item.grade)</td>
+
+            <p class="bg-danger text-center text-white font-weight-bold">
+                No files Uploded
+            </p>
+
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(file => item.file_id)</td>
+                    <td>@Html.DisplayFor(file => item.file_name)</td>
+                    <td>@Html.DisplayFor(file => item.upload_date)</td>
+                    <td>@Html.DisplayFor(file => item.subject)</td>
+                    <td>@Html.DisplayFor(file => item.grade)</td>
                
 
-                <td>
-                    @Html.ActionLink(" ", "Delete", new { id = item.file_id }, new { @class = "btn btn-danger fas fa-trash-alt" }) 
-                    @Html.ActionLink(" ", "Edit", new { id = item.file_id }, new { @class = "btn btn-success far fa-edit" })
+                    <td>
+                        @Html.ActionLink(" ", "Delete", new { id = item.file_id }, new { @class = "btn btn-danger fas fa-trash-alt" }) 
+                        @Html.ActionLink(" ", "Edit", new { id = item.file_id }, new { @class = "btn btn-success far fa-edit" })
                     
-                </td>
+                    </td>
                 
                 
 
 
-            </tr>
+                </tr>
+            }
         }
     </table>

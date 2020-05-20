@@ -895,6 +895,7 @@
     <Content Include="Views\UserFeedbacks\Index.cshtml" />
     <Content Include="Views\UserFeedbacks\TeacherPage.cshtml" />
     <Content Include="Views\UploadFile\TeacherUpload.cshtml" />
+    <Content Include="Views\UploadFile\TeacherViewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

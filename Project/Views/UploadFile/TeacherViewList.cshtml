@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Project.Models.upload_file>
+
+@{
+    ViewBag.Title = "Uploaded Files";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<span><br /></span>
+<h2 class="text-center">Uploaded Files</h2>
+@Html.ActionLink("Export to PDF", "Report", new { ReportType = "PDF" })
+
+<table class=" table table-bordered table-striped table-responsive-sm table-hover">
+
+    <tr>
+        <th>File ID</th>
+        <th>File Name</th>
+        <th>Upload Date</th>
+        <th>Subject</th>
+        <th>Grade</th>
+
+    </tr>
+    @if (Model.Count() == 0)
+    {
+
+        <p class="bg-danger text-center text-white font-weight-bold">
+            No files Uploded
+        </p>
+
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(file => item.file_id)</td>
+                <td>@Html.DisplayFor(file => item.file_name)</td>
+                <td>@Html.DisplayFor(file => item.upload_date)</td>
+                <td>@Html.DisplayFor(file => item.subject)</td>
+                <td>@Html.DisplayFor(file => item.grade)</td>
+
+
+                <td>
+                    @Html.ActionLink(" ", "Delete", new { id = item.file_id }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                    @Html.ActionLink(" ", "Edit", new { id = item.file_id }, new { @class = "btn btn-success far fa-edit" })
+
+                </td>
+
+
+
+
+            </tr>
+        }
+    }
+</table>
+
+
