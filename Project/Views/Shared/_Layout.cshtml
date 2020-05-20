@@ -38,6 +38,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="~/UploadFile/TeacherViewList">Files</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/UserFeedbacks/TeacherPage">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("My profile", "Details", "Teacher", new { id = Int32.Parse(Session["UserID"].ToString()) }, new { @class = "nav-link" })
+
+                        </li>
+                    }
+                    if (Session["Role"].ToString().Equals("Cleaner"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("My profile", "Details", "Cleaner", new { id = Int32.Parse(Session["UserID"].ToString()) }, new { @class = "nav-link" })
+                        </li>
                     }
                     if (Session["Role"].ToString().Equals("Admin"))
                     {
@@ -58,7 +71,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @{
-                                    for (int i = 0; i < 5; i++)
+                                    for (int i = 0; i < 1; i++)
                                     {
                                         <li class="dropdown-item">@Html.ActionLink(Session["Subject"].ToString(), "GetFiles", "UploadFile", "", new { id = Session["Role"] })</li>
                                     }
@@ -68,6 +81,9 @@
                         <li class="nav-item">
                             @Html.ActionLink("My profile", "Details", "Student", new { id = Int32.Parse(Session["sid"].ToString()) }, new { @class = "nav-link" })
 
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="~/UserFeedbacks/Index">Feedback</a>
                         </li>
                                     }
                     <li>@Html.ActionLink("Log out", "Logout", "Login", "", new { @class= "nav-link" })</li>

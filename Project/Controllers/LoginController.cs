@@ -76,7 +76,7 @@ namespace Project.Controllers
                     else if (managerDetails != null)
                     {
                         Session["UserID"] = managerDetails.UserID;
-                        Session["Role"] = "Staff";
+                        Session["Role"] = "Admin";
                         return RedirectToAction("Index", "AdminPanel");
                     }
                     else if (cleanerDetails != null)

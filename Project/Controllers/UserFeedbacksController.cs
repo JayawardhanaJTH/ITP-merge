@@ -135,6 +135,9 @@ namespace FeedbackAndNotices.Controllers
             {
                 return HttpNotFound();
             }
+            List<TeacherList> list = db.TeacherLists.ToList();
+
+            ViewBag.list = new SelectList(list, "teacher_name", "teacher_name");
             return View(userFeedback);
         }
 

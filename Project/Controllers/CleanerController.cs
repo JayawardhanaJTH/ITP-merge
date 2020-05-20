@@ -137,11 +137,19 @@ namespace Staff_Management1.Controllers
                 // TODO: Add update logic here
                 using (DBmodel dbModel = new DBmodel())
                 {
+                    cleaner.UserID = id;
                     dbModel.Entry(cleaner).State = EntityState.Modified;
                     dbModel.SaveChanges();
                 }
 
-                return RedirectToAction("Index");
+                if (Session["Role"].ToString().Contains("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = cleaner.UserID });
+                }
             }
             catch
             {

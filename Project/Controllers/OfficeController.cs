@@ -139,6 +139,7 @@ namespace Staff_Management1.Controllers
             {
                 using (DBmodel dbModel = new DBmodel())
                 {
+                    office.UserID = id;
                     dbModel.Entry(office).State = EntityState.Modified;
                     dbModel.SaveChanges();
                 }

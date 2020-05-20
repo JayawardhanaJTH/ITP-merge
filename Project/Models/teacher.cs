@@ -15,10 +15,7 @@ namespace Project.Models
     public partial class Teacher
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Teacher()
-        {
-            this.TeacherSalaries = new HashSet<TeacherSalary>();
-        }
+        
     
         public int UserID { get; set; }
         public string Username { get; set; }

@@ -165,8 +165,15 @@ namespace Project.Controllers
                     dBModels.Entry(studentTB).State = System.Data.Entity.EntityState.Modified;
                     dBModels.SaveChanges();
                 }
-
-                return RedirectToAction("Index");
+                if (Session["Role"].ToString().Contains("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = studentTB.sid });
+                }
+                
             }
             catch
             {

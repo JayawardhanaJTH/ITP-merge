@@ -8,6 +8,7 @@ using Project.Models;
 using System.Data.Entity;
 using Microsoft.Reporting.WebForms;
 using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
 
 namespace Staff_Management1.Controllers
 {
@@ -156,6 +157,7 @@ namespace Staff_Management1.Controllers
             {
                 using (DBmodel dbModel = new DBmodel())
                 {
+                    teacher.UserID = id;
                     dbModel.Entry(teacher).State = EntityState.Modified;
                     dbModel.SaveChanges();
 
@@ -170,7 +172,14 @@ namespace Staff_Management1.Controllers
                 }
                 // TODO: Add update logic here
 
-                return RedirectToAction("Index");
+                if (Session["Role"].ToString().Contains("Admin"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Details", new { id = teacher.UserID });
+                }
             }
             catch
             {
@@ -191,26 +200,36 @@ namespace Staff_Management1.Controllers
         [HttpPost]
         public ActionResult Delete(int id, Teacher model)
         {
+            
             try
             {
                 // TODO: Add delete logic here
                 using (DBmodel dbModel = new DBmodel())
                 {
                     Teacher teacher = dbModel.Teachers.Where(x => x.UserID == id).FirstOrDefault();
-                    dbModel.Teachers.Remove(model);
-                    dbModel.SaveChanges();
+                    TeacherList mod = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
+                    TeacherList mod1 = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
+                    TeacherList mod2 = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
+                    TeacherList mod3 = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
+                    TeacherList mod4 = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
+                    TeacherList mod5 = dbModel.TeacherLists.Where(x => x.teacher_id == id).FirstOrDefault();
 
-                    //TeacherList model = dbModel.TeacherLists.Find(id);
+                    string name = teacher.Name;
+                    string school = teacher.Shool;
+
+                    dbModel.Teachers.Remove(teacher);
                     
 
-                    //dbModel.TeacherLists.Remove(model);
-                    //dbModel.SaveChanges();
+
+                    dbModel.SaveChanges();
+                    
+
                 }
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Delete",id);
             }
         }
     }

@@ -1,38 +1,23 @@
 ﻿@model Project.Models.UserFeedback
-<!DOCTYPE html>
-<html>
-<head>
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
     <title>Delete Feedbacks</title>
-    <!-- custom-theme -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Admission Enquiry Form web template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
-
-
-
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
     <!-- //custom-theme -->
-
-
     @Styles.Render("~/Content/fdbk.css")
 
-
-
-</head>
-<body>
-    @{
-        ViewBag.Title = "Details";
-        Layout = null;
-    }
+<body class="bg-info">
+   
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="content-w3ls">
+        <div class="content-w3ls bg-secondary">
             <h1 class="agile-head text-center">Feedbacks Details</h1>
 
             <div class="form-w3layouts">
@@ -73,8 +58,8 @@
             </div>
            
                     <div>
-                        <button class="btn edit">@Html.ActionLink("Edit", "Edit", new { id = Model.id }) </button>  &nbsp;&nbsp;
-                        <button class="btn back" onclick="back()"> @Html.ActionLink("Back to List", "Index", new { style = "color: white" })</button>
+                        <button class="btn edit">@Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class="text-dark"}) </button>  &nbsp;&nbsp;
+                        <button class="btn back" onclick="back()"> @Html.ActionLink("Back to List", "Index", "",new { @class = "text-dark" })</button>
                         <script>
                                       function back() {
                                           alert("Do you want to go back to the feedback list");

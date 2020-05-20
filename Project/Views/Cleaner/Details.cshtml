@@ -62,5 +62,11 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (Session["Role"].ToString().Contains("Admin"))
+    {
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+    
 </p>
