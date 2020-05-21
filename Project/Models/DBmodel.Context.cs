@@ -46,5 +46,7 @@ namespace Project.Models
         public virtual DbSet<upload_file_teacher> upload_file_teacher { get; set; }
         public virtual DbSet<UserFeedback> UserFeedbacks { get; set; }
         public virtual DbSet<teacher_grade> teacher_grade { get; set; }
+        public virtual DbSet<Exam2> Exam2 { get; set; }
+        public virtual DbSet<Timetable> Timetables { get; set; }
     }
 }

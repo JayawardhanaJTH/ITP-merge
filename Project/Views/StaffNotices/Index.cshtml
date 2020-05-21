@@ -1,56 +1,52 @@
 ﻿@model IEnumerable<Project.Models.StaffNotice>
+@{
+    ViewBag.Title = "Notice List";
+    //Layout = null;
+}
+    @Styles.Render("~/Content/notcss.css")
 
-    @{
-        ViewBag.Title = "Index";
-        Layout = null;
-    }
+            <div class="content">
+                <button class="btn create">@Html.ActionLink("Export to Word ", "Reports", new { ReportType = "Word" },new {@class="text-white" }) </button>
+                <button class="btn create">@Html.ActionLink("Export to PDF ", "Reports", new { ReportType = "PDF" }, new { @class = "text-white" })</button>
+                <h1 class="agile-head text-center">My Notices..</h1>
 
-
-
-
-    <div class="content">
-        <button class="btn create">@Html.ActionLink("Export to Word ", "Reports", new { ReportType = "Word" }) </button>
-        <button class="btn create">@Html.ActionLink("Export to PDF ", "Reports", new { ReportType = "PDF" })</button>
-        <h1 class="agile-head text-center">My Notices..</h1>
-
-
-        <p>
-            <button class="btn create" onclick="create()"> @Html.ActionLink("Create New", "Create", new { style = "color: white" })</button>
-            <script>
+                <p>
+                    <button class="btn create" onclick="create()"> @Html.ActionLink("Create New", "Create", new { style = "color: white" })</button>
+                    <script>
                         function create() {
                             alert("Do you want  to create a new notice");
 
                         }
-            </script>
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Notice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-                <th></th>
-            </tr>
+                    </script>
+                </p>
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Notice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Type)
+                        </th>
+                        <th></th>
+                    </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Notice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td>
-                        <button class="btn edit"> @Html.ActionLink("Edit", "Edit", new { id = item.id }) </button>  &nbsp;&nbsp;
-                        <button class="btn details">  @Html.ActionLink("Details", "Details", new { id = item.id })</button>&nbsp;&nbsp;
-                        <button class="btn delete">  @Html.ActionLink("Delete", "Delete", new { id = item.id })</button>
-                    </td>
-                </tr>
-            }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Notice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                <button class="btn edit"> @Html.ActionLink("Edit", "Edit", new { id = item.id }) </button>  &nbsp;&nbsp;
+                                <button class="btn details">  @Html.ActionLink("Details", "Details", new { id = item.id })</button>&nbsp;&nbsp;
+                                <button class="btn delete">  @Html.ActionLink("Delete", "Delete", new { id = item.id })</button>
+                            </td>
+                        </tr>
+                    }
 
-        </table>
+                </table>
 
-    </div>
+            </div>

@@ -1,0 +1,64 @@
+@model IEnumerable<Project.Models.SubjectTB>
+@{
+    ViewBag.Title = "StudentSubjectList";
+}
+
+<h1 style="text-align:center">List Of Subjects</h1>
+
+<table id="SubjectTB" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Grade</th>
+            <th>Teacher</th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+</table>
+<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet"/>
+
+@section scripts
+{
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#SubjectTB").DataTable({
+                "ajax": {
+                    "url": "/Subject/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+
+                    { "data": "SubjectCode" },
+                    { "data": "SubjectName" },
+                    { "data": "Grade" },
+                    { "data": "TeacherName" },
+                    {
+                        "data": "SubjectCode", "render": function (data) {
+
+                            return "<a class='btn btn-success btn-sm'id='listbtn' style='margin-left:5px'title='Details' href='Details/" + data + "'><i class='far fa-file-alt'></i> Details</a>"
+                        },
+                        "orderable": false,
+                        "width": "150px"
+                    }
+
+                ],
+                "dom": "Bfrtip",
+                "language": {
+
+                    "emptyTable": "No data found, Please <b> Add Subject</b> Details"
+                }
+
+            });
+        });
+
+
+    </script>
+
+}
+

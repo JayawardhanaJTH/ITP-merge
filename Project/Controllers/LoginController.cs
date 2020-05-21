@@ -90,7 +90,7 @@ namespace Project.Controllers
                         Session["sid"] = studentDetails.sid;
                         Session["Role"] = "Student";
                         Session["Subject"] = studentDetails.subject;
-                        // Session["Grade"] = studentDetails.grade;
+                        Session["Grade"] = studentDetails.grade;
                         return RedirectToAction("Index", "Homepage");
                     }
                     else if (username == "Admin" && password == "admin")

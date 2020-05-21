@@ -305,6 +305,15 @@ namespace Project.Controllers
                 return View();
             }
         }
+
+        // GET : Student View
+        public ActionResult StudentSubjectList()
+        {
+            using (DBmodel dbModel = new DBmodel())
+            {
+                return View(dbModel.SubjectTBs.ToList());
+            }
+        }
         public ActionResult Reports(string ReportType)
         {
             DBmodel db = new DBmodel();

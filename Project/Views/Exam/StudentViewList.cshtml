@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Project.Models.Exam2>
+
+@{
+    ViewBag.Title = "StudentViewList";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<span><br /></span>
+<h2 class="text-center">Uploaded Files</h2>
+
+
+<table class=" table table-bordered table-striped table-responsive-sm table-hover">
+
+    <tr>
+
+        <th>@Html.DisplayNameFor(model => model.Subject)</th>
+        <th>@Html.DisplayNameFor(model => model.Grade)</th>
+        <th>@Html.DisplayNameFor(model => model.TeacherName)</th>
+        <th>@Html.DisplayNameFor(model => model.FileName)</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Subject)</td>
+            <td>@Html.DisplayFor(modelItem => item.Grade)</td>
+            <td>@Html.DisplayFor(modelItem => item.TeacherName)</td>
+            <td>@Html.DisplayFor(modelItem => item.FileName)</td>
+            <td>
+
+                @Html.ActionLink("Download", "DownloadFile", new { FileName = item.FileName }, new { @class = "btn btn-success" }) 
+
+            </td>
+        </tr>
+    }
+
+</table>

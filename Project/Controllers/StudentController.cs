@@ -18,6 +18,7 @@ namespace Project.Controllers
         [AllowAnonymous]
         public ActionResult Homepage()
         {
+            
             return View();
         }
 
@@ -73,7 +74,24 @@ namespace Project.Controllers
         {
             using (DBmodel dBModels = new DBmodel())
             {
-                return View(dBModels.StudentTBs.Where(x => x.sid == id).FirstOrDefault());
+                StudentTB temp = dBModels.StudentTBs.Where(x => x.sid == id).FirstOrDefault();
+                Studentmodel model = new Studentmodel();
+
+                model.fullname = temp.fullname;
+                model.gender = temp.gender;
+                model.address = temp.address;
+                model.email = temp.email;
+                model.grade = temp.grade;
+                model.parentname = temp.parentname;
+                model.parenttpnum = temp.parenttpnum;
+                model.password = temp.password;
+                model.school = temp.school;
+                model.sid = temp.sid;
+                model.subject = temp.subject;
+                model.tpnum = temp.tpnum;
+                model.username = temp.username;
+
+                return View(model);
             }
         }
 
@@ -97,16 +115,16 @@ namespace Project.Controllers
         [HttpPost]
         
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StudentTB studentTB)
+        public ActionResult Create(Studentmodel temp)
         {
             try
             {
                 using (DBmodel dBModels = new DBmodel())
                 {
-                   if(dBModels.StudentTBs.Any(m=>m.username == studentTB.username) 
-                        || dBModels.Teachers.Any(m=>m.Username == studentTB.username)
-                        || dBModels.Cleaners.Any(m=>m.Username == studentTB.username)
-                        || dBModels.Offices.Any(m=>m.Username == studentTB.username))
+                   if(dBModels.StudentTBs.Any(m=>m.username == temp.username) 
+                        || dBModels.Teachers.Any(m=>m.Username == temp.username)
+                        || dBModels.Cleaners.Any(m=>m.Username == temp.username)
+                        || dBModels.Offices.Any(m=>m.Username == temp.username))
                     {
                         ViewBag.Error = "User name already exist! please use another one";
 
@@ -115,12 +133,27 @@ namespace Project.Controllers
 
                         ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
                         ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
-                        return View(studentTB);
+                        return View(temp);
                     }
                     else
                     {
-                       
-                        dBModels.StudentTBs.Add(studentTB);
+                        StudentTB model = new StudentTB();
+
+                        model.fullname = temp.fullname;
+                        model.gender = temp.gender;
+                        model.address = temp.address;
+                        model.email = temp.email;
+                        model.grade = temp.grade;
+                        model.parentname = temp.parentname;
+                        model.parenttpnum = temp.parenttpnum;
+                        model.password = temp.password;
+                        model.school = temp.school;
+                        model.sid = temp.sid;
+                        model.subject = temp.subject;
+                        model.tpnum = temp.tpnum;
+                        model.username = temp.username;
+
+                        dBModels.StudentTBs.Add(model);
 
                         if (ModelState.IsValid)
                         {
@@ -129,7 +162,12 @@ namespace Project.Controllers
                         }
                         else
                         {
-                            return new JsonResult { Data = "Student not Registered" };
+                            List<GradeList> grades = dBModels.GradeLists.ToList();
+                            List<subject> subjects = dBModels.subjects.ToList();
+
+                            ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                            ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+                            return View(temp);
                         }
                     }
                 }
@@ -149,20 +187,60 @@ namespace Project.Controllers
         {
             using (DBmodel dBModels = new DBmodel())
             {
-                return View(dBModels.StudentTBs.Where(x => x.sid == id).FirstOrDefault());
+                StudentTB temp = dBModels.StudentTBs.Where(x => x.sid == id).FirstOrDefault();
+                Studentmodel model = new Studentmodel();
+
+                model.fullname = temp.fullname;
+                model.gender = temp.gender;
+                model.address = temp.address;
+                model.email = temp.email;
+                model.grade = temp.grade;
+                model.parentname = temp.parentname;
+                model.parenttpnum = temp.parenttpnum;
+                model.password = temp.password;
+                model.school = temp.school;
+                model.sid = temp.sid;
+                model.subject = temp.subject;
+                model.tpnum = temp.tpnum;
+                model.username = temp.username;
+
+                List<GradeList> grades = dBModels.GradeLists.ToList();
+                List<subject> subjects = dBModels.subjects.ToList();
+
+                ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+
+                return View(model);
             }
         }
 
         // POST: Student/Edit/5
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Edit(int id, StudentTB studentTB)
+        public ActionResult Edit(int id, Studentmodel temp)
         {
             try
             {
+                StudentTB model = new StudentTB();
                 using (DBmodel dBModels = new DBmodel())
                 {
-                    dBModels.Entry(studentTB).State = System.Data.Entity.EntityState.Modified;
+                   
+
+                    model.fullname = temp.fullname;
+                    model.gender = temp.gender;
+                    model.address = temp.address;
+                    model.email = temp.email;
+                    model.grade = temp.grade;
+                    model.parentname = temp.parentname;
+                    model.parenttpnum = temp.parenttpnum;
+                    model.password = temp.password;
+                    model.school = temp.school;
+                    model.sid = id;
+                    model.subject = temp.subject;
+                    model.tpnum = temp.tpnum;
+                    model.username = temp.username;
+
+                    dBModels.Entry(model).State = System.Data.Entity.EntityState.Modified;
                     dBModels.SaveChanges();
                 }
                 if (Session["Role"].ToString().Contains("Admin"))
@@ -171,12 +249,18 @@ namespace Project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Details", new { id = studentTB.sid });
+                    return RedirectToAction("Details", new { id = model.sid });
                 }
                 
             }
             catch
             {
+                DBmodel dBModels = new DBmodel();
+                List<GradeList> grades = dBModels.GradeLists.ToList();
+                List<subject> subjects = dBModels.subjects.ToList();
+
+                ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
                 return View();
             }
         }

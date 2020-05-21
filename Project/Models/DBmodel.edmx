@@ -36,6 +36,17 @@
           <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Exam2">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TeacherName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilePath" Type="varchar(max)" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="grade">
           <Key>
             <PropertyRef Name="grade_id" />
@@ -182,6 +193,18 @@
           <Property Name="Month" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Date_Time" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="classId" />
+          </Key>
+          <Property Name="classId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Day" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hallno" Type="int" Nullable="false" />
+          <Property Name="TeacherName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="upload_file">
           <Key>
             <PropertyRef Name="file_id" />
@@ -322,6 +345,7 @@
           <EntitySet Name="Biil" EntityType="Self.Biil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cleaner" EntityType="Self.Cleaner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CleanerSalary" EntityType="Self.CleanerSalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exam2" EntityType="Self.Exam2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GradeList" EntityType="Self.GradeList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Office" EntityType="Self.Office" Schema="dbo" store:Type="Tables" />
@@ -337,6 +361,7 @@
           <EntitySet Name="teacher_subject" EntityType="Self.teacher_subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherList" EntityType="Self.TeacherList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherSalary" EntityType="Self.TeacherSalary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file" EntityType="Self.upload_file" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="upload_file_teacher" EntityType="Self.upload_file_teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFeedbacks" EntityType="Self.UserFeedbacks" Schema="dbo" store:Type="Tables" />
@@ -439,6 +464,8 @@
             <End Role="TeacherSalary" EntitySet="TeacherSalaries" />
           </AssociationSet>
           <EntitySet Name="teacher_grade" EntityType="SipminiModel.teacher_grade" />
+          <EntitySet Name="Exam2" EntityType="SipminiModel.Exam2" />
+          <EntitySet Name="Timetables" EntityType="SipminiModel.Timetable" />
         </EntityContainer>
         <EntityType Name="Biil">
           <Key>
@@ -771,6 +798,29 @@
           <Property Name="grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="grade_id" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Exam2">
+          <Key>
+            <PropertyRef Name="ExamID" />
+          </Key>
+          <Property Name="ExamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TeacherName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="classId" />
+          </Key>
+          <Property Name="classId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Day" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Hallno" Type="Int32" Nullable="false" />
+          <Property Name="TeacherName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1000,6 +1050,31 @@
                 <ScalarProperty Name="grade" ColumnName="grade" />
                 <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
                 <ScalarProperty Name="subjectCode" ColumnName="subjectCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exam2">
+            <EntityTypeMapping TypeName="SipminiModel.Exam2">
+              <MappingFragment StoreEntitySet="Exam2">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetables">
+            <EntityTypeMapping TypeName="SipminiModel.Timetable">
+              <MappingFragment StoreEntitySet="Timetable">
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="Hallno" ColumnName="Hallno" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="classId" ColumnName="classId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

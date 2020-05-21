@@ -35,6 +35,8 @@
         <AssociationConnector Association="SipminiModel.FK_TeacherList_Teacher" />
         <AssociationConnector Association="SipminiModel.FK_TeacherSalary_Teacher" />
         <EntityTypeShape EntityType="SipminiModel.teacher_grade" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.Exam2" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.Timetable" Width="1.5" PointX="0.75" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

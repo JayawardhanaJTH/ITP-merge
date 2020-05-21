@@ -1,11 +1,10 @@
 ﻿@model Project.Models.StaffNotice
 
-            @{
-                ViewBag.Title = "Create";
-                Layout = null;
-            }
-
-
+@{
+    ViewBag.Title = "Add notice";
+   // Layout = null;
+}
+    @Styles.Render("~/Content/notcss.css")
 
             @using (Html.BeginForm())
             {
@@ -18,15 +17,15 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                       
-                        <div class="form-control">
-                            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "header" } })
                                 @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-dangerr" })
                                 <div class="clear"></div>
                             </div>
                         </div>
-                        <div class="form-control">
+                        <div class="form-group">
                             @Html.LabelFor(model => model.Notice, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.TextAreaFor(model => model.Notice, new { htmlAttributes = new { @class = "enquiry" } })
@@ -35,13 +34,13 @@
                             </div>
                         </div>
 
-                        <div class="form-control w3ls-end">
+                        <div class="form-group w3ls-end">
                             <div class="col-md-offset-2 col-md-10">
                                 <input type="submit" class="register" value="Submit" />
                                 <input type="reset" class="reset" value="Reset">
                             </div>
                             <div>
-                                <button class="btn back">  @Html.ActionLink("Back to List", "Index", new { @class = "ActionLink" })</button>
+                                <button class="btn back">  @Html.ActionLink("Back to List", "Index", "",new { @class = "ActionLink" })</button>
                             </div>
 
                         </div>
@@ -51,8 +50,7 @@
                 </div>
 
             }
-
-
+   
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

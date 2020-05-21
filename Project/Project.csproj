@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Controllers\AdminPanelController.cs" />
     <Compile Include="Controllers\CleanerController.cs" />
+    <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomepageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
@@ -250,6 +251,16 @@
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
     <Compile Include="Controllers\UserFeedbacksController.cs" />
+    <Compile Include="Exam2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exam2DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FeedbackDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedbackDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +291,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBmodel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Exam2.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExamUpload.cs" />
     <Compile Include="Models\FileClass.cs" />
     <Compile Include="Models\grade.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
@@ -304,6 +319,7 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentFeeView.cs" />
+    <Compile Include="Models\Studentmodel.cs" />
     <Compile Include="Models\StudentTB.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -336,6 +352,9 @@
     <Compile Include="Models\teacher_subject.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Timetable.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UploadFile.cs" />
     <Compile Include="Models\upload_file.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
@@ -348,6 +367,11 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewFileList.cs" />
+    <Compile Include="NoticeDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoticeDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OficeDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -602,6 +626,39 @@
     <Content Include="OficeDataSet.xsc">
       <DependentUpon>OficeDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="FeedbackDataSet.xsc">
+      <DependentUpon>FeedbackDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Exam2DataSet.xsc">
+      <DependentUpon>Exam2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="Exam2DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Exam2DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Exam2DataSet.xss">
+      <DependentUpon>Exam2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="FeedbackDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FeedbackDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="FeedbackDataSet.xss">
+      <DependentUpon>FeedbackDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="NoticeDataSet.xsc">
+      <DependentUpon>NoticeDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="NoticeDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NoticeDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="NoticeDataSet.xss">
+      <DependentUpon>NoticeDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="OficeDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>OficeDataSet.Designer.cs</LastGenOutput>
@@ -852,12 +909,6 @@
     <Content Include="Views\PayRoll\Salary_edit_office.cshtml" />
     <Content Include="Views\PayRoll\Salary_edit_teacher.cshtml" />
     <Content Include="Views\PayRoll\StudentList.cshtml" />
-    <Content Include="Views\StaffNotices\Index.cshtml" />
-    <Content Include="Views\StaffNotices\Create.cshtml" />
-    <Content Include="Views\StaffNotices\Delete.cshtml" />
-    <Content Include="Views\StaffNotices\Details.cshtml" />
-    <Content Include="Views\StaffNotices\Edit.cshtml" />
-    <Content Include="Views\StaffNotices\Home.cshtml" />
     <Content Include="Views\AdminPanel\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -897,9 +948,21 @@
     <Content Include="Views\UploadFile\TeacherUpload.cshtml" />
     <Content Include="Views\UploadFile\TeacherViewList.cshtml" />
     <Content Include="Views\UploadFile\TeacherEdit.cshtml" />
+    <Content Include="Views\StaffNotices\Create.cshtml" />
+    <Content Include="Views\StaffNotices\Delete.cshtml" />
+    <Content Include="Views\StaffNotices\Details.cshtml" />
+    <Content Include="Views\StaffNotices\Edit.cshtml" />
+    <Content Include="Views\StaffNotices\Home.cshtml" />
+    <Content Include="Views\StaffNotices\Index.cshtml" />
+    <Content Include="Views\Subject\StudentSubjectList.cshtml" />
+    <Content Include="Views\Exam\Delete.cshtml" />
+    <Content Include="Views\Exam\Edit.cshtml" />
+    <Content Include="Views\Exam\Index.cshtml" />
+    <Content Include="Views\Exam\StudentViewList.cshtml" />
+    <Content Include="Views\Exam\ViewList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\File\" />
     <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
@@ -911,7 +974,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\CleanersReport.rdlc" />
+    <EmbeddedResource Include="Reports\ExamReport.rdlc" />
+    <EmbeddedResource Include="Reports\FeedbackReport.rdlc" />
     <EmbeddedResource Include="Reports\IncomeOutcome.rdlc" />
+    <EmbeddedResource Include="Reports\NoticeReport.rdlc" />
     <EmbeddedResource Include="Reports\OfficesReport.rdlc" />
     <EmbeddedResource Include="Reports\StudentReport.rdlc" />
     <EmbeddedResource Include="Reports\SubjectReport.rdlc" />
