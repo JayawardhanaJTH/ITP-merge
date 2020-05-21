@@ -249,6 +249,7 @@
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\TimetableController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
     <Compile Include="Controllers\UserFeedbacksController.cs" />
     <Compile Include="Exam2DataSet.Designer.cs">
@@ -408,6 +409,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TeachersDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TimetableDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimetableDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="UploadFiles.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -871,6 +877,17 @@
     <Content Include="UploadFiles.xsc">
       <DependentUpon>UploadFiles.xsd</DependentUpon>
     </Content>
+    <Content Include="TimetableDataSet.xsc">
+      <DependentUpon>TimetableDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="TimetableDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TimetableDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="TimetableDataSet.xss">
+      <DependentUpon>TimetableDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="UploadFiles.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>UploadFiles.Designer.cs</LastGenOutput>
@@ -960,6 +977,12 @@
     <Content Include="Views\Exam\Index.cshtml" />
     <Content Include="Views\Exam\StudentViewList.cshtml" />
     <Content Include="Views\Exam\ViewList.cshtml" />
+    <Content Include="Views\Timetable\CreateTimetable.cshtml" />
+    <Content Include="Views\Timetable\DeleteTimetable.cshtml" />
+    <Content Include="Views\Timetable\EditTimetable.cshtml" />
+    <Content Include="Views\Timetable\TimetableDetails.cshtml" />
+    <Content Include="Views\Timetable\TimetableList.cshtml" />
+    <Content Include="Views\Timetable\Timetablehome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\File\" />
@@ -982,6 +1005,7 @@
     <EmbeddedResource Include="Reports\StudentReport.rdlc" />
     <EmbeddedResource Include="Reports\SubjectReport.rdlc" />
     <EmbeddedResource Include="Reports\TeachersReport.rdlc" />
+    <EmbeddedResource Include="Reports\TimetableReport.rdlc" />
     <EmbeddedResource Include="Reports\uploadFileReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>

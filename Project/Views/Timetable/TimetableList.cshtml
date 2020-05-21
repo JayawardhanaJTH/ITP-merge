@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Project.Models.Timetable>
+
+@{
+    ViewBag.Title = "TimetableList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel=" stylesheet" href="~/Content/bootstrap.css">
+    <link rel=" stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<h1>Classes List</h1>
+
+
+<p>
+    @Html.ActionLink("Create New", "CreateTimeTable")
+</p>
+<body>
+
+
+    <div>
+        @using (Html.BeginForm("TimetableList", "Timetable", FormMethod.Get))
+        {
+            @Html.TextBox("searching")<Input type="submit" value="Search" />
+        }
+    </div>
+    <br />
+    <br />
+    <table class="table" style="font-size:15px">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Day)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hall)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Day)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeacherName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditTimetable", new { id = item.classId }) |
+            @Html.ActionLink("Details", "TimetableDetails", new { id = item.classId }) |
+            @Html.ActionLink("Delete", "DeleteTimetable", new { id = item.classId })
+        </td>
+    </tr>
+        }
+
+    </table>
+</body>
+<br />
+<br />
+
+
+

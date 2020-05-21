@@ -1,0 +1,90 @@
+﻿@model Project.Models.Timetable
+
+@{
+    ViewBag.Title = "TimetableDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Class Details</h1>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel=" stylesheet" href="~/Content/bootstrap.css">
+    <link rel=" stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<div style="font-size:15px">
+
+    <hr />
+    <br />
+    <br />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.classId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.classId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Day)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Day)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeacherName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditTimetable", new {  id = Model.classId }) |
+    @Html.ActionLink("Back to List", "TimetableList")
+</p>
