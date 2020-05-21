@@ -17,9 +17,10 @@ namespace Project.Models
         public int classId { get; set; }
         public string Subject { get; set; }
         public string Grade { get; set; }
-        public string Time { get; set; }
+        public string Hall { get; set; }
         public string Day { get; set; }
-        public int Hallno { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
         public string TeacherName { get; set; }
     }
 }

@@ -784,6 +784,10 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="TimePicker\bootstrap-timepicker.css" />
+    <Content Include="TimePicker\bootstrap-timepicker.js" />
+    <Content Include="TimePicker\MvcBootstrapTimepicker.css" />
+    <Content Include="TimePicker\MvcBootstrapTimepicker.js" />
     <Content Include="Views\UploadFile\GetFileList.cshtml" />
     <Content Include="Views\Shared\DisplayAllGrades.cshtml" />
     <Content Include="Views\UploadFile\GetFiles.cshtml" />

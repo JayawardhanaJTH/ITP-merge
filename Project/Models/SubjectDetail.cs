@@ -19,5 +19,7 @@ namespace Project.Models
         public string Day { get; set; }
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
+    
+        public virtual SubjectTB SubjectTB { get; set; }
     }
 }

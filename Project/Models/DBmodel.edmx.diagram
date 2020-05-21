@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="SipminiModel.StudentFee" Width="1.5" PointX="8" PointY="6.625" />
         <EntityTypeShape EntityType="SipminiModel.StudentTB" Width="1.5" PointX="5.75" PointY="6" />
         <EntityTypeShape EntityType="SipminiModel.subject" Width="1.5" PointX="7.5" PointY="1.125" />
-        <EntityTypeShape EntityType="SipminiModel.SubjectDetail" Width="1.5" PointX="4.75" PointY="10.75" />
         <EntityTypeShape EntityType="SipminiModel.SubjectTB" Width="1.5" PointX="5.25" PointY="1.875" />
         <EntityTypeShape EntityType="SipminiModel.Teacher" Width="1.5" PointX="0.75" PointY="3.25" />
         <EntityTypeShape EntityType="SipminiModel.teacher_subject" Width="1.5" PointX="7.5" PointY="3.375" />
@@ -36,6 +35,8 @@
         <AssociationConnector Association="SipminiModel.FK_TeacherSalary_Teacher" />
         <EntityTypeShape EntityType="SipminiModel.teacher_grade" Width="1.5" PointX="7.375" PointY="12.75" />
         <EntityTypeShape EntityType="SipminiModel.Exam2" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.SubjectDetail" Width="1.5" PointX="7.875" PointY="15.125" />
+        <AssociationConnector Association="SipminiModel.FK_SubjectDetails_SubjectDetails" />
         <EntityTypeShape EntityType="SipminiModel.Timetable" Width="1.5" PointX="0.75" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>

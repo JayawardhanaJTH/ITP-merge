@@ -39,6 +39,16 @@ namespace Timetable.Controllers
         // GET: Timetable/Create
         public ActionResult CreateTimetable()
         {
+            DBmodel db = new DBmodel();
+
+            List<TeacherList> list = db.TeacherLists.ToList();
+            List<GradeList> grades = db.GradeLists.ToList();
+            List<subject> subjects = db.subjects.ToList();
+
+            ViewBag.teacherlist = new SelectList(list, "teacher_name", "teacher_name");
+            ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+            ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+
             return View();
         }
 
@@ -54,10 +64,23 @@ namespace Timetable.Controllers
                     try
                     {
                         if (ModelState.IsValid)
-                        {   
+                        {
+                            SubjectDetail subject = new SubjectDetail();
 
+                            var subje = tution.SubjectTBs.Where(m => m.SubjectName == timetable.Subject).Select(u => new { sub = u.SubjectCode }).Single();
+                            
                             tution.Timetables.Add(timetable);
                             tution.SaveChanges();
+
+                            subject.Hall = timetable.Hall;
+                            subject.StartTime = timetable.StartTime;
+                            subject.EndTime = timetable.EndTime;
+                            subject.Day = timetable.Day;
+                            subject.SubjectID = subje.sub;
+
+                            tution.SubjectDetails.Add(subject);
+                            tution.SaveChanges();
+
                             return RedirectToAction("TimetableList");
                         }
                     }
@@ -70,6 +93,16 @@ namespace Timetable.Controllers
 
             catch
             {
+                DBmodel db = new DBmodel();
+
+                List<TeacherList> list = db.TeacherLists.ToList();
+                List<GradeList> grades = db.GradeLists.ToList();
+                List<subject> subjects = db.subjects.ToList();
+
+                ViewBag.teacherlist = new SelectList(list, "teacher_name", "teacher_name");
+                ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+
                 return View();
             }
             return RedirectToAction("TimetableList");
@@ -81,6 +114,16 @@ namespace Timetable.Controllers
         {
             using (DBmodel tution = new DBmodel())
             {
+                DBmodel db = new DBmodel();
+
+                List<TeacherList> list = db.TeacherLists.ToList();
+                List<GradeList> grades = db.GradeLists.ToList();
+                List<subject> subjects = db.subjects.ToList();
+
+                ViewBag.teacherlist = new SelectList(list, "teacher_name", "teacher_name");
+                ViewBag.Grades = new SelectList(grades, "Grade", "Grade");
+                ViewBag.Subjects = new SelectList(subjects, "subject1", "subject1");
+
                 return View(tution.Timetables.Where(x => x.classId == id).FirstOrDefault());
             }
         }
@@ -93,9 +136,25 @@ namespace Timetable.Controllers
             {
                 using (DBmodel tution = new DBmodel())
                 {
+                    //SubjectDetail subject = new SubjectDetail();
+
+                    //string sub = tution.Timetables.Find(id).Subject.ToString();
                     timetable.classId = id;
+
                     tution.Entry(timetable).State = EntityState.Modified;
                     tution.SaveChanges();
+
+                    //var subje = tution.SubjectTBs.Where(m => m.SubjectName == timetable.Subject).Select(u => new { sub = u.SubjectCode }).Single();
+
+                    //subject.Hall = timetable.Hall;
+                    //subject.StartTime = timetable.StartTime;
+                    //subject.EndTime = timetable.EndTime;
+                    //subject.Day = timetable.Day;
+                    //subject.SubjectID = subje.sub;
+
+                    //tution.Entry(subject).State = EntityState.Modified;
+                    //tution.SaveChanges();
+
                     return RedirectToAction("TimetableList");
                 }
                 // TODO: Add update logic here
@@ -104,7 +163,8 @@ namespace Timetable.Controllers
             }
             catch
             {
-                return View("TimetableList");
+
+                return RedirectToAction("TimetableList");
             }
         }
 
@@ -121,13 +181,25 @@ namespace Timetable.Controllers
         [HttpPost]
         public ActionResult DeleteTimetable(int id, FormCollection collection)
         {
+            Project.Models.Timetable timetable = new Project.Models.Timetable();
             try
             {
+               
                 using (DBmodel tution = new DBmodel())
                 {
-                    Project.Models.Timetable timetable =tution.Timetables.Where(x => x.classId == id).FirstOrDefault();
+                    
+                    timetable = tution.Timetables.Where(x => x.classId == id).FirstOrDefault();
+
+                    //var subje = tution.SubjectTBs.Where(m => m.SubjectName == timetable.Subject).Select(u => new { sub = u.SubjectCode }).Single();
+
+
+                    //SubjectDetail subject = tution.SubjectDetails.Where(x => x.SubjectID == subje.sub).FirstOrDefault();
+                   
                     tution.Timetables.Remove(timetable);
                     tution.SaveChanges();
+
+                    //tution.SubjectDetails.Remove(subject);
+                    //tution.SaveChanges();
                 }
                 // TODO: Add update logic here
 
@@ -135,7 +207,7 @@ namespace Timetable.Controllers
             }
             catch
             {
-                return View();
+                return View(timetable);
             }
         }
         public ActionResult Reports()
@@ -150,11 +222,11 @@ namespace Timetable.Controllers
             localReport.DataSources.Add(reportDataSource);
             string mimeType;
             string encoding;
-            string fileNameExtenction = "jpg";
+            string fileNameExtenction = "pdf";
             string[] streams;
             Warning[] warnings;
             byte[] renderedByte;
-            renderedByte = localReport.Render("Image", "", out mimeType, out encoding, out fileNameExtenction, out streams, out warnings);
+            renderedByte = localReport.Render("pdf", "", out mimeType, out encoding, out fileNameExtenction, out streams, out warnings);
             Response.AddHeader("content-disposition", "attachment:filename = timetable_report." + fileNameExtenction);
             return File(renderedByte, fileNameExtenction);
 

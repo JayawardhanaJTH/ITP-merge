@@ -23,5 +23,6 @@ namespace Project.Models
         public virtual subject subject { get; set; }
         public virtual TeacherList TeacherList { get; set; }
         public virtual teacher_subject teacher_subject { get; set; }
+        public virtual SubjectDetail SubjectDetail { get; set; }
     }
 }

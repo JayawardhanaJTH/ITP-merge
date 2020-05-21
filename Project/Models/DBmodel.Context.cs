@@ -36,7 +36,6 @@ namespace Project.Models
         public virtual DbSet<StudentFee> StudentFees { get; set; }
         public virtual DbSet<StudentTB> StudentTBs { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
-        public virtual DbSet<SubjectDetail> SubjectDetails { get; set; }
         public virtual DbSet<SubjectTB> SubjectTBs { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<teacher_subject> teacher_subject { get; set; }
@@ -47,6 +46,7 @@ namespace Project.Models
         public virtual DbSet<UserFeedback> UserFeedbacks { get; set; }
         public virtual DbSet<teacher_grade> teacher_grade { get; set; }
         public virtual DbSet<Exam2> Exam2 { get; set; }
+        public virtual DbSet<SubjectDetail> SubjectDetails { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
     }
 }

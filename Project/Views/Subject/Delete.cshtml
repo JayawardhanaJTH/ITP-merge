@@ -44,7 +44,8 @@
         </div>
         <div class="form-group" style="margin-top:3%">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Delete" class="btn btn-danger" name="Delete" />
+                <input type="submit" value="Delete" class="btn btn-danger" name="Delete"
+                       onclick="return confirm('Are you sure you want to delete subject : @Model.Subject.SubjectCode')" />
                 <a type="button" value="Cancel" class="btn btn-secondary" href="/Subject/SubjectList">Cancel</a>
             </div>
         </div>
