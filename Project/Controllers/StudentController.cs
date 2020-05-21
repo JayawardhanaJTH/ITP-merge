@@ -297,5 +297,63 @@ namespace Project.Controllers
                 return View();
             }
         }
+
+        public ActionResult AddSubject(int id)
+        {
+            subjectList subjectList1 = new subjectList();
+
+            subjectList1.Id = id;
+
+            return View(subjectList1);
+
+        }
+        [HttpPost]
+        public ActionResult AddSubject(int id, subjectList subjectList1)
+        {
+            try
+            {
+                using (DBmodel dBModels = new DBmodel())
+                {
+
+
+                    if (subjectList1.Maths == true)
+                    {
+                        StudentSubject studentSubject = new StudentSubject();
+
+                        studentSubject.sid = id;
+                        studentSubject.subject = "Maths";
+                        dBModels.StudentSubjects.Add(studentSubject);
+                        dBModels.SaveChanges();
+                    }
+
+                    if (subjectList1.English == true)
+                    {
+                        StudentSubject studentSubject = new StudentSubject();
+
+                        studentSubject.sid = id;
+                        studentSubject.subject = "English";
+                        dBModels.StudentSubjects.Add(studentSubject);
+                        dBModels.SaveChanges();
+                    }
+
+                    if (subjectList1.Science == true)
+                    {
+                        StudentSubject studentSubject = new StudentSubject();
+
+                        studentSubject.sid = id;
+                        studentSubject.subject = "Science";
+                        dBModels.StudentSubjects.Add(studentSubject);
+                        dBModels.SaveChanges();
+                    }
+
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }

@@ -12,17 +12,9 @@ namespace Project.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SubjectTB
+    public partial class StudentSubject
     {
-        public int SubjectCode { get; set; }
-        public string SubjectName { get; set; }
-        public string Grade { get; set; }
-        public int Teacher { get; set; }
-    
-        public virtual GradeList GradeList { get; set; }
-        public virtual subject subject { get; set; }
-        public virtual SubjectDetail SubjectDetail { get; set; }
-        public virtual TeacherList TeacherList { get; set; }
-        public virtual teacher_subject teacher_subject { get; set; }
+        public int sid { get; set; }
+        public string subject { get; set; }
     }
 }

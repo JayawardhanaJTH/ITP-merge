@@ -1,0 +1,69 @@
+﻿@model Project.Models.subjectList
+
+
+@{
+    ViewBag.Title = "AddSubject";
+}
+
+<br />
+<br />
+<h2 class="display-4 text-center mt-4"><b>Add New Subject</b></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2 font-weight-bold" })
+            <div class="col-md-10 ml-5">
+                @Html.ValueFor(model => model.Id)
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2 font-weight-bold" })
+            <div class="col-md-10 ml-5">
+                <div>
+                    @Html.LabelFor(model => model.Maths)
+                    @Html.CheckBoxFor(m => m.Maths)
+                </div>
+
+                <div>
+                    @Html.LabelFor(model => model.English)
+                    @Html.CheckBoxFor(m => m.English)
+                </div>
+
+                <div>
+                    @Html.LabelFor(model => model.Science)
+                    @Html.CheckBoxFor(m => m.Science)
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Subject" title="Add Subject" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

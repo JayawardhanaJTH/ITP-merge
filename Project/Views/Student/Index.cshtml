@@ -72,11 +72,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.parentname)
                 </td>
-                <td>
+                <td >
                     <div class="btn-group">
                         @Html.ActionLink("|", "Edit", new { id = item.sid }, new { @class = "btn btn-primary far fa-edit" })
                         @Html.ActionLink("|", "Details", new { id = item.sid }, new { @class = "btn btn-secondary far fa-file-alt" })
                         @Html.ActionLink("|", "Delete", new { id = item.sid }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                        @Html.ActionLink("|", "AddSubject", new { id = item.sid }, new { @class = "btn btn-warning fas fa-address-card" })
                     </div>
                 </td>
             </tr>

@@ -5,39 +5,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9862ae1486f5429e9c4e7d17994b4da1" Name="Diagram1">
-        <EntityTypeShape EntityType="SipminiModel.Biil" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SipminiModel.Cleaner" Width="1.5" PointX="7.75" PointY="9.875" />
-        <EntityTypeShape EntityType="SipminiModel.CleanerSalary" Width="1.5" PointX="10" PointY="9.875" />
-        <EntityTypeShape EntityType="SipminiModel.grade" Width="1.5" PointX="2.75" PointY="10.75" />
-        <EntityTypeShape EntityType="SipminiModel.GradeList" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="SipminiModel.Office" Width="1.5" PointX="9.75" PointY="0.875" />
-        <EntityTypeShape EntityType="SipminiModel.OfficeSalary" Width="1.5" PointX="12" PointY="0.875" />
-        <EntityTypeShape EntityType="SipminiModel.StaffNotice" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SipminiModel.StudentFee" Width="1.5" PointX="8" PointY="6.625" />
-        <EntityTypeShape EntityType="SipminiModel.StudentTB" Width="1.5" PointX="5.75" PointY="6" />
-        <EntityTypeShape EntityType="SipminiModel.subject" Width="1.5" PointX="7.5" PointY="1.125" />
-        <EntityTypeShape EntityType="SipminiModel.SubjectTB" Width="1.5" PointX="5.25" PointY="1.875" />
-        <EntityTypeShape EntityType="SipminiModel.Teacher" Width="1.5" PointX="0.75" PointY="3.25" />
-        <EntityTypeShape EntityType="SipminiModel.teacher_subject" Width="1.5" PointX="7.5" PointY="3.375" />
-        <EntityTypeShape EntityType="SipminiModel.TeacherList" Width="1.5" PointX="3" PointY="2.125" />
-        <EntityTypeShape EntityType="SipminiModel.TeacherSalary" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="SipminiModel.upload_file" Width="1.5" PointX="12.75" PointY="4.75" />
-        <EntityTypeShape EntityType="SipminiModel.upload_file_teacher" Width="1.5" PointX="12.75" PointY="7.75" />
-        <EntityTypeShape EntityType="SipminiModel.UserFeedback" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SipminiModel.Biil" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SipminiModel.Cleaner" Width="1.5" PointX="9.75" PointY="5" />
+        <EntityTypeShape EntityType="SipminiModel.CleanerSalary" Width="1.5" PointX="12" PointY="5" />
+        <EntityTypeShape EntityType="SipminiModel.Exam2" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SipminiModel.grade" Width="1.5" PointX="10.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SipminiModel.GradeList" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="SipminiModel.Office" Width="1.5" PointX="9.75" PointY="1" />
+        <EntityTypeShape EntityType="SipminiModel.OfficeSalary" Width="1.5" PointX="12" PointY="1" />
+        <EntityTypeShape EntityType="SipminiModel.StaffNotice" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SipminiModel.StudentFee" Width="1.5" PointX="8" PointY="9.625" />
+        <EntityTypeShape EntityType="SipminiModel.StudentSubject" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.StudentTB" Width="1.5" PointX="5.75" PointY="9" />
+        <EntityTypeShape EntityType="SipminiModel.subject" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="SipminiModel.SubjectDetail" Width="1.5" PointX="7.5" PointY="5.625" />
+        <EntityTypeShape EntityType="SipminiModel.SubjectTB" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="SipminiModel.Teacher" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SipminiModel.teacher_grade" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.teacher_subject" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="SipminiModel.TeacherList" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="SipminiModel.TeacherSalary" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="SipminiModel.Timetable" Width="1.5" PointX="7.75" PointY="12.75" />
+        <EntityTypeShape EntityType="SipminiModel.upload_file" Width="1.5" PointX="12.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SipminiModel.upload_file_teacher" Width="1.5" PointX="12.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SipminiModel.UserFeedback" Width="1.5" PointX="4.75" PointY="13.75" />
         <AssociationConnector Association="SipminiModel.FK_CleanerSalary_Cleaner" />
         <AssociationConnector Association="SipminiModel.FK_SubjectTB_GradeList" />
         <AssociationConnector Association="SipminiModel.FK_OfficeSalary_Office" />
         <AssociationConnector Association="SipminiModel.FK_StudentTB" />
         <AssociationConnector Association="SipminiModel.FK_subject_SubjectTB" />
+        <AssociationConnector Association="SipminiModel.FK_SubjectDetails_SubjectDetails" />
         <AssociationConnector Association="SipminiModel.FK_SubjectTB_TeacherList" />
         <AssociationConnector Association="SipminiModel.FK_teacher_subject_SubjectTB" />
         <AssociationConnector Association="SipminiModel.FK_TeacherList_Teacher" />
         <AssociationConnector Association="SipminiModel.FK_TeacherSalary_Teacher" />
-        <EntityTypeShape EntityType="SipminiModel.teacher_grade" Width="1.5" PointX="7.375" PointY="12.75" />
-        <EntityTypeShape EntityType="SipminiModel.Exam2" Width="1.5" PointX="9.75" PointY="12.75" />
-        <EntityTypeShape EntityType="SipminiModel.SubjectDetail" Width="1.5" PointX="7.875" PointY="15.125" />
-        <AssociationConnector Association="SipminiModel.FK_SubjectDetails_SubjectDetails" />
-        <EntityTypeShape EntityType="SipminiModel.Timetable" Width="1.5" PointX="0.75" PointY="13.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

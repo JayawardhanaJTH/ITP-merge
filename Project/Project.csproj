@@ -321,6 +321,9 @@
     </Compile>
     <Compile Include="Models\StudentFeeView.cs" />
     <Compile Include="Models\Studentmodel.cs" />
+    <Compile Include="Models\StudentSubject.cs">
+      <DependentUpon>DBmodel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StudentTB.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -331,6 +334,7 @@
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubjectDetailsViewModel.cs" />
+    <Compile Include="Models\subjectList.cs" />
     <Compile Include="Models\SubjectTB.cs">
       <DependentUpon>DBmodel.tt</DependentUpon>
     </Compile>
@@ -987,6 +991,7 @@
     <Content Include="Views\Timetable\TimetableDetails.cshtml" />
     <Content Include="Views\Timetable\TimetableList.cshtml" />
     <Content Include="Views\Timetable\Timetablehome.cshtml" />
+    <Content Include="Views\Student\AddSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\File\" />
