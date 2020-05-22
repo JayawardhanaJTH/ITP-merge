@@ -11,11 +11,11 @@
         <div class="form-group">
 
 
-            @Html.LabelFor(model => model.Exam_ID, new { @class = "control-label " })
+            @Html.LabelFor(model => model.ExamID, new { @class = "control-label " })
             <div>
 
 
-                @Html.DisplayFor(model => model.Exam_ID, new { @class = "form-control" })
+                @Html.DisplayFor(model => model.ExamID, new { @class = "form-control" })
             </div>
 
         </div>
@@ -81,6 +81,9 @@
 
                     </div>
                 }
+                <div>
+                    @Html.ActionLink("Back to List", "ViewList")
+                </div>
             </div>
 
         </div>

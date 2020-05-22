@@ -143,8 +143,8 @@ namespace Exam__.Controllers
             List<subject> subjectList = db.subjects.ToList();
             ViewBag.subList = new SelectList(subjectList, "subject_id", "subject1");
 
-            List<grade> gradeList = db.grades.ToList();
-            ViewBag.grList = new SelectList(gradeList, "grade_id", "grade1");
+            List<GradeList> gradeList = db.GradeLists.ToList();
+            ViewBag.grList = new SelectList(gradeList, "ID", "Grade");
 
             return View(model);
         }
@@ -190,8 +190,8 @@ namespace Exam__.Controllers
             else
             {
 
-                List<grade> gradeList = db.grades.ToList();
-                ViewBag.grList = new SelectList(gradeList, "grade_id", "grade1");
+                List<GradeList> gradeList = db.GradeLists.ToList();
+                ViewBag.grList = new SelectList(gradeList, "ID", "Grade");
 
                 List<subject> subjectList = db.subjects.ToList();
                 ViewBag.subList = new SelectList(subjectList, "subject_id", "subject1");

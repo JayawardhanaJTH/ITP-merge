@@ -27,6 +27,7 @@ namespace Project.Controllers
             try
             {
                 ViewBag.FileMessage = "Select file you want to upload";
+                //get teachers list to drop down
                 ViewBag.teachersList = new SelectList(GetteachersList(), "teacher_id", "teacher_name");
                 return View();
             }
@@ -486,17 +487,17 @@ namespace Project.Controllers
         }
 
        
-        public ActionResult GetFiles(TeacherRel model)
+        public ActionResult GetFiles(string subject)
         {
             try {
                 DBmodel db = new DBmodel();
                 string grades = null;
-                string subject = null;
+                
 
-                if (Session["Grade"] != null && Session["Subject"] != null)
+                if (Session["Grade"] != null)
                 {
                      grades = Session["Grade"].ToString();
-                     subject = Session["Subject"].ToString();
+                     //subject = Session["Subject"].ToString();
                 }
                 else
                 {

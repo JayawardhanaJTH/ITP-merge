@@ -52,5 +52,13 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Back to List", "StudentSubjectList")
+    @if (Session["Role"].ToString().Contains("Admin"))
+    {
+        @Html.ActionLink("Back to List", "SubjectList")
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "StudentSubjectList")
+    }
+   
 </div>
